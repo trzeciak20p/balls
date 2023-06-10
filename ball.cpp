@@ -1,4 +1,5 @@
 #include "ball.h"
+// #include <iostream>
 
 
 Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}{
@@ -11,7 +12,7 @@ Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y
 }
 
 Ball::~Ball(){
-    //jakby tu walnąć particle explosion byłoby cool
+    // make some exsplosion effect
 }
 
 sf::Vector2f Ball::getPos(){
@@ -38,29 +39,31 @@ bool Ball::checkRange(float _x, float _y){
 void Ball::setSpeed(float _x, float _y){
     vel_x = _x;
     vel_y = _y;
+
 }
 
 void Ball::update(){
     if(vel_x == 0 && vel_y == 0)
         return;
 
-    if(x + vel_x < 0 || x + vel_x >= (*Ball::window).getSize().x)        //changing directions
-        vel_x *= 1;
-    if(y + vel_y < 0 || y + vel_y >= (*Ball::window).getSize().y)
-        vel_y *= 1;
-            
+    if(x + vel_x < body.getRadius() || x + vel_x >= Ball::window -> getSize().x - body.getRadius())        //changing directions
+        vel_x *= -1;
+    if(y + vel_y < body.getRadius() || y + vel_y >= Ball::window -> getSize().y - body.getRadius())
+        vel_y *= -1;
+
     x += vel_x;
     y += vel_y; 
 
     body.setPosition(sf::Vector2f(x, y));
 
-    vel_x -= friction;      // lowering speed
-    if(vel_x < 0)
-        vel_x = 0;
-    vel_y -= friction;
-    if(vel_y < 0)
-        vel_y = 0;
+    vel_x *= Ball::friction;      // lowering speed
+    if(vel_x < 1 && vel_x > -1)
+        vel_x = vel_y = 0;      // clearing both so the ball doesn't move unnaturally in one direction after some time
+    vel_y *= Ball::friction;
+    if(vel_y < 1 && vel_y > -1)
+        vel_x = vel_y = 0;
 
-    if(vel_x && vel_y)
+
+    if(vel_x == 0 && vel_y == 0)
         Ball::movable = false;
 }

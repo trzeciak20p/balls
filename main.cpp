@@ -37,28 +37,24 @@ int main(){
     window.setFramerateLimit(30);
 
     sf::Vector2i mouse;
-    sf::Vector2i mouse_dif(0, 0);
-    // sf::CircleShape circle(10);
-    // circle.setOrigin(sf::Vector2f(circle.getRadius(), circle.getRadius()));
 
-    bool draw_line_guide = false;
+    bool dragging = false;
     const float max_drag = 100; 
-
 
     Ball::window = &window;
     Ball::W = window.getSize().x; 
     Ball::H = window.getSize().y; 
-    Ball::friction = 0.8;
+    Ball::friction = 0.9;
 
     int active_ball;
     std::vector <Ball> balls;
 
 
     balls.push_back(Ball(100, 100));
-    // b1.setSpeed(20, 20);
+    balls[0].setSpeed(50, 10);
 
     balls.push_back(Ball(20, 20));
-    // b2.setSpeed(10, -40);
+    balls[1].setSpeed(10, -40);
 
 
 
@@ -71,38 +67,34 @@ int main(){
             }else if(event.type == sf::Event::MouseButtonPressed){
                 mouse = sf::Mouse::getPosition(window);
                 int j = 0;
-                for(auto i : balls){        // checking if hovered over ball
+                for(auto &i : balls){        // checking if hovered over ball
                     if(i.checkRange(mouse.x, mouse.y)){
                         active_ball = j;
-                        std::cout << "\r\nPrzypisano: " << i.getPos().x << " " << i.getPos().y << " " << j << "\r\n";
-                        draw_line_guide = true;
-                        // break;
+                        dragging = true;
+                        break;
                     }
                     j++;
-
                 }
-                
             }
             if(event.type == sf::Event::MouseButtonReleased){
-                if(draw_line_guide){
+                if(dragging){
+                    balls[active_ball].setSpeed( mouse.x - sf::Mouse::getPosition(window).x, mouse.y - sf::Mouse::getPosition(window).y);
                     balls[active_ball].body.setFillColor(balls[active_ball].color);
-                    draw_line_guide = false;
+                    dragging = false;
                 }    
             }
         }
 
         window.clear(sf::Color::Black);
 
-        for(auto i : balls){        // updating positions
+        for(auto &i : balls){        // updating positions
             i.update();
-            i.body.setFillColor(i.color);
             window.draw(i.body);
         }
-        window.draw(balls[0].body);
 
 
 
-        if(draw_line_guide){
+        if(dragging){
             // mouse_dif = sf::Mouse::getPosition(window) - mouse;
             float distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(window).y, 2));
             // std::cout << distance << "\r\n";
