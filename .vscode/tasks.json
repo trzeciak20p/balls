@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always", //coś z vsc
+                "-g",
+                "${file}", //source plik
+
+                "${workspaceFolder}\\ball.h",
+                "${workspaceFolder}\\ball.cpp",
+
+
+                "-IC:\\SFML-2.5.1\\include", //.hpp files           
+                "-LC:\\SFML-2.5.1\\lib", //potrzebne do flag niżej
+
+                "-lsfml-graphics",
+                "-lsfml-audio",
+                "-lsfml-window",
+                "-lsfml-system",
+                // "-lsfml-network",
+
+                "-lopengl32",
+                "-lgdi32",
+
+                "-lopenal32",
+                "-lwinmm",
+                "-lopengl32",
+                "-lgdi32",
+                "-lfreetype",
+
+
+
+                "-o",
+                "${workspaceFolder}\\${fileBasenameNoExtension}.exe" //output
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
+        }
+    ]
+}
