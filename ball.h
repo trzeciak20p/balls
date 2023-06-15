@@ -2,31 +2,33 @@
 #include <SFML/Audio.hpp>
 #include <math.h>
 
+#include "wall.h"
+
 
 class Ball{
 
     private:
-        float x, y, vel_x, vel_y;
+        float x, y, vel_x, vel_y, decrease_vel_x, decrease_vel_y;
 
     public:
         inline static sf::Window *window;       // for now using window
-        inline static int H , W;        // switching to this when only a part of window will be playfield
+        inline static int H, W;        // switching to this when only a part of window will be playfield
         inline static float friction;
-        inline static bool movable = true;
-        inline static Ball *active_ball;      // coul be reference but could be not
-        inline static std::vector <Ball> balls;
+        inline static bool movable = true;      // tells if ball can be moved
+        inline static Ball *active_ball;
+        inline static std::vector <Ball> balls;     // Vector for storing every class instance
 
         sf::CircleShape body;
         sf::Color color;
 
 
-
         Ball(float _x, float _y, float size = 20, sf::Color color = sf::Color::White);
         ~Ball();
 
-
         sf::Vector2f getPos();
-        bool checkRange(float _x, float _y);
+
+        void checkBounce();
+        bool checkHover(float _x, float _y);
         void setSpeed(float _x, float _y);
         void update();
 

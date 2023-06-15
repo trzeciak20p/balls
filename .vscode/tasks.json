@@ -12,6 +12,8 @@
 
                 "${workspaceFolder}\\ball.h",
                 "${workspaceFolder}\\ball.cpp",
+                "${workspaceFolder}\\wall.h",
+                "${workspaceFolder}\\wall.cpp",
 
 
                 "-IC:\\SFML-2.5.1\\include", //.hpp files           

@@ -1,5 +1,8 @@
+#ifndef BOUNCE_BALL
+#define BOUNCE_BALL
+
 #include "ball.h"
-// #include <iostream>
+#include <iostream>
 
 
 Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}{
@@ -20,8 +23,44 @@ sf::Vector2f Ball::getPos(){
     return sf::Vector2f(x, y);
 }
 
+void Ball::checkBounce(){
+    for(auto &wall : Wall::walls){
+        float new_x = x + vel_x, new_y = y + vel_y;
 
-bool Ball::checkRange(float _x, float _y){
+        if( (new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) && (new_y >= wall.getTop() && new_y <= wall.getBottom()) ){
+            vel_x *= -1;
+            decrease_vel_x *= -1;
+
+        }
+        if( (new_y + body.getRadius() > wall.getTop() || new_y - body.getRadius()  > wall.getBottom()) && (new_x >= wall.getLeft() && new_x <= wall.getRight()) ){
+            vel_y *= -1;
+            decrease_vel_y *= -1;
+        }
+
+
+        // if(x + vel_x < body.getRadius() + wall.getLeft() || x + vel_x >= Ball::window -> getSize().x - body.getRadius() + wall.getRight()){       //changing directions
+        //     vel_x *= -1;
+        //     decrease_vel_x *= -1;
+        // }
+        // if(y + vel_y < body.getRadius() + wall.getBottom() || y + vel_y >= Ball::window -> getSize().y - body.getRadius() + wall.getTop()){
+        //     vel_y *= -1;
+        //     decrease_vel_y *= -1;
+        // }
+
+
+    }
+
+    for(auto &i : Ball::balls){
+
+
+
+
+    }
+
+
+}
+
+bool Ball::checkHover(float _x, float _y){      // Checks if cursor hovers over ball 
     float distance = sqrt( (_x-x)*(_x-x) + (_y-y)*(_y-y));
     if(distance <= body.getRadius()){
         Ball::active_ball = this;
@@ -35,6 +74,8 @@ void Ball::setSpeed(float _x, float _y){
         movable = false;
         vel_x = _x;
         vel_y = _y;
+        decrease_vel_x = _x / Ball::friction;
+        decrease_vel_y = _y / Ball::friction;
     }
 }
 
@@ -42,10 +83,17 @@ void Ball::update(){
     if(vel_x == 0 && vel_y == 0)
         return;
 
-    if(x + vel_x < body.getRadius() || x + vel_x >= Ball::window -> getSize().x - body.getRadius())        //changing directions
+    if(x + vel_x < body.getRadius() || x + vel_x >= Ball::window -> getSize().x - body.getRadius()){       //changing directions
         vel_x *= -1;
-    if(y + vel_y < body.getRadius() || y + vel_y >= Ball::window -> getSize().y - body.getRadius())
+        decrease_vel_x *= -1;
+    }
+    if(y + vel_y < body.getRadius() || y + vel_y >= Ball::window -> getSize().y - body.getRadius()){
         vel_y *= -1;
+        decrease_vel_y *= -1;
+    }
+
+    checkBounce();
+
 
     x += vel_x;
     y += vel_y; 
@@ -55,9 +103,11 @@ void Ball::update(){
     vel_x *= Ball::friction;      // lowering speed
     vel_y *= Ball::friction;
 
-    if( (vel_x < 1 && vel_x > -1) || (vel_y < 1 && vel_y > -1)){
-        vel_x = vel_y = 0;      // clearing both so the ball doesn't move unnaturally in one direction after some time
+    if((vel_x < 0.2 && vel_x > -0.2) && (vel_y < 0.2 && vel_y > -0.2)){
+        vel_x = vel_y = 0;
         Ball::movable = true;
     }
 
 }
+
+#endif //BOUNCE_BALL
