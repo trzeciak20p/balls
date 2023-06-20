@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "ball.h"
-// #include "wall.h"
+#include "wall.h"
 
 // nawalasz się kulami na zmiane, jak twoja kulka walnie w czerwoną ściane 3 razy to umierasz
 // system hp i robisz craki w kulkach 
@@ -89,59 +89,40 @@ int main(){
 
 
 
-        if(dragging && Ball::movable){
-            // mouse_dif = sf::Mouse::getPosition(window) - mouse;
+        if(dragging && Ball::movable){      // Drawing guide for trail
             float distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(window).y, 2));
-            // std::cout << distance << "\r\n";
-            //zmienić potem na to że bierze środek wybranego kółka
-            Equation line_guide_equ = getEquation((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(window));       // geting equation from dragged line 
-
-            float x = cos(line_guide_equ.ang + (M_PI_2)) * Ball::active_ball -> body.getRadius();
-            float y = sin(line_guide_equ.ang + (M_PI_2)) * Ball::active_ball -> body.getRadius();
+            Equation trail_equ = getEquation((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(window));       // geting equation from dragged line 
+            float x = cos(trail_equ.ang + (M_PI_2)) * Ball::active_ball -> body.getRadius();
+            float y = sin(trail_equ.ang + (M_PI_2)) * Ball::active_ball -> body.getRadius();
  
-
-            // ograniczenie dla odległości zrobić
-            // wziąć kąt z funkcji r zrobić max odległość i obrócić o 180 stopni (kursor)
-
-            sf::Vertex line_guide[3];
-
+            sf::Vertex trail[3];
+                
             if(distance < 200){
-                sf::Color line_guide_color((distance <= 100) ? (distance / 100 * 255) : (255), (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
+                sf::Color trail_color((distance <= 100) ? (distance / 100 * 255) : (255), (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
                 
-                line_guide[0] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x + x, Ball::active_ball -> getPos().y + y), line_guide_color);
-                line_guide[1] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x - x, Ball::active_ball -> getPos().y - y), line_guide_color);
-                line_guide[2] = sf::Vertex(sf::Vector2f(2 * (sf::Vector2i)Ball::active_ball -> getPos() - sf::Mouse::getPosition(window)), line_guide_color);
+                trail[0] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x + x, Ball::active_ball -> getPos().y + y), trail_color);
+                trail[1] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x - x, Ball::active_ball -> getPos().y - y), trail_color);
+                trail[2] = sf::Vertex(sf::Vector2f(2 * (sf::Vector2i)Ball::active_ball -> getPos() - sf::Mouse::getPosition(window)), trail_color);
             
-
-                Ball::active_ball -> body.setFillColor(line_guide_color);
-                
+                Ball::active_ball -> body.setFillColor(trail_color);    
             }else{      // pushing velocity cap
-                // distance = 200;
-                line_guide[0] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x + x, Ball::active_ball -> getPos().y + y), sf::Color::Red);
-                line_guide[1] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x - x, Ball::active_ball -> getPos().y - y), sf::Color::Red);
-                float tip_x = cos(line_guide_equ.ang) * 200;
-                float tip_y = sin(line_guide_equ.ang) * 200;
+                trail[0] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x + x, Ball::active_ball -> getPos().y + y), sf::Color::Red);
+                trail[1] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x - x, Ball::active_ball -> getPos().y - y), sf::Color::Red);
+                float tip_x = cos(trail_equ.ang) * 200;
+                float tip_y = sin(trail_equ.ang) * 200;
                 
-                std::cout << sf::Mouse::getPosition(window).x << " " << Ball::active_ball -> getPos().x <<" \r\n";
-                if(sf::Mouse::getPosition(window).x >= Ball::active_ball -> getPos().x){
-                    tip_x *= -1;
-                }
-                if(sf::Mouse::getPosition(window).x > Ball::active_ball -> getPos().x){
-                    tip_y *= -1;
-                }
-                std::cout << tip_x << " " << tip_y << " \r\n";
+                std::cout << sf::Mouse::getPosition(window).x << " " << Ball::active_ball -> getPos().x <<" " << trail_equ.ang << " \r\n";
 
-                
-                line_guide[2] = sf::Vertex(sf::Vector2f( Ball::active_ball -> getPos().x + tip_x, Ball::active_ball -> getPos().y + tip_y), sf::Color::Red);
-
+                if(sf::Mouse::getPosition(window).x < Ball::active_ball -> getPos().x +2.5){
+                    trail[2] = sf::Vertex(sf::Vector2f( Ball::active_ball -> getPos().x + tip_x, Ball::active_ball -> getPos().y + tip_y), sf::Color::Red);
+                }else{
+                    trail[2] = sf::Vertex(sf::Vector2f( Ball::active_ball -> getPos().x - tip_x, Ball::active_ball -> getPos().y - tip_y), sf::Color::Red);  
+                }
 
                 Ball::active_ball -> body.setFillColor(sf::Color::Red);
             }
 
-
-            
-
-            window.draw(line_guide, 3, sf::Triangles);
+            window.draw(trail, 3, sf::Triangles);
             window.draw(Ball::active_ball -> body);       // might be optimizeable
         }
 

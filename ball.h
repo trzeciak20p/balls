@@ -1,7 +1,11 @@
+#ifndef BOUNCE_BALL
+#define BOUNCE_BALL
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <math.h>
 
+// #include "functions.cpp"
 #include "wall.h"
 
 
@@ -27,9 +31,12 @@ class Ball{
 
         sf::Vector2f getPos();
 
+        float getDistacne(float _x, float _y);
         void checkBounce();
         bool checkHover(float _x, float _y);
         void setSpeed(float _x, float _y);
         void update();
 
 };    
+
+#endif //BOUNCE_BALL

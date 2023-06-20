@@ -1,6 +1,3 @@
-#ifndef BOUNCE_BALL
-#define BOUNCE_BALL
-
 #include "ball.h"
 #include <iostream>
 
@@ -23,6 +20,10 @@ sf::Vector2f Ball::getPos(){
     return sf::Vector2f(x, y);
 }
 
+float Ball::getDistacne(float _x, float _y){
+    return sqrt( (_x-x)*(_x-x) + (_y-y)*(_y-y));
+}
+
 void Ball::checkBounce(){
     for(auto &wall : Wall::walls){
         float new_x = x + vel_x, new_y = y + vel_y;
@@ -36,6 +37,14 @@ void Ball::checkBounce(){
             vel_y *= -1;
             decrease_vel_y *= -1;
         }
+
+        if( getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius()){
+            vel_x *= -1;
+            decrease_vel_x *= -1;
+            vel_y *= -1;
+            decrease_vel_y *= -1;
+        }
+        
 
 
         // if(x + vel_x < body.getRadius() + wall.getLeft() || x + vel_x >= Ball::window -> getSize().x - body.getRadius() + wall.getRight()){       //changing directions
@@ -60,9 +69,10 @@ void Ball::checkBounce(){
 
 }
 
-bool Ball::checkHover(float _x, float _y){      // Checks if cursor hovers over ball 
-    float distance = sqrt( (_x-x)*(_x-x) + (_y-y)*(_y-y));
-    if(distance <= body.getRadius()){
+
+
+bool Ball::checkHover(float _x, float _y){      // Checks if cursor hovers over ball     
+    if(getDistacne(_x, _y) <= body.getRadius()){
         Ball::active_ball = this;
         return true;
     }
@@ -72,8 +82,8 @@ bool Ball::checkHover(float _x, float _y){      // Checks if cursor hovers over 
 void Ball::setSpeed(float _x, float _y){
     if(movable){
         movable = false;
-        vel_x = _x;
-        vel_y = _y;
+        vel_x = _x/2;
+        vel_y = _y/2;
         decrease_vel_x = _x / Ball::friction;
         decrease_vel_y = _y / Ball::friction;
     }
@@ -83,7 +93,7 @@ void Ball::update(){
     if(vel_x == 0 && vel_y == 0)
         return;
 
-    if(x + vel_x < body.getRadius() || x + vel_x >= Ball::window -> getSize().x - body.getRadius()){       //changing directions
+    if(x + vel_x < body.getRadius() || x + vel_x >= Ball::window -> getSize().x - body.getRadius()){       // changing directions from boundaries
         vel_x *= -1;
         decrease_vel_x *= -1;
     }
@@ -109,5 +119,3 @@ void Ball::update(){
     }
 
 }
-
-#endif //BOUNCE_BALL
