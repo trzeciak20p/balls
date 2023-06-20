@@ -16,8 +16,8 @@
                 "${workspaceFolder}\\wall.cpp",
 
 
-                "-IC:\\SFML-2.5.1\\include", //.hpp files           
-                "-LC:\\SFML-2.5.1\\lib", //potrzebne do flag niżej
+                "-I${workspaceFolder}\\src\\include", //.hpp files           
+                "-L${workspaceFolder}\\src\\lib", //potrzebne do flag niżej
 
                 "-lsfml-graphics",
                 "-lsfml-audio",
