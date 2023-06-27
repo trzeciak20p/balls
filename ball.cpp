@@ -1,5 +1,7 @@
 #include "ball.h"
+
 #include <iostream>
+#include "src/utils/utils_2d.cpp"
 
 
 Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}{
@@ -27,23 +29,52 @@ float Ball::getDistacne(float _x, float _y){
 void Ball::checkBounce(){
     for(auto &wall : Wall::walls){
         float new_x = x + vel_x, new_y = y + vel_y;
+        float angle, angle2;
+        angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
+        
+        // Cheking for corners
+        if(getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius() ){
+            angle2 = bnw::getEquationAngle(getPos(), sf::Vector2f(wall.getLeft(), wall.getTop()) );
+            // float relative_x = wall.getLeft() - x;
+            // float relative_y = wall.getTop() - y;
+            x = wall.getLeft() - wall.getTop() + y;
+            y = wall.getTop() - wall.getLeft() + x;
 
-        if( (new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) && (new_y >= wall.getTop() && new_y <= wall.getBottom()) ){
-            vel_x *= -1;
-            decrease_vel_x *= -1;
+            float x = cos(angle + angle2) * Ball::active_ball -> body.getRadius();
+            float y = sin(angle + angle2) * Ball::active_ball -> body.getRadius();
 
-        }
-        if( (new_y + body.getRadius() > wall.getTop() || new_y - body.getRadius()  > wall.getBottom()) && (new_x >= wall.getLeft() && new_x <= wall.getRight()) ){
-            vel_y *= -1;
-            decrease_vel_y *= -1;
+        }else if( getDistacne(wall.getLeft() - vel_x, wall.getBottom() - vel_y) <= body.getRadius() ){
+
+
+        }else if( getDistacne(wall.getRight() - vel_x, wall.getTop() - vel_y) <= body.getRadius() ){
+
+
+        }else if( getDistacne(wall.getRight() - vel_x, wall.getBottom() - vel_y) <= body.getRadius() ){
+
+        }else{
+
+            // Checking for sides
+            if( (new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) && (new_y >= wall.getTop() && new_y <= wall.getBottom()) ){
+                vel_x *= -1;
+                decrease_vel_x *= -1;
+            }
+            if( (new_y + body.getRadius() > wall.getTop() || new_y - body.getRadius()  > wall.getBottom()) && (new_x >= wall.getLeft() && new_x <= wall.getRight()) ){
+                vel_y *= -1;
+                decrease_vel_y *= -1;
+            }
+            return;
         }
 
-        if( getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius()){
-            vel_x *= -1;
-            decrease_vel_x *= -1;
-            vel_y *= -1;
-            decrease_vel_y *= -1;
-        }
+
+        std::cout << "angle: " << angle << "\tangle2: " << angle2 << "\r\n"; 
+        float vel_x_buffer = vel_x;
+        // vel_x = -vel_y;
+        // vel_y = -vel_x_buffer;
+        // decrease_vel_x *= -1;
+        // decrease_vel_y *= -1;
+        
+        
+        
         
 
 
@@ -60,7 +91,7 @@ void Ball::checkBounce(){
     }
 
     for(auto &i : Ball::balls){
-
+            // uwzględnić prędkość obu piłek
 
 
 

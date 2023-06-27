@@ -5,8 +5,8 @@
 #include <SFML/Audio.hpp>
 #include <math.h>
 
-// #include "functions.cpp"
 #include "wall.h"
+#include "src\utils\utils_2d.h"
 
 
 class Ball{

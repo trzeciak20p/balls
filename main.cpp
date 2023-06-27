@@ -5,31 +5,13 @@
 #include <math.h>
 #include <iostream>
 
+#include "src/utils/utils_2d.h"
 #include "ball.h"
 #include "wall.h"
 
+
 // nawalasz się kulami na zmiane, jak twoja kulka walnie w czerwoną ściane 3 razy to umierasz
 // system hp i robisz craki w kulkach 
-
-struct Equation{
-    double a;
-    double b;
-    double ang;
-    int getX(float y){
-        return (y - b) / a;
-    };
-    int getY(float x){
-        return a * x + b;
-    }
-};
-
-Equation getEquation(sf::Vector2f A, sf::Vector2f B){
-    double a = (B.y - A.y) / (B.x - A.x);
-    double b = ((B.x*A.y) - (A.x*B.y)) / B.x - A.x;
-    double ang = atan(a);
-    return Equation{a, b, ang};
-} 
-
 
 int main(){
 
@@ -47,9 +29,11 @@ int main(){
     Ball::H = window.getSize().y; 
     Ball::friction = 0.9;
 
-    Ball(100, 100);
+    Ball(100, 100, 40);
+    // Ball(100, 100);
     Ball(700, 600, 20, sf::Color::Black);
 
+    Wall(200, 200, 100, 100);
     Wall(600, 600, 200, 100);
 
     while(window.isOpen()){
@@ -69,7 +53,8 @@ int main(){
             }
             if(event.type == sf::Event::MouseButtonReleased){
                 if(dragging){
-                    Ball::active_ball -> setSpeed( mouse.x - sf::Mouse::getPosition(window).x, mouse.y - sf::Mouse::getPosition(window).y);
+                    // Ball::active_ball -> setSpeed( mouse.x - sf::Mouse::getPosition(window).x, mouse.y - sf::Mouse::getPosition(window).y);
+                    Ball::active_ball -> setSpeed( (mouse.x - sf::Mouse::getPosition(window).x) / 3, (mouse.y - sf::Mouse::getPosition(window).y) / 3);
                     Ball::active_ball -> body.setFillColor(Ball::active_ball -> color);
                     dragging = false;
                 }    
@@ -91,9 +76,9 @@ int main(){
 
         if(dragging && Ball::movable){      // Drawing guide for trail
             float distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(window).y, 2));
-            Equation trail_equ = getEquation((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(window));       // geting equation from dragged line 
-            float x = cos(trail_equ.ang + (M_PI_2)) * Ball::active_ball -> body.getRadius();
-            float y = sin(trail_equ.ang + (M_PI_2)) * Ball::active_ball -> body.getRadius();
+            double angle = bnw::getEquationAngle((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(window));
+            float x = cos(angle + (M_PI_2)) * Ball::active_ball -> body.getRadius();
+            float y = sin(angle + (M_PI_2)) * Ball::active_ball -> body.getRadius();
  
             sf::Vertex trail[3];
                 
@@ -105,13 +90,13 @@ int main(){
                 trail[2] = sf::Vertex(sf::Vector2f(2 * (sf::Vector2i)Ball::active_ball -> getPos() - sf::Mouse::getPosition(window)), trail_color);
             
                 Ball::active_ball -> body.setFillColor(trail_color);    
-            }else{      // pushing velocity cap
+            }else{      // Pushing velocity cap
                 trail[0] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x + x, Ball::active_ball -> getPos().y + y), sf::Color::Red);
                 trail[1] = sf::Vertex(sf::Vector2f(Ball::active_ball -> getPos().x - x, Ball::active_ball -> getPos().y - y), sf::Color::Red);
-                float tip_x = cos(trail_equ.ang) * 200;
-                float tip_y = sin(trail_equ.ang) * 200;
+                float tip_x = cos(angle) * 200;
+                float tip_y = sin(angle) * 200;
                 
-                std::cout << sf::Mouse::getPosition(window).x << " " << Ball::active_ball -> getPos().x <<" " << trail_equ.ang << " \r\n";
+                std::cout << sf::Mouse::getPosition(window).x << " " << Ball::active_ball -> getPos().x <<" " << angle << " \r\n";
 
                 if(sf::Mouse::getPosition(window).x < Ball::active_ball -> getPos().x +2.5){
                     trail[2] = sf::Vertex(sf::Vector2f( Ball::active_ball -> getPos().x + tip_x, Ball::active_ball -> getPos().y + tip_y), sf::Color::Red);
