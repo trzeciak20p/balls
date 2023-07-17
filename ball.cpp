@@ -32,16 +32,81 @@ void Ball::checkBounce(){
         float angle, angle2;
         angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
         
+
         // Cheking for corners
-        if(getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius() ){
-            angle2 = bnw::getEquationAngle(getPos(), sf::Vector2f(wall.getLeft(), wall.getTop()) );
+        if(float distance = getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius() ){
+            // angle2 = bnw::getEquationAngle(getPos(), sf::Vector2f(wall.getLeft(), wall.getTop()) );
             // float relative_x = wall.getLeft() - x;
             // float relative_y = wall.getTop() - y;
-            x = wall.getLeft() - wall.getTop() + y;
-            y = wall.getTop() - wall.getLeft() + x;
+            // x = wall.getLeft() - wall.getTop() + y;
+            // y = wall.getTop() - wall.getLeft() + x;
+            // angle = atan(1);
+            
+            
 
-            float x = cos(angle + angle2) * Ball::active_ball -> body.getRadius();
-            float y = sin(angle + angle2) * Ball::active_ball -> body.getRadius();
+            if(angle < 0){
+                if(x > y){                    // Determining which side is ball comming from
+                    // right
+                    x = wall.getLeft() + cos(M_PI + M_PI_4 + angle) * (distance*10 + body.getRadius());
+                    y = wall.getTop() - sin(M_PI + M_PI_4 + angle) * (distance*10 + body.getRadius());
+                }else{
+                    // left
+                    x = wall.getLeft() + cos(angle - M_PI_4) * (distance*10 + body.getRadius());
+                    y = wall.getTop() - sin(angle - M_PI_4) * (distance*10 + body.getRadius());
+                }
+            }else{
+                x = wall.getLeft() + cos(M_PI_2 + angle) * (distance*10 + body.getRadius());
+                y = wall.getTop() - sin(M_PI_2 + angle) * (distance*10 + body.getRadius());
+                float vel_x_buffer = vel_x;
+                vel_x = -vel_y;
+                vel_y = -vel_x_buffer;
+                decrease_vel_x *= -1;
+                decrease_vel_y *= -1;
+                // float x_buffer = x;
+                // x = wall.getLeft() - wall.getTop() + y;
+                // y = wall.getTop() - wall.getLeft() + x;
+            }
+
+
+            // if(x > y){        // right side
+            //     std::cout << "right\r\n";
+            //     if(angle < 0){
+            //         x = wall.getLeft() + cos(M_PI_2 - angle) * (distance*10 + body.getRadius());
+            //         y = wall.getTop() - sin(M_PI_2 - angle) * (distance*10 + body.getRadius());
+            //     }else{
+            //         x = wall.getLeft() + cos(M_PI + M_PI_4 - angle) * (distance*10 + body.getRadius());
+            //         y = wall.getTop() - sin(M_PI + M_PI_4 - angle) * (distance*10 + body.getRadius());
+            //     }
+
+            // }else{      // left side
+            //     std::cout << "left\r\n";
+
+            //     if(angle < 0){
+            //         x = wall.getLeft() + cos(M_PI_2  - angle) * (distance*10 + body.getRadius());
+            //         y = wall.getTop() - sin(M_PI_2 - angle) * (distance*10 + body.getRadius());
+            //     }else{
+            //         x = wall.getLeft() + cos(M_PI + M_PI_4 + angle) * (distance*10 + body.getRadius());
+            //         y = wall.getTop() - sin(M_PI + M_PI_4 + angle) * (distance*10 + body.getRadius());
+            //     }
+
+            // }
+
+
+            // if(angle < 0){
+            //     x = wall.getLeft() + cos(M_PI_2 + M_PI_4 + angle) * (distance*10 + body.getRadius());
+            //     y = wall.getTop() - sin(M_PI_2 + M_PI_4 + angle) * (distance*10 + body.getRadius());
+            // }else{
+            //     x = wall.getLeft() + cos(M_PI_2 + M_PI_4 - angle) * (distance*10 + body.getRadius());
+            //     y = wall.getTop() - sin(M_PI_2 + M_PI_4 - angle) * (distance*10 + body.getRadius());
+            // }
+            
+            // if(x == 0 && y == 0){
+            //     x = wall.getLeft() + cos(M_PI_2 + M_PI_4) * (distance*10 + body.getRadius());
+            //     y = wall.getTop() - sin(M_PI_2 + M_PI_4) * (distance*10 + body.getRadius());
+            // }
+            
+            std::cout << "diff x: " << x - wall.getLeft() << "diff y: " << y - wall.getTop() << "\r\n";
+
 
         }else if( getDistacne(wall.getLeft() - vel_x, wall.getBottom() - vel_y) <= body.getRadius() ){
 
@@ -66,14 +131,11 @@ void Ball::checkBounce(){
         }
 
 
-        std::cout << "angle: " << angle << "\tangle2: " << angle2 << "\r\n"; 
-        float vel_x_buffer = vel_x;
-        // vel_x = -vel_y;
-        // vel_y = -vel_x_buffer;
-        // decrease_vel_x *= -1;
-        // decrease_vel_y *= -1;
+        std::cout << "angle: " << atan(angle) << "\tangle2: " << atan(angle2) << "\r\n"; 
+        // std::cout << x << "\t" << y << "\r\n"; 
         
         
+        // vel_x = vel_y = 0;
         
         
 

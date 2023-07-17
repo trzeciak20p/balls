@@ -7,16 +7,17 @@
 
 namespace bnw{      // Balls n' Walls
 
+
 struct Equation{
-    double a;
-    double b;
-    double ang;
-    // int getX(float y){
-    //     return (y - b) / a;
-    // };
-    // int getY(float x){
-    //     return a * x + b;
-    // }
+    float a;
+    float b;
+    float ang;
+    float getX(float y){
+        return (y - b) / a;
+    };
+    float getY(float x){
+        return a * x + b;
+    }
 };
 
 Equation getEquation(sf::Vector2f A, sf::Vector2f B);

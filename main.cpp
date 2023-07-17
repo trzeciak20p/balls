@@ -77,8 +77,8 @@ int main(){
         if(dragging && Ball::movable){      // Drawing guide for trail
             float distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(window).y, 2));
             double angle = bnw::getEquationAngle((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(window));
-            float x = cos(angle + (M_PI_2)) * Ball::active_ball -> body.getRadius();
-            float y = sin(angle + (M_PI_2)) * Ball::active_ball -> body.getRadius();
+            float x = cos(angle + M_PI_2) * Ball::active_ball -> body.getRadius() / 2;
+            float y = sin(angle + M_PI_2) * Ball::active_ball -> body.getRadius() / 2;
  
             sf::Vertex trail[3];
                 
