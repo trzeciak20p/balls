@@ -27,13 +27,6 @@ int main(){
     Ball::H = window.getSize().y; 
     Ball::friction = 0.9;
 
-    Ball(100, 100, 40);
-    // Ball(100, 100);
-    Ball(700, 600, 20, sf::Color::Black);
-
-    Wall(200, 200, 100, 100);
-    Wall(600, 600, 200, 100);
-
     LoadMap(1);
 
     while(window.isOpen()){

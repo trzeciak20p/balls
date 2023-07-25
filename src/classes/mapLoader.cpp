@@ -16,47 +16,44 @@ sf::Color ConvertToSFColor(std::string &str){
     return sf::Color(color[0], color[1], color[2]);
 }
 
-void LoadMap(int level){
-
-    Ball::balls.clear();
-    Wall::walls.clear();
-
+void LoadMap(std::string path){
     std::fstream file;
-    std::string path = "../maps/map";
-    path += char(level + '0');
-
     file.open(path, std::ios::in);
     if(!file.good()){
+        file.close();
         return;
     }
+
+    // Will probably be unnecessary after making menu
+    Ball::balls.clear();
+    Wall::walls.clear();
     
     char obj;
-
     while(file >> obj){
         if(obj == 'b'){
             float x, y, r;
             file >> x; file >> y; file >> r;
 
             // Data check
-            // if(x < 0)
-            //     x *= -1;
-            // if(y < 0)
-            //     y *= -1;
-            // if(r < 0)
-            //     r *= -1;
-            // if(r <= 0)
-            //     r = 50;
+            if(x < 0)
+                x *= -1;
+            if(y < 0)
+                y *= -1;
+            if(r < 0)
+                r *= -1;
+            if(r <= 0)
+                r = 50;
 
-            std::string color_str;
-            file >> color_str;
+            std::string color_str; file >> color_str;
             sf::Color color = ConvertToSFColor(color_str);
             Ball(x, y, r, color);
-            std::cout << "kolorek" << color.r << ", " << color.g << ", " << color.b << "\r\n";
 
         }else if(obj == 'w'){
             float x, y, x_size, y_size;
             file >> x; file >> y; file >> x_size; file >> y_size;
-
+            std::string type;
+            file >> type;
+            Wall(x, y, x_size, y_size, static_cast<Wall::Type>(type[5] -'0') ); 
 
         }else{
             file.close();
@@ -67,11 +64,10 @@ void LoadMap(int level){
     }
     
     file.close();
-    
 }
 
-void LoadMap(std::string file){
-
-    LoadMap(1);
-
+void LoadMap(int level){
+    std::string path = "../maps/map";
+    path += char(level + '0');
+    LoadMap(path);
 }

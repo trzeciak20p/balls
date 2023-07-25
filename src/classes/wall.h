@@ -6,20 +6,23 @@
 #include <vector>
 
 
-class Wall{
 
-    private:
+class Wall{
+    public:
         enum class Type{
-            normal,
-            dmg,
-            bouncy
-        };
+        normal = 0,
+        dmg,
+        bouncy
+    };
+    private:
+        
 
         int x, y, size_x, size_y;
         Type type;
 
     
     public:
+        
         inline static std::vector <Wall> walls;
 
         sf::RectangleShape body;

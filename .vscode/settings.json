@@ -66,6 +66,7 @@
         "list": "cpp",
         "mutex": "cpp",
         "optional": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "map1": "cpp"
     }
 }
