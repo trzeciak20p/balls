@@ -27,7 +27,7 @@ int main(){
     Ball::H = window.getSize().y; 
     Ball::friction = 0.9;
 
-    LoadMap(1);
+    loadMap(1);
 
     while(window.isOpen()){
 

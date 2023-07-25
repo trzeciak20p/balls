@@ -1,7 +1,7 @@
 #include "mapLoader.h"
 
 
-sf::Color ConvertToSFColor(std::string &str){
+sf::Color convertToSFColor(std::string &str){
     if(str == "col()")
         return sf::Color::White;
 
@@ -16,7 +16,7 @@ sf::Color ConvertToSFColor(std::string &str){
     return sf::Color(color[0], color[1], color[2]);
 }
 
-void LoadMap(std::string path){
+void loadMap(std::string path){
     std::fstream file;
     file.open(path, std::ios::in);
     if(!file.good()){
@@ -45,7 +45,7 @@ void LoadMap(std::string path){
                 r = 50;
 
             std::string color_str; file >> color_str;
-            sf::Color color = ConvertToSFColor(color_str);
+            sf::Color color = convertToSFColor(color_str);
             Ball(x, y, r, color);
 
         }else if(obj == 'w'){
@@ -66,8 +66,8 @@ void LoadMap(std::string path){
     file.close();
 }
 
-void LoadMap(int level){
+void loadMap(int level){
     std::string path = "../maps/map";
     path += char(level + '0');
-    LoadMap(path);
+    loadMap(path);
 }
