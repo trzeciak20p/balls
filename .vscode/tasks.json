@@ -10,10 +10,9 @@
                 "-g",
                 "${workspaceFolder}\\main.cpp",
 
-                "${workspaceFolder}\\ball.h",
-                "${workspaceFolder}\\ball.cpp",
-                "${workspaceFolder}\\wall.h",
-                "${workspaceFolder}\\wall.cpp",
+                // "${workspaceFolder}\\src\\utils\\*",
+                "${workspaceFolder}\\src\\classes\\*",
+
 
 
                 "-I${workspaceFolder}\\src\\include", //.hpp files           

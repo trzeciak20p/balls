@@ -1,10 +1,10 @@
 #include "wall.h"
 
 
-Wall::Wall(int _x, int _y, int _size_x, int _size_y, t_type _type) : x{_x}, y{_y}, size_x{_size_x}, size_y{_size_y}, type{_type}{
-    if(type == dmg){
+Wall::Wall(int _x, int _y, int _size_x, int _size_y, Type _type) : x{_x}, y{_y}, size_x{_size_x}, size_y{_size_y}, type{_type}{
+    if(type == Type::dmg){
         body.setFillColor(sf::Color(255, 20, 20));
-    }else if(type == bouncy){
+    }else if(type == Type::bouncy){
         body.setFillColor(sf::Color(235, 40, 255));
     }else{
         body.setFillColor(sf::Color(125, 125, 125));

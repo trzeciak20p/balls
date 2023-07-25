@@ -6,17 +6,15 @@
 #include <iostream>
 
 #include "src/utils/utils_2d.h"
-#include "ball.h"
-#include "wall.h"
+#include "src/classes/mapLoader.h"
+#include "src/classes/ball.h"
+#include "src/classes/wall.h"
 
-
-// nawalasz się kulami na zmiane, jak twoja kulka walnie w czerwoną ściane 3 razy to umierasz
-// system hp i robisz craki w kulkach 
 
 int main(){
 
     // Window szouldn't be resizeable as it interferes with checking positions
-    sf::RenderWindow window(sf::VideoMode(800, 700), "Balls", sf::Style::Close);        
+    sf::RenderWindow window(sf::VideoMode(800, 700), "Balls and Walls", sf::Style::Close);        
     window.setFramerateLimit(60);
 
     sf::Vector2i mouse;
@@ -35,6 +33,8 @@ int main(){
 
     Wall(200, 200, 100, 100);
     Wall(600, 600, 200, 100);
+
+    LoadMap(1);
 
     while(window.isOpen()){
 

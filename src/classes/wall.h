@@ -9,14 +9,14 @@
 class Wall{
 
     private:
-        enum t_type{
+        enum class Type{
             normal,
             dmg,
             bouncy
         };
 
         int x, y, size_x, size_y;
-        t_type type;
+        Type type;
 
     
     public:
@@ -25,7 +25,7 @@ class Wall{
         sf::RectangleShape body;
 
 
-        Wall(int _x, int _y, int _size_x, int _size_y, t_type _type = normal);
+        Wall(int _x, int _y, int _size_x, int _size_y, Type _type = Type::normal);
         ~Wall();
 
         int getTop();

@@ -6,7 +6,7 @@
 #include <math.h>
 
 #include "wall.h"
-#include "src\utils\utils_2d.h"
+#include "../utils/utils_2d.h"
 
 
 class Ball{
