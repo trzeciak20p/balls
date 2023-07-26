@@ -6,16 +6,17 @@
             "label": "C/C++: g++.exe build active file",
             "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
             "args": [
-                "-fdiagnostics-color=always", //coś z vsc
+                "-fdiagnostics-color=always",
                 "-g",
-                "${file}", //source plik
+                "${workspaceFolder}\\main.cpp",
 
-                "${workspaceFolder}\\ball.h",
-                "${workspaceFolder}\\ball.cpp",
+                // "${workspaceFolder}\\src\\utils\\*",
+                "${workspaceFolder}\\src\\classes\\*",
 
 
-                "-IC:\\SFML-2.5.1\\include", //.hpp files           
-                "-LC:\\SFML-2.5.1\\lib", //potrzebne do flag niżej
+
+                "-I${workspaceFolder}\\src\\include", //.hpp files           
+                "-L${workspaceFolder}\\src\\lib", // flags
 
                 "-lsfml-graphics",
                 "-lsfml-audio",
@@ -35,7 +36,7 @@
 
 
                 "-o",
-                "${workspaceFolder}\\${fileBasenameNoExtension}.exe" //output
+                "${workspaceFolder}\\main.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
