@@ -21,6 +21,7 @@ void loadMap(std::string path){
     file.open(path, std::ios::in);
     if(!file.good()){
         file.close();
+        std::cout << "\r\nCOULDN'T FIND A FILE TO LOAD MAP\tunder path:\"" << path << "\"\r\n";
         return;
     }
 
@@ -57,6 +58,7 @@ void loadMap(std::string path){
 
         }else{
             file.close();
+            std::cout << "\r\nLOADING MAP WAS UNSUCCESSFUL\r\n";
             // return error
             return;
         }
@@ -67,7 +69,7 @@ void loadMap(std::string path){
 }
 
 void loadMap(int level){
-    std::string path = "../maps/map";
+    std::string path = "src/maps/map";
     path += char(level + '0');
     loadMap(path);
 }
