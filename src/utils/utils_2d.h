@@ -1,5 +1,4 @@
-#ifndef BOUNCE_UTILS2D
-#define BOUNCE_UTILS2D
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <math.h>
@@ -29,5 +28,3 @@ float getDistacne(float x1, float y1, float x2, float y2);
 
 
 }
-
-#endif //BOUNCE_UTILS2D

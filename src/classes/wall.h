@@ -1,5 +1,4 @@
-#ifndef BOUNCE_WALL
-#define BOUNCE_WALL
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -37,5 +36,3 @@ class Wall{
         int getLeft();
 
 };
-
-#endif //BOUNCe_WALL

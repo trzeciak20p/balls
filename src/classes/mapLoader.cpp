@@ -67,7 +67,7 @@ void loadMap(std::string path){
 }
 
 void loadMap(int level){
-    std::string path = "../maps/map";
+    std::string path = "/home/abfipes/Downloads/maps/map";
     path += char(level + '0');
     loadMap(path);
 }
