@@ -1,11 +1,11 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <math.h>
-
 #include "wall.h"
 #include "../utils/utils_2d.h"
+
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <cmath>
 
 class Ball
 {

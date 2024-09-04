@@ -1,7 +1,8 @@
 #include "ball.h"
 
-#include <iostream>
 #include "../utils/utils_2d.h"
+
+#include <iostream>
 
 Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
 {

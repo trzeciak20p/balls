@@ -1,18 +1,16 @@
-#include <thread>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <vector>
-#include <math.h>
-#include <iostream>
-
 #include "utils/utils_2d.h"
 #include "classes/mapLoader.h"
 #include "classes/ball.h"
 #include "classes/wall.h"
 
+#include <cmath>
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <SFML/Graphics.hpp>
+
 int main()
 {
-
     // Window szouldn't be resizeable as it interferes with checking positions
     sf::RenderWindow window(sf::VideoMode(800, 700), "Balls and Walls", sf::Style::Close);
     window.setFramerateLimit(60);
@@ -31,7 +29,6 @@ int main()
 
     while (window.isOpen())
     {
-
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -123,5 +120,5 @@ int main()
         window.display();
     }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

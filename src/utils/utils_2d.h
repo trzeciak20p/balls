@@ -24,7 +24,5 @@ namespace bnw
     Equation getEquation(sf::Vector2f A, sf::Vector2f B);
     double getEquationAngle(sf::Vector2f A, sf::Vector2f B);
 
-    float getDistacne(int x1, int y1, int x2, int y2);
-    float getDistacne(float x1, float y1, float x2, float y2);
-
-}
+    float getDistacne(auto x1, auto y1, auto x2, auto y2);
+} // namespace bnw

@@ -20,10 +20,6 @@ Wall::Wall(int _x, int _y, int _size_x, int _size_y, Type _type) : x{_x}, y{_y},
     Wall::walls.push_back(*this);
 }
 
-Wall::~Wall()
-{
-}
-
 int Wall::getTop()
 {
     return y;
