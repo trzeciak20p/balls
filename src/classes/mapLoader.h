@@ -1,5 +1,4 @@
-#ifndef BOUNCE_LOAD_MAP
-#define BOUNCE_LOAD_MAP
+#pragma once
 
 #include <fstream>
 #include <iostream>
@@ -8,7 +7,4 @@
 #include "wall.h"
 
 void loadMap(int level);        // Loads built-in maps
-void loadMap(std::string path);     // Loads custom maps
-
-
-#endif //BOUNCE_LOAD_MAP
+void loadMap(std::string path); // Loads custom maps
