@@ -6,10 +6,6 @@ Game::Game(sf::Window *_window) : window{_window}
     dragging = false;
 }
 
-Game::~Game()
-{
-}
-
 Game::State Game::getState()
 {
     return state;

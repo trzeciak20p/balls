@@ -1,13 +1,12 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <math.h>
-
-#include "mapLoader.h"
 #include "ball.h"
-#include "wall.h"
+#include "mapLoader.h"
 #include "utils_2d.h"
+#include "wall.h"
+
+#include <SFML/Graphics.hpp>
+#include <math.h>
 
 class Game
 {
@@ -32,7 +31,6 @@ public:
     sf::Vertex trail[3];
 
     Game(sf::Window *window);
-    ~Game();
 
     State getState();
 

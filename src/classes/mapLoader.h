@@ -7,4 +7,4 @@
 #include <iostream>
 
 void loadMap(int level);        // Loads built-in maps
-void loadMap(std::string path); // Loads custom maps
+void loadMap(const std::string path); // Loads custom maps

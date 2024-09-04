@@ -1,6 +1,6 @@
 #include "mapLoader.h"
 
-sf::Color convertToSFColor(std::string &str)
+sf::Color convertToSFColor(const std::string &str)
 {
     if (str == "col()")
         return sf::Color::White;

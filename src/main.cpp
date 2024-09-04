@@ -3,11 +3,11 @@
 #include "classes/ball.h"
 #include "classes/wall.h"
 
+#include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <SFML/Graphics.hpp>
 
 int main()
 {

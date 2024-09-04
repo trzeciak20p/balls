@@ -3,7 +3,7 @@ project(BallsWithYourFriends LANGUAGES CXX)
 
 #option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
-find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
+find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
 
 add_executable(main src/main.cpp src/classes/ball.cpp src/classes/mapLoader.cpp src/classes/wall.cpp src/classes/utils_2d.cpp src/classes/game.cpp)
 
