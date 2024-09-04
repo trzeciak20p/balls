@@ -15,11 +15,6 @@ Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y
     balls.push_back(*this);
 }
 
-Ball::~Ball()
-{
-    // make some exsplosion effect
-}
-
 sf::Vector2f Ball::getPos()
 {
     return sf::Vector2f(x, y);
@@ -41,13 +36,6 @@ void Ball::checkBounce()
         // Cheking for corners
         if (float distance = getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius())
         {
-            // angle2 = bnw::getEquationAngle(getPos(), sf::Vector2f(wall.getLeft(), wall.getTop()) );
-            // float relative_x = wall.getLeft() - x;
-            // float relative_y = wall.getTop() - y;
-            // x = wall.getLeft() - wall.getTop() + y;
-            // y = wall.getTop() - wall.getLeft() + x;
-            // angle = atan(1);
-
             if (angle < 0)
             {
                 if (x > y)
@@ -72,46 +60,7 @@ void Ball::checkBounce()
                 vel_y = -vel_x_buffer;
                 decrease_vel_x *= -1;
                 decrease_vel_y *= -1;
-                // float x_buffer = x;
-                // x = wall.getLeft() - wall.getTop() + y;
-                // y = wall.getTop() - wall.getLeft() + x;
             }
-
-            // if(x > y){        // right side
-            //     std::cout << "right\r\n";
-            //     if(angle < 0){
-            //         x = wall.getLeft() + cos(M_PI_2 - angle) * (distance*10 + body.getRadius());
-            //         y = wall.getTop() - sin(M_PI_2 - angle) * (distance*10 + body.getRadius());
-            //     }else{
-            //         x = wall.getLeft() + cos(M_PI + M_PI_4 - angle) * (distance*10 + body.getRadius());
-            //         y = wall.getTop() - sin(M_PI + M_PI_4 - angle) * (distance*10 + body.getRadius());
-            //     }
-
-            // }else{      // left side
-            //     std::cout << "left\r\n";
-
-            //     if(angle < 0){
-            //         x = wall.getLeft() + cos(M_PI_2  - angle) * (distance*10 + body.getRadius());
-            //         y = wall.getTop() - sin(M_PI_2 - angle) * (distance*10 + body.getRadius());
-            //     }else{
-            //         x = wall.getLeft() + cos(M_PI + M_PI_4 + angle) * (distance*10 + body.getRadius());
-            //         y = wall.getTop() - sin(M_PI + M_PI_4 + angle) * (distance*10 + body.getRadius());
-            //     }
-
-            // }
-
-            // if(angle < 0){
-            //     x = wall.getLeft() + cos(M_PI_2 + M_PI_4 + angle) * (distance*10 + body.getRadius());
-            //     y = wall.getTop() - sin(M_PI_2 + M_PI_4 + angle) * (distance*10 + body.getRadius());
-            // }else{
-            //     x = wall.getLeft() + cos(M_PI_2 + M_PI_4 - angle) * (distance*10 + body.getRadius());
-            //     y = wall.getTop() - sin(M_PI_2 + M_PI_4 - angle) * (distance*10 + body.getRadius());
-            // }
-
-            // if(x == 0 && y == 0){
-            //     x = wall.getLeft() + cos(M_PI_2 + M_PI_4) * (distance*10 + body.getRadius());
-            //     y = wall.getTop() - sin(M_PI_2 + M_PI_4) * (distance*10 + body.getRadius());
-            // }
 
             std::cout << "diff x: " << x - wall.getLeft() << "diff y: " << y - wall.getTop() << "\r\n";
         }
@@ -126,7 +75,6 @@ void Ball::checkBounce()
         }
         else
         {
-
             // Checking for sides
             if ((new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) && (new_y >= wall.getTop() && new_y <= wall.getBottom()))
             {
@@ -142,18 +90,6 @@ void Ball::checkBounce()
         }
 
         std::cout << "angle: " << atan(angle) << "\tangle2: " << atan(angle2) << "\r\n";
-        // std::cout << x << "\t" << y << "\r\n";
-
-        // vel_x = vel_y = 0;
-
-        // if(x + vel_x < body.getRadius() + wall.getLeft() || x + vel_x >= Ball::window -> getSize().x - body.getRadius() + wall.getRight()){       //changing directions
-        //     vel_x *= -1;
-        //     decrease_vel_x *= -1;
-        // }
-        // if(y + vel_y < body.getRadius() + wall.getBottom() || y + vel_y >= Ball::window -> getSize().y - body.getRadius() + wall.getTop()){
-        //     vel_y *= -1;
-        //     decrease_vel_y *= -1;
-        // }
     }
 
     for (auto &i : Ball::balls)
@@ -210,7 +146,7 @@ void Ball::update()
     vel_x *= Ball::friction; // lowering speed
     vel_y *= Ball::friction;
 
-    if ((vel_x < 0.2 && vel_x > -0.2) && (vel_y < 0.2 && vel_y > -0.2))
+    if (abs(vel_x) < 0.2 && abs(vel_y) < 0.2)
     {
         vel_x = vel_y = 0;
         Ball::movable = true;

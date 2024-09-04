@@ -4,7 +4,6 @@
 #include "../utils/utils_2d.h"
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <cmath>
 
 class Ball
@@ -25,7 +24,6 @@ public:
     sf::Color color;
 
     Ball(float _x, float _y, float size = 20, sf::Color color = sf::Color::White);
-    ~Ball();
 
     sf::Vector2f getPos();
 
