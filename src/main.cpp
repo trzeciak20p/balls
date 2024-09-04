@@ -21,8 +21,8 @@ int main()
     const float max_drag = 100;
 
     Ball::window = &window;
-    Ball::W = window.getSize().x;
-    Ball::H = window.getSize().y;
+    Ball::board_width = window.getSize().x;
+    Ball::board_height = window.getSize().y;
     Ball::friction = 0.9;
 
     loadMap(1);
