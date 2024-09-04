@@ -23,6 +23,7 @@ void loadMap(std::string path)
     if (!file.good())
     {
         file.close();
+        std::cout << "\r\nCOULDN'T FIND A FILE TO LOAD MAP\tunder path:\"" << path << "\"\r\n";
         return;
     }
 
@@ -69,6 +70,7 @@ void loadMap(std::string path)
         else
         {
             file.close();
+            std::cout << "\r\nLOADING MAP WAS UNSUCCESSFUL\r\n";
             // return error
             return;
         }

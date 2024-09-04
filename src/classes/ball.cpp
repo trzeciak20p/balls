@@ -20,14 +20,20 @@ Ball::~Ball()
     // make some exsplosion effect
 }
 
-sf::Vector2f Ball::getPos()
-{
+void Ball::initialize(sf::Window *_window, float _friction, float _board_width, float _board_height){
+    Ball::window = _window;
+    Ball::board_width = _window -> getSize().x; 
+    Ball::board_height = _window -> getSize().y; 
+    Ball::friction = 0.9;
+}
+
+sf::Vector2f Ball::getPos(){
     return sf::Vector2f(x, y);
 }
 
-float Ball::getDistacne(float _x, float _y)
-{
-    return sqrt((_x - x) * (_x - x) + (_y - y) * (_y - y));
+
+float Ball::getDistacne(float _x, float _y){
+    return sqrt( (_x-x)*(_x-x) + (_y-y)*(_y-y));
 }
 
 void Ball::checkBounce()
