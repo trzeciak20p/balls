@@ -5,7 +5,7 @@ project(BallsWithYourFriends LANGUAGES CXX)
 
 find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
-add_executable(main src/main.cpp src/classes/ball.cpp src/classes/mapLoader.cpp src/classes/wall.cpp src/utils/utils_2d.cpp)
+add_executable(main src/main.cpp src/classes/ball.cpp src/classes/mapLoader.cpp src/classes/wall.cpp src/classes/utils_2d.cpp src/classes/game.cpp)
 
 set_target_properties(main PROPERTIES CXX_STANDARD 20)
 set_target_properties(main PROPERTIES OUTPUT_NAME baluminc)

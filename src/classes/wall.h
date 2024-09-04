@@ -4,15 +4,13 @@
 #include <SFML/Audio.hpp>
 #include <vector>
 
-
-
 class Wall{
 
     public:
         enum class Type{
         normal = 0,
         dmg = 1 << 0,
-        bouncy = 1 << 1
+        bouncy = 1 << 1,
     };
 
     private:     

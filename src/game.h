@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BOUNCE_GAME
+#define BOUNCE_GAME
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -155,3 +156,5 @@ inline void Game::mouseRelease()
         break;
     }
 }
+
+#endif // BOUNCE_GAME

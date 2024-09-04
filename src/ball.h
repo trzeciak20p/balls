@@ -1,5 +1,3 @@
-#pragma once
-
 #include "wall.h"
 #include "utils_2d.h"
 

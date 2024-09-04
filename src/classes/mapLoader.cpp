@@ -67,13 +67,6 @@ void loadMap(std::string path)
             file >> type;
             Wall(x, y, x_size, y_size, static_cast<Wall::Type>(type[5] - '0'));
         }
-        else
-        {
-            file.close();
-            std::cout << "\r\nLOADING MAP WAS UNSUCCESSFUL\r\n";
-            // return error
-            return;
-        }
     }
 
     file.close();
