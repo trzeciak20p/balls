@@ -18,12 +18,9 @@ int main()
     sf::Vector2i mouse;
 
     bool dragging = false;
-    const float max_drag = 100;
 
-    Ball::window = &window;
-    Ball::board_width = window.getSize().x;
-    Ball::board_height = window.getSize().y;
-    Ball::friction = 0.9;
+
+    Ball::initialize(&window);
 
     loadMap(1);
 

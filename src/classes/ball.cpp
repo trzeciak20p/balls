@@ -20,11 +20,11 @@ Ball::~Ball()
     // make some exsplosion effect
 }
 
-void Ball::initialize(sf::Window *_window, float _friction, float _board_width, float _board_height)
+void Ball::initialize(sf::Window *_window)
 {
     Ball::window = _window;
-    Ball::board_width = _window->getSize().x;
-    Ball::board_height = _window->getSize().y;
+    Ball::board_width = window->getSize().x;
+    Ball::board_height = window->getSize().y;
     Ball::friction = 0.9;
 }
 
@@ -43,7 +43,7 @@ void Ball::checkBounce()
     for (auto &wall : Wall::walls)
     {
         float new_x = x + vel_x, new_y = y + vel_y;
-        float angle, angle2;
+        float angle;
         angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
 
         // Cheking for corners
@@ -102,7 +102,7 @@ void Ball::checkBounce()
             return;
         }
 
-        std::cout << "angle: " << atan(angle) << "\tangle2: " << atan(angle2) << "\r\n";
+        std::cout << "angle: " << atan(angle) << "\r\n";
     }
 
     // TODO uwzględnić prędkość obu piłek
@@ -135,12 +135,12 @@ void Ball::update()
     if (vel_x == 0 && vel_y == 0)
         return;
 
-    if (x + vel_x < body.getRadius() || x + vel_x >= Ball::window->getSize().x - body.getRadius())
+    if (x + vel_x < body.getRadius() || x + vel_x >= Ball::board_width - body.getRadius())
     { // changing directions from boundaries
         vel_x *= -1;
         decrease_vel_x *= -1;
     }
-    if (y + vel_y < body.getRadius() || y + vel_y >= Ball::window->getSize().y - body.getRadius())
+    if (y + vel_y < body.getRadius() || y + vel_y >= Ball::board_height - body.getRadius())
     {
         vel_y *= -1;
         decrease_vel_y *= -1;

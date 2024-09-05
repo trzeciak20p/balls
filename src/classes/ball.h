@@ -25,7 +25,7 @@ public:
 
     Ball(float _x, float _y, float _size = 20, sf::Color _color = sf::Color::White);
     ~Ball();
-    static void initialize(sf::Window *_window, float _friction = 0.9, float _board_width = 0, float _board_height = 0); // Initializes classes static variables
+    static void initialize(sf::Window *_window); // Initializes classes static variables
 
     sf::Vector2f getPos();
 
