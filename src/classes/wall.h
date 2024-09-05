@@ -8,7 +8,7 @@ class Wall{
 
     public:
         enum class Type{
-        normal = 0,
+        normal = 0 << 1,
         dmg = 1 << 0,
         bouncy = 1 << 1,
     };
