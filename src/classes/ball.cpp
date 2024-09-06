@@ -137,7 +137,7 @@ void Ball::setSpeed(float _x, float _y)
 
 void Ball::update()
 {
-    if ((vel_x == 0.0) && (vel_y == 0.0))
+    if ((vel_x == vel_y == 0.0))
     {
         return;
     }

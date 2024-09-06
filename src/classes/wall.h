@@ -6,7 +6,6 @@
 
 class Wall
 {
-
 public:
     enum class Type
     {
@@ -15,11 +14,6 @@ public:
         bouncy = 1 << 1,
     };
 
-private:
-    int x, y, size_x, size_y;
-    Type type;
-
-public:
     sf::RectangleShape body;
 
     Wall(int _x, int _y, int _size_x, int _size_y, Type _type = Type::normal);
@@ -28,6 +22,10 @@ public:
     int getBottom() const;
     int getRight() const;
     int getLeft() const;
+
+private:
+    int x, y, size_x, size_y;
+    Type type;
 };
 
 inline std::vector<Wall> walls;

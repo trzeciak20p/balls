@@ -9,7 +9,6 @@
 
 class Game
 {
-
 public:
     enum class State
     {
@@ -20,11 +19,6 @@ public:
         map_selection
     };
 
-private:
-    sf::Window *window;
-    State state;
-
-public:
     bool dragging = false;
     sf::Vector2i mouse;
     sf::Vertex trail[3];
@@ -38,4 +32,8 @@ public:
 
     void mousePress();
     void mouseRelease();
+
+private:
+    sf::Window *window;
+    State state;
 };

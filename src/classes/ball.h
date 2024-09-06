@@ -7,10 +7,6 @@
 
 class Ball
 {
-
-private:
-    float x, y, vel_x, vel_y, decrease_vel_x{}, decrease_vel_y{};
-
 public:
     inline static sf::Window *window;            // for now using window
     inline static int board_width, board_height; // switching to this when only a part of window will be playfield
@@ -31,6 +27,9 @@ public:
     bool checkHover(float _x, float _y);
     void setSpeed(float _x, float _y);
     void update();
+
+private:
+    float x, y, vel_x, vel_y, decrease_vel_x{}, decrease_vel_y{};
 };
 
 inline std::vector<Ball> balls; // Vector for storing every class instance

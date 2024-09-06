@@ -9,6 +9,7 @@ Equation getEquation(sf::Vector2f A, sf::Vector2f B)
     return Equation{(B.y - A.y) / (B.x - A.x), ((B.x * A.y) - (A.x * B.y)) / B.x - A.x,
                     atan((B.y - A.y) / (B.x - A.x))};
 }
+
 float getEquationAngle(sf::Vector2f A, sf::Vector2f B)
 {
     return atan((B.y - A.y) / (B.x - A.x));
