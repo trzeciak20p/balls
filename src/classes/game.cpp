@@ -21,14 +21,16 @@ Game::State Game::getState()
 void Game::errorReport(const std::string &err)
 {
     std::cout << err << "\r\n";
-    state = State::menu;
+    // state = State::menu;
 }
 
 bool Game::calculateTrail()
 {
-    if (!(dragging && Ball::movable))
-        return false;
 
+    if (!(dragging && Ball::movable))
+    {
+        return false;
+    }
     float const distance =
         sqrt(pow(mouse.x - sf::Mouse::getPosition(*window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(*window).y, 2));
     float const angle = bnw::getEquationAngle((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(*window));
