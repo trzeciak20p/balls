@@ -138,7 +138,9 @@ void Ball::setSpeed(float _x, float _y)
 void Ball::update()
 {
     if ((vel_x == 0.0) && (vel_y == 0.0))
+    {
         return;
+    }
 
     if (x + vel_x < body.getRadius() || x + vel_x >= Ball::board_width - body.getRadius())
     { // changing directions from boundaries

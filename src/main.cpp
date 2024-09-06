@@ -64,7 +64,9 @@ int main()
         window.clear(sf::Color(102, 102, 102));
 
         for (auto &i : walls)
+        {
             window.draw(i.body);
+        }
 
         for (auto &i : balls)
         { // updating positions

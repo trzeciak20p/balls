@@ -11,7 +11,9 @@
 sf::Color convertToSFColor(const std::string &str)
 {
     if (str == "col()")
+    {
         return sf::Color::White;
+    }
 
     std::cout << "str: " << str << "\r\n";
     unsigned char color[3];
@@ -53,13 +55,21 @@ void loadMap(const std::string &path)
 
             // Data check
             if (x < 0)
+            {
                 x *= -1;
+            }
             if (y < 0)
+            {
                 y *= -1;
+            }
             if (r < 0)
+            {
                 r *= -1;
+            }
             if (r <= 0)
+            {
                 r = 50;
+            }
 
             std::string color_str;
             file >> color_str;
