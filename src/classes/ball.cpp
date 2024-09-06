@@ -1,12 +1,15 @@
 #include "ball.h"
-
 #include "utils_2d.h"
-
+#include "wall.h"
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Window/Window.hpp>
+#include <cmath>
+#include <cstdlib>
 #include <iostream>
 
-Ball::Ball(double _x, double _y, double _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
+Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
 {
-    vel_x = vel_y = 0.0f;
+    vel_x = vel_y = 0.0F;
 
     body.setPosition(x, y);
     body.setRadius(_size);
@@ -15,10 +18,8 @@ Ball::Ball(double _x, double _y, double _size, sf::Color _color) : x{_x + _size}
     balls.push_back(*this);
 }
 
-Ball::~Ball()
-{
-    // make some exsplosion effect
-}
+// Ball::~Ball() = default;
+// make some exsplosion effect
 
 void Ball::initialize(sf::Window *_window)
 {
@@ -28,12 +29,12 @@ void Ball::initialize(sf::Window *_window)
     Ball::friction = 0.9;
 }
 
-sf::Vector2f Ball::getPos()
+sf::Vector2f Ball::getPos() const
 {
-    return sf::Vector2f(x, y);
+    return {x, y};
 }
 
-double Ball::getDistacne(double _x, double _y)
+float Ball::getDistacne(float _x, float _y) const
 {
     return sqrt((_x - x) * (_x - x) + (_y - y) * (_y - y));
 }
@@ -42,12 +43,14 @@ void Ball::checkBounce()
 {
     for (auto &wall : walls)
     {
-        double new_x = x + vel_x, new_y = y + vel_y;
-        double angle;
+        float const new_x = x + vel_x;
+        float const new_y = y + vel_y;
+        float angle = NAN;
         angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
 
         // Cheking for corners
-        if (double distance = getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius())
+        if (auto const distance =
+                static_cast<float>(getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius()))
         {
             if (angle < 0)
             {
@@ -68,7 +71,7 @@ void Ball::checkBounce()
             {
                 x = wall.getLeft() + cos(M_PI_2 + angle) * (distance * 10 + body.getRadius());
                 y = wall.getTop() - sin(M_PI_2 + angle) * (distance * 10 + body.getRadius());
-                double vel_x_buffer = vel_x;
+                float const vel_x_buffer = vel_x;
                 vel_x = -vel_y;
                 vel_y = -vel_x_buffer;
                 decrease_vel_x *= -1;
@@ -89,12 +92,14 @@ void Ball::checkBounce()
         else
         {
             // Checking for sides
-            if ((new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) && (new_y >= wall.getTop() && new_y <= wall.getBottom()))
+            if ((new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) &&
+                (new_y >= wall.getTop() && new_y <= wall.getBottom()))
             {
                 vel_x *= -1;
                 decrease_vel_x *= -1;
             }
-            if ((new_y + body.getRadius() > wall.getTop() || new_y - body.getRadius() > wall.getBottom()) && (new_x >= wall.getLeft() && new_x <= wall.getRight()))
+            if ((new_y + body.getRadius() > wall.getTop() || new_y - body.getRadius() > wall.getBottom()) &&
+                (new_x >= wall.getLeft() && new_x <= wall.getRight()))
             {
                 vel_y *= -1;
                 decrease_vel_y *= -1;
@@ -108,7 +113,7 @@ void Ball::checkBounce()
     // TODO uwzględnić prędkość obu piłek
 }
 
-bool Ball::checkHover(double _x, double _y)
+bool Ball::checkHover(float _x, float _y)
 { // Checks if cursor hovers over ball
     if (getDistacne(_x, _y) <= body.getRadius())
     {
@@ -118,7 +123,7 @@ bool Ball::checkHover(double _x, double _y)
     return false;
 }
 
-void Ball::setSpeed(double _x, double _y)
+void Ball::setSpeed(float _x, float _y)
 {
     if (movable)
     {
@@ -132,7 +137,7 @@ void Ball::setSpeed(double _x, double _y)
 
 void Ball::update()
 {
-    if (!vel_x && !vel_y)
+    if ((vel_x == 0.0) && (vel_y == 0.0))
         return;
 
     if (x + vel_x < body.getRadius() || x + vel_x >= Ball::board_width - body.getRadius())

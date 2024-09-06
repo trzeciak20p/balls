@@ -1,0 +1,6 @@
+BasedOnStyle: Microsoft
+
+ColumnLimit: 120
+AccessModifierOffset: -4
+InsertBraces: false
+RemoveBracesLLVM: true

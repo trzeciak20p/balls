@@ -1,4 +1,12 @@
 #include "mapLoader.h"
+#include "ball.h"
+#include "wall.h"
+#include <SFML/Graphics/Color.hpp>
+#include <cmath>
+#include <fstream>
+#include <ios>
+#include <iostream>
+#include <string>
 
 sf::Color convertToSFColor(const std::string &str)
 {
@@ -7,16 +15,16 @@ sf::Color convertToSFColor(const std::string &str)
 
     std::cout << "str: " << str << "\r\n";
     unsigned char color[3];
-    unsigned char index = str.find(",");
+    unsigned char index = str.find(',');
     color[0] = std::stoi(str.substr(4, index - 4));
-    unsigned char index2 = str.substr(++index).find(",") + index;
+    unsigned char index2 = str.substr(++index).find(',') + index;
     color[1] = std::stoi(str.substr(index, index2 - index));
-    index = str.substr(++index2).find(")") + index2;
+    index = str.substr(++index2).find(')') + index2;
     color[2] = std::stoi(str.substr(index2, index - index2));
-    return sf::Color(color[0], color[1], color[2]);
+    return {color[0], color[1], color[2]};
 }
 
-void loadMap(std::string path)
+void loadMap(const std::string &path)
 {
     std::fstream file;
     file.open(path, std::ios::in);
@@ -31,12 +39,14 @@ void loadMap(std::string path)
     balls.clear();
     walls.clear();
 
-    char obj;
+    char obj = 0;
     while (file >> obj)
     {
         if (obj == 'b')
         {
-            double x, y, r;
+            float x = NAN;
+            float y = NAN;
+            float r = NAN;
             file >> x;
             file >> y;
             file >> r;
@@ -53,12 +63,15 @@ void loadMap(std::string path)
 
             std::string color_str;
             file >> color_str;
-            sf::Color color = convertToSFColor(color_str);
+            sf::Color const color = convertToSFColor(color_str);
             Ball(x, y, r, color);
         }
         else if (obj == 'w')
         {
-            double x, y, x_size, y_size;
+            float x = NAN;
+            float y = NAN;
+            float x_size = NAN;
+            float y_size = NAN;
             file >> x;
             file >> y;
             file >> x_size;

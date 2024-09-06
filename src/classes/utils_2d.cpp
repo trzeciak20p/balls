@@ -1,19 +1,21 @@
 #include "utils_2d.h"
+#include <SFML/System/Vector2.hpp>
+#include <cmath>
 
 namespace bnw
 { // Balls n' Walls
-    Equation getEquation(sf::Vector2f A, sf::Vector2f B)
-    {
-        return Equation{(B.y - A.y) / (B.x - A.x), ((B.x * A.y) - (A.x * B.y)) / B.x - A.x, atan((B.y - A.y) / (B.x - A.x))};
-    }
-    double getEquationAngle(sf::Vector2f A, sf::Vector2f B)
-    {
-        return atan((B.y - A.y) / (B.x - A.x));
-    }
+Equation getEquation(sf::Vector2f A, sf::Vector2f B)
+{
+    return Equation{(B.y - A.y) / (B.x - A.x), ((B.x * A.y) - (A.x * B.y)) / B.x - A.x,
+                    atan((B.y - A.y) / (B.x - A.x))};
+}
+float getEquationAngle(sf::Vector2f A, sf::Vector2f B)
+{
+    return atan((B.y - A.y) / (B.x - A.x));
+}
 
-    template <typename T>
-    double getDistacne(T x1, T y1, T x2, T y2)
-    {
-        return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    }
+template <typename T> float getDistacne(T x1, T y1, T x2, T y2)
+{
+    return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
 } // namespace bnw
