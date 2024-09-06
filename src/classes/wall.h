@@ -18,7 +18,6 @@ class Wall{
         Type type;
  
     public: 
-        inline static std::vector <Wall> walls;
         sf::RectangleShape body;
 
 
@@ -29,3 +28,5 @@ class Wall{
     int getRight();
     int getLeft();
 };
+
+inline std::vector <Wall> walls;

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
+Ball::Ball(double _x, double _y, double _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
 {
     vel_x = vel_y = 0.0f;
 
@@ -33,21 +33,21 @@ sf::Vector2f Ball::getPos()
     return sf::Vector2f(x, y);
 }
 
-float Ball::getDistacne(float _x, float _y)
+double Ball::getDistacne(double _x, double _y)
 {
     return sqrt((_x - x) * (_x - x) + (_y - y) * (_y - y));
 }
 
 void Ball::checkBounce()
 {
-    for (auto &wall : Wall::walls)
+    for (auto &wall : walls)
     {
-        float new_x = x + vel_x, new_y = y + vel_y;
-        float angle;
+        double new_x = x + vel_x, new_y = y + vel_y;
+        double angle;
         angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
 
         // Cheking for corners
-        if (float distance = getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius())
+        if (double distance = getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius())
         {
             if (angle < 0)
             {
@@ -68,7 +68,7 @@ void Ball::checkBounce()
             {
                 x = wall.getLeft() + cos(M_PI_2 + angle) * (distance * 10 + body.getRadius());
                 y = wall.getTop() - sin(M_PI_2 + angle) * (distance * 10 + body.getRadius());
-                float vel_x_buffer = vel_x;
+                double vel_x_buffer = vel_x;
                 vel_x = -vel_y;
                 vel_y = -vel_x_buffer;
                 decrease_vel_x *= -1;
@@ -108,7 +108,7 @@ void Ball::checkBounce()
     // TODO uwzględnić prędkość obu piłek
 }
 
-bool Ball::checkHover(float _x, float _y)
+bool Ball::checkHover(double _x, double _y)
 { // Checks if cursor hovers over ball
     if (getDistacne(_x, _y) <= body.getRadius())
     {
@@ -118,7 +118,7 @@ bool Ball::checkHover(float _x, float _y)
     return false;
 }
 
-void Ball::setSpeed(float _x, float _y)
+void Ball::setSpeed(double _x, double _y)
 {
     if (movable)
     {
@@ -132,7 +132,7 @@ void Ball::setSpeed(float _x, float _y)
 
 void Ball::update()
 {
-    if (vel_x == 0 && vel_y == 0)
+    if (!vel_x && !vel_y)
         return;
 
     if (x + vel_x < body.getRadius() || x + vel_x >= Ball::board_width - body.getRadius())

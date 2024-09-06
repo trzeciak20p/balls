@@ -8,14 +8,14 @@ namespace bnw
 
     struct Equation
     {
-        float a;
-        float b;
-        float ang;
-        float getX(float y)
+        double a;
+        double b;
+        double ang;
+        double getX(double y)
         {
             return (y - b) / a;
-        };
-        float getY(float x)
+        }
+        double getY(double x)
         {
             return a * x + b;
         }
@@ -24,5 +24,6 @@ namespace bnw
     Equation getEquation(sf::Vector2f A, sf::Vector2f B);
     double getEquationAngle(sf::Vector2f A, sf::Vector2f B);
 
-    float getDistacne(auto x1, auto y1, auto x2, auto y2);
+    template <typename T>
+    double getDistacne(T x1, T y1, T x2, T y2);
 } // namespace bnw

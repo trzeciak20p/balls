@@ -11,7 +11,8 @@ namespace bnw
         return atan((B.y - A.y) / (B.x - A.x));
     }
 
-    float getDistacne(auto x1, auto y1, auto x2, auto y2)
+    template <typename T>
+    double getDistacne(T x1, T y1, T x2, T y2)
     {
         return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }

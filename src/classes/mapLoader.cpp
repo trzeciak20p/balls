@@ -28,15 +28,15 @@ void loadMap(std::string path)
     }
 
     // Will probably be unnecessary after making menu
-    Ball::balls.clear();
-    Wall::walls.clear();
+    balls.clear();
+    walls.clear();
 
     char obj;
     while (file >> obj)
     {
         if (obj == 'b')
         {
-            float x, y, r;
+            double x, y, r;
             file >> x;
             file >> y;
             file >> r;
@@ -58,7 +58,7 @@ void loadMap(std::string path)
         }
         else if (obj == 'w')
         {
-            float x, y, x_size, y_size;
+            double x, y, x_size, y_size;
             file >> x;
             file >> y;
             file >> x_size;

@@ -46,10 +46,10 @@ inline bool Game::calculateTrail()
     if (!(dragging && Ball::movable))
         return false;
 
-    float distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(*window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(*window).y, 2));
+    double distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(*window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(*window).y, 2));
     double angle = bnw::getEquationAngle((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(*window));
-    float x = cos(angle + M_PI_2) * Ball::active_ball->body.getRadius() / 2;
-    float y = sin(angle + M_PI_2) * Ball::active_ball->body.getRadius() / 2;
+    double x = cos(angle + M_PI_2) * Ball::active_ball->body.getRadius() / 2;
+    double y = sin(angle + M_PI_2) * Ball::active_ball->body.getRadius() / 2;
 
     if (distance < 200)
     {
@@ -65,8 +65,8 @@ inline bool Game::calculateTrail()
     { // speed velocity cap
         trail[0] = sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x + x, Ball::active_ball->getPos().y + y), sf::Color::Red);
         trail[1] = sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x - x, Ball::active_ball->getPos().y - y), sf::Color::Red);
-        float tip_x = cos(angle) * 200;
-        float tip_y = sin(angle) * 200;
+        double tip_x = cos(angle) * 200;
+        double tip_y = sin(angle) * 200;
 
         std::cout << sf::Mouse::getPosition(*window).x << " " << Ball::active_ball->getPos().x << " " << angle << " \r\n";
 
@@ -101,7 +101,7 @@ inline void Game::mousePress()
 
     case Game::State::playing:
         mouse = sf::Mouse::getPosition(*window);
-        for (auto &i : Ball::balls)
+        for (auto &i : balls)
         { // checking if hovered over ball
             if (i.checkHover(mouse.x, mouse.y))
             {
