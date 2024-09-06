@@ -5,7 +5,7 @@
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
-#include <math.h>
+#include <cmath>
 
 class Game
 {
@@ -19,7 +19,7 @@ public:
         map_selection
     };
 
-    bool dragging = false;
+    bool dragging{};
     sf::Vector2i mouse;
     sf::Vertex trail[3];
 

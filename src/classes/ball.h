@@ -29,7 +29,12 @@ public:
     void update();
 
 private:
-    float x, y, vel_x, vel_y, decrease_vel_x{}, decrease_vel_y{};
+    float x{};
+    float y{};
+    float vel_x{};
+    float vel_y{};
+    float decrease_vel_x{};
+    float decrease_vel_y{};
 };
 
 inline std::vector<Ball> balls; // Vector for storing every class instance

@@ -21,12 +21,10 @@ Game::State Game::getState()
 void Game::errorReport(const std::string &err)
 {
     std::cout << err << "\r\n";
-    // state = State::menu;
 }
 
 bool Game::calculateTrail()
 {
-
     if (!(dragging && Ball::movable))
     {
         return false;
@@ -124,8 +122,6 @@ void Game::mouseRelease()
     case Game::State::playing:
         if (dragging)
         {
-            // Ball::active_ball -> setSpeed( mouse.x - sf::Mouse::getPosition(window).x, mouse.y -
-            // sf::Mouse::getPosition(window).y);
             Ball::active_ball->setSpeed((mouse.x - sf::Mouse::getPosition(*window).x) / 3,
                                         (mouse.y - sf::Mouse::getPosition(*window).y) / 3);
             Ball::active_ball->body.setFillColor(Ball::active_ball->color);

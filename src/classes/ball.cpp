@@ -9,8 +9,6 @@
 
 Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
 {
-    vel_x = vel_y = 0.0F;
-
     body.setPosition(x, y);
     body.setRadius(_size);
     body.setFillColor(_color);
@@ -137,7 +135,7 @@ void Ball::setSpeed(float _x, float _y)
 
 void Ball::update()
 {
-    if ((vel_x == vel_y == 0.0))
+    if (vel_x == 0.0 && vel_y == 0.0)
     {
         return;
     }
@@ -163,7 +161,7 @@ void Ball::update()
     vel_x *= Ball::friction; // lowering speed
     vel_y *= Ball::friction;
 
-    if (abs(vel_x) < 0.2 && abs(vel_y) < 0.2)
+    if (std::abs(vel_x) < 0.2 && std::abs(vel_y) < 0.2)
     {
         vel_x = vel_y = 0;
         Ball::movable = true;
