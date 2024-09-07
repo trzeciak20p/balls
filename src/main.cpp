@@ -1,4 +1,5 @@
 #include "classes/ball.h"
+#include "classes/button.h"
 #include "classes/game.h"
 #include "classes/mapLoader.h"
 #include "classes/utils_2d.h"
@@ -19,10 +20,12 @@ int main()
     window.setFramerateLimit(60);
 
     Game gra(&window);
-
     Ball::initialize(&window);
 
     loadMap(1);
+
+    buttons.push_back(Button(5, 5, 200, 100, "AAAA"));
+    buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
 
     while (window.isOpen())
     {
@@ -43,10 +46,23 @@ int main()
             }
         }
 
+        // Rendering
         window.clear(sf::Color(102, 102, 102));
 
         switch (gra.getState())
         {
+        case Game::Game::State::map_selection:
+            break;
+        case Game::Game::State::paused:
+            break;
+        case Game::Game::State::menu:
+            for (auto &i : buttons)
+            {
+                window.draw(i.getBody());
+                window.draw(i.getText());
+            }
+            break;
+
         case Game::Game::State::playing:
             for (auto &i : walls)
             {

@@ -1,5 +1,6 @@
 #include "game.h"
 #include "ball.h"
+#include "button.h"
 #include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -9,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-Game::Game(sf::Window *_window) : window{_window}, state(State::playing)
+Game::Game(sf::Window *_window) : window{_window}, state(State::menu)
 {
 }
 
@@ -80,16 +81,24 @@ bool Game::calculateTrail()
 
 void Game::mousePress()
 {
+    mouse = sf::Mouse::getPosition(*window);
     switch (state)
     {
     case Game::State::menu:
+        for (auto &i : buttons)
+        {
+            if (i.checkHover(mouse))
+            {
+                i.onClick();
+            }
+        }
+        break;
     case Game::State::map_selection:
     case Game::State::settings:
 
         break;
 
     case Game::State::playing:
-        mouse = sf::Mouse::getPosition(*window);
         for (auto &i : balls)
         { // checking if hovered over ball
             if (i.checkHover(mouse.x, mouse.y))
