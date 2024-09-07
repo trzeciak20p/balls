@@ -12,8 +12,8 @@ class Button
 private:
     sf::Window *window;
     int pos_x = 0, pos_y = 0;
-    sf::Text text{};
     sf::RectangleShape body{};
+    sf::Text text{};
 
 public:
     Button(int _pos_x, int _pos_y, int _size_x, int _size_y, std::string _name);

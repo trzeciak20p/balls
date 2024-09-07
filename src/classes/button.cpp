@@ -1,15 +1,12 @@
 #include "button.h"
-#include <iostream>
+#include "fontLoader.h"
 
 Button::Button(int _pos_x, int _pos_y, int _size_x, int _size_y, std::string _name) : pos_x{_pos_x}, pos_y{_pos_y}
 {
-    sf::Font font1;
-    if (font1.loadFromFile("../comic.ttf"))
-    {
-        text.setFont(font1);
-    }
+    text.setFont(bnw::font1);
     text.setString(_name);
-    text.setPosition(_pos_x + _size_x / 2, _pos_y + _size_y);
+    text.setCharacterSize(20);
+    text.setPosition(_pos_x, _pos_y);
     text.setFillColor(sf::Color::Yellow);
     body.setPosition(_pos_x, _pos_y);
     body.setSize(sf::Vector2f(_size_x, _size_y));
@@ -31,7 +28,6 @@ sf::RectangleShape Button::getBody()
 
 bool Button::checkHover(sf::Vector2i pos)
 {
-    std::fprintf(stderr, "m: %d %d\r\n", pos.x, pos.y);
     if (pos.x >= body.getPosition().x && pos.x <= body.getPosition().x + body.getSize().x &&
         pos.y >= body.getPosition().y && pos.y <= body.getPosition().y + body.getSize().y)
     {
@@ -39,8 +35,9 @@ bool Button::checkHover(sf::Vector2i pos)
     }
     return false;
 };
-void Button::onClick() {
-
+void Button::onClick()
+{
+    std::fprintf(stderr, "clicked  :D \r\n");
 };
 void Button::onHover()
 {

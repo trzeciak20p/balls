@@ -18,7 +18,7 @@ else()
     find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
 endif()
 
-add_executable(main src/main.cpp src/classes/ball.cpp src/classes/mapLoader.cpp src/classes/wall.cpp src/classes/utils_2d.cpp src/classes/game.cpp src/classes/slider.cpp src/classes/button.cpp src/classes/button.cpp)
+add_executable(main src/main.cpp src/classes/ball.cpp src/classes/mapLoader.cpp src/classes/wall.cpp src/classes/utils_2d.cpp src/classes/game.cpp src/classes/slider.cpp src/classes/button.cpp src/classes/button.cpp src/classes/fontLoader.cpp)
 
 # basycznie powinno sie używać analizatora ale jeszcze go nie ma wiec jest ściana (wall)
 # target_compile_options(main PRIVATE "-Wall;-Wextra;-Wpedantic;-pedantic-errors;-fanalyzer;-Wshadow;-Wnull-dereference;-Wduplicated-cond;-Wredundant-decls;-Wduplicated-branches;-Wlogical-op;-Wcast-qual;-Wfloat-equal")

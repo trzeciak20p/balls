@@ -1,5 +1,6 @@
 #include "classes/ball.h"
 #include "classes/button.h"
+#include "classes/fontLoader.h"
 #include "classes/game.h"
 #include "classes/mapLoader.h"
 #include "classes/utils_2d.h"
@@ -23,6 +24,7 @@ int main()
     Ball::initialize(&window);
 
     loadMap(1);
+    bnw::loadFont("../comic.ttf");
 
     buttons.push_back(Button(5, 5, 200, 100, "AAAA"));
     buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
