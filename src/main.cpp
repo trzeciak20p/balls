@@ -34,6 +34,7 @@ int main()
         sf::Event event{};
         while (window.pollEvent(event))
         {
+            gra.updateMouse();
             if (event.type == sf::Event::Closed)
             {
                 window.close();
@@ -60,6 +61,15 @@ int main()
         case Game::Game::State::menu:
             for (auto &i : buttons)
             {
+                if (i.checkHover(gra.mouse))
+                {
+                    i.setActive();
+                }
+                else if (Button::getActive() != nullptr)
+                {
+                    Button::clearActive();
+                }
+
                 window.draw(i.getBody());
                 window.draw(i.getText());
             }

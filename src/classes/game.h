@@ -30,6 +30,7 @@ public:
     void errorReport(const std::string &err);
     bool calculateTrail(); // Calculates trail for drawing
 
+    void updateMouse();
     void mousePress();
     void mouseRelease();
 

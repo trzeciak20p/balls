@@ -79,9 +79,13 @@ bool Game::calculateTrail()
     return true;
 }
 
-void Game::mousePress()
+void Game::updateMouse()
 {
     mouse = sf::Mouse::getPosition(*window);
+}
+
+void Game::mousePress()
+{
     switch (state)
     {
     case Game::State::menu:
@@ -89,7 +93,7 @@ void Game::mousePress()
         {
             if (i.checkHover(mouse))
             {
-                i.onClick();
+                i.onUse();
             }
         }
         break;
