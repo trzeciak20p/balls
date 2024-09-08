@@ -1,17 +1,12 @@
 #include "classes/ball.h"
 #include "classes/game.h"
 #include "classes/mapLoader.h"
-#include "classes/utils_2d.h"
 #include "classes/wall.h"
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Vertex.hpp>
-#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cmath>
-#include <iostream>
 
 int main()
 {
@@ -63,9 +58,6 @@ int main()
             {
                 window.draw(gra.trail, 3, sf::Triangles);
             }
-            break;
-
-        default:
             break;
         }
 

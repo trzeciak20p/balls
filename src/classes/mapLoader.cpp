@@ -15,14 +15,14 @@ sf::Color convertToSFColor(const std::string &str)
         return sf::Color::White;
     }
 
-    std::cout << "str: " << str << "\r\n";
+    std::cout << "str: " << str << "\n";
     unsigned char color[3];
-    unsigned char index = str.find(',');
-    color[0] = std::stoi(str.substr(4, index - 4));
+    unsigned char index  = str.find(',');
+    color[0]             = std::stoi(str.substr(4, index - 4));
     unsigned char index2 = str.substr(++index).find(',') + index;
-    color[1] = std::stoi(str.substr(index, index2 - index));
-    index = str.substr(++index2).find(')') + index2;
-    color[2] = std::stoi(str.substr(index2, index - index2));
+    color[1]             = std::stoi(str.substr(index, index2 - index));
+    index                = str.substr(++index2).find(')') + index2;
+    color[2]             = std::stoi(str.substr(index2, index - index2));
     return {color[0], color[1], color[2]};
 }
 
@@ -33,7 +33,7 @@ void loadMap(const std::string &path)
     if (!file.good())
     {
         file.close();
-        std::cout << "\r\nCOULDN'T FIND A FILE TO LOAD MAP\tunder path:\"" << path << "\"\r\n";
+        std::cout << "\nCOULDN'T FIND A FILE TO LOAD MAP\tunder path:\"" << path << "\"\n";
         return;
     }
 
@@ -47,7 +47,7 @@ void loadMap(const std::string &path)
         if (obj == 'b')
         {
             float x = NAN;
-            float y = NAN;
+            float y{};
             float r = NAN;
             file >> x;
             file >> y;
@@ -73,13 +73,13 @@ void loadMap(const std::string &path)
 
             std::string color_str;
             file >> color_str;
-            sf::Color const color = convertToSFColor(color_str);
+            const sf::Color color = convertToSFColor(color_str);
             Ball(x, y, r, color);
         }
         else if (obj == 'w')
         {
-            float x = NAN;
-            float y = NAN;
+            float x      = NAN;
+            float y      = NAN;
             float x_size = NAN;
             float y_size = NAN;
             file >> x;
@@ -98,6 +98,6 @@ void loadMap(const std::string &path)
 void loadMap(int level)
 {
     std::string path = "../../src/maps/map";
-    path += char(level + '0');
+    path += static_cast<char>(level + '0');
     loadMap(path);
 }

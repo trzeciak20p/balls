@@ -10,11 +10,9 @@ public:
     enum class Type
     {
         normal = 0 << 1,
-        dmg = 1 << 0,
+        dmg    = 1 << 0,
         bouncy = 1 << 1,
     };
-
-    sf::RectangleShape body;
 
     Wall(int _x, int _y, int _size_x, int _size_y, Type _type = Type::normal);
 
@@ -23,8 +21,13 @@ public:
     int getRight() const;
     int getLeft() const;
 
+    sf::RectangleShape body;
+
 private:
-    int x, y, size_x, size_y;
+    int  x;
+    int  y;
+    int  size_x;
+    int  size_y;
     Type type;
 };
 

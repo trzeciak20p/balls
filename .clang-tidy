@@ -1,1 +1,14 @@
-Checks: 'bugprone-*,cert-*,clang-analyzer-*,cppcoreguidelines-*,performance-*,portability-*,readability-*,misc-*,modernize-*,-modernize-use-trailing-return-type,-readability-braces-around-statements'
+Checks: 
+- bugprone-*
+- cert-*
+- concurrency-*
+- cppcoreguidelines-*
+- -cppcoreguidelines-avoid-magic-numbers
+- google-*
+- misc-*
+- modernize-*
+- -modernize-use-trailing-return-type
+- performance-*
+- readability-*
+- -readability-identifier-length
+- -readability-magic-numbers

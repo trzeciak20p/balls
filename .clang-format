@@ -1,6 +1,17 @@
 BasedOnStyle: Microsoft
 
-ColumnLimit: 120
 AccessModifierOffset: -4
+AlignConsecutiveAssignments: AcrossComments
+AlignConsecutiveDeclarations: AcrossComments
+AlwaysBreakTemplateDeclarations: Yes
+BreakTemplateDeclarations: Yes
 InsertBraces: true
-RemoveBracesLLVM: false
+IntegerLiteralSeparator:
+  Binary: 8
+  Decimal: 3
+  Hex: 4
+PackConstructorInitializers: NextLineOnly
+QualifierAlignment: Left
+RemoveParentheses: ReturnStatement
+RemoveSemicolon: true
+SeparateDefinitionBlocks: Always

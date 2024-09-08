@@ -19,21 +19,19 @@ public:
         map_selection
     };
 
-    bool dragging{};
-    sf::Vector2i mouse;
-    sf::Vertex trail[3];
-
     Game(sf::Window *window);
 
-    State getState();
+    static void errorReport(const std::string &err);
+    bool        calculateTrail(); // Calculates trail for drawing
+    void        mousePress();
+    void        mouseRelease();
+    State       getState();
 
-    void errorReport(const std::string &err);
-    bool calculateTrail(); // Calculates trail for drawing
-
-    void mousePress();
-    void mouseRelease();
+    bool         dragging{};
+    sf::Vector2i mouse;
+    sf::Vertex   trail[3];
 
 private:
     sf::Window *window;
-    State state;
+    State       state;
 };

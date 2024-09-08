@@ -8,25 +8,25 @@
 class Ball
 {
 public:
-    inline static sf::Window *window;            // for now using window
-    inline static int board_width, board_height; // switching to this when only a part of window will be playfield
-    inline static float friction;
-    inline static bool movable = true; // tells if ball can be moved
-    inline static Ball *active_ball;
+    Ball(float _x, float _y, float _size = 20, sf::Color _color = sf::Color::White);
+
+    static void  initialize(sf::Window *_window); // Initializes classes static variables
+    float        getDistacne(float _x, float _y) const;
+    void         checkBounce();
+    sf::Vector2f getPos() const;
+    bool         checkHover(float _x, float _y);
+    void         setSpeed(float _x, float _y);
+    void         update();
+
+    inline static sf::Window *window;         // for now using window
+    inline static bool        movable = true; // tells if ball can be moved
+    inline static int         board_width;    // switching to this when only a part of window will be playfield
+    inline static int         board_height;   // switching to this when only a part of window will be playfield
+    inline static float       friction;
+    inline static Ball       *active_ball;
 
     sf::CircleShape body;
-    sf::Color color;
-
-    Ball(float _x, float _y, float _size = 20, sf::Color _color = sf::Color::White);
-    static void initialize(sf::Window *_window); // Initializes classes static variables
-
-    sf::Vector2f getPos() const;
-
-    float getDistacne(float _x, float _y) const;
-    void checkBounce();
-    bool checkHover(float _x, float _y);
-    void setSpeed(float _x, float _y);
-    void update();
+    sf::Color       color;
 
 private:
     float x{};

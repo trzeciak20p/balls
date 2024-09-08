@@ -25,14 +25,17 @@ int Wall::getTop() const
 {
     return y;
 }
+
 int Wall::getBottom() const
 {
     return y + size_y;
 }
+
 int Wall::getLeft() const
 {
     return x;
 }
+
 int Wall::getRight() const
 {
     return x + size_x;
