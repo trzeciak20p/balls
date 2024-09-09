@@ -2,7 +2,6 @@
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics/Color.hpp>
-#include <SFML/Window/Window.hpp>
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
