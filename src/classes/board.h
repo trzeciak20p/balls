@@ -10,6 +10,8 @@ class Board
 {
 public:
 
+Board(const std::string& str);
+
 // const std::vector<Wall>& getWalls()
 // {
 //     return m_walls;

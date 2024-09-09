@@ -16,9 +16,8 @@ int main()
 
     Game gra(&window);
 
-    Board board;
+    Board board("../../src/maps/map1");
     gra.to_board = &board;
-    loadMap(board, "../../src/maps/map1");
     board.m_width  = window.getSize().x;
     board.m_height = window.getSize().y;
 
