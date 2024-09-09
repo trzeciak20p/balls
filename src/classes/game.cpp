@@ -19,7 +19,7 @@ Game::Game(sf::Window *window)
 
 Game::State Game::getState()
 {
-    return state;
+    return m_state;
 }
 
 void Game::errorReport(const std::string &err)
@@ -85,7 +85,7 @@ bool Game::calculateTrail()
 
 void Game::mousePress()
 {
-    switch (state)
+    switch (m_state)
     {
     case Game::State::menu:
     case Game::State::map_selection:
@@ -114,7 +114,7 @@ void Game::mousePress()
 
 void Game::mouseRelease()
 {
-    switch (state)
+    switch (m_state)
     {
     case Game::State::menu:
     case Game::State::map_selection:

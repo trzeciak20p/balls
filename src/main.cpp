@@ -19,25 +19,28 @@ int main()
     Board board;
     gra.to_board = &board;
     loadMap(board, "../../src/maps/map1");
-    board.m_width = window.getSize().x;
+    board.m_width  = window.getSize().x;
     board.m_height = window.getSize().y;
 
     while (window.isOpen())
     {
         sf::Event event{};
+
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            switch (event.type)
             {
+            case sf::Event::Closed:
                 window.close();
-            }
-            else if (event.type == sf::Event::MouseButtonPressed)
-            {
+                break;
+
+            case sf::Event::MouseButtonPressed:
                 gra.mousePress();
-            }
-            if (event.type == sf::Event::MouseButtonReleased)
-            {
+                break;
+
+            case sf::Event::MouseButtonReleased:
                 gra.mouseRelease();
+                break;
             }
         }
 

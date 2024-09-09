@@ -14,7 +14,7 @@ public:
         bouncy = 1 << 1,
     };
 
-    Wall(int _x, int _y, int _size_x, int _size_y, Type _type = Type::normal);
+    Wall(int x, int y, int size_x, int size_y, Type type = Type::normal);
 
     int getTop() const;
     int getBottom() const;
@@ -24,9 +24,9 @@ public:
     sf::RectangleShape body;
 
 private:
-    int  x;
-    int  y;
-    int size_x;
-    int size_y;
-    Type type;
+    int  m_x;
+    int  m_y;
+    int  m_size_x;
+    int  m_size_y;
+    Type m_type;
 };

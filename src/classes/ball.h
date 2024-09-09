@@ -11,13 +11,13 @@ class Board;
 class Ball
 {
 public:
-    Ball(float _x, float _y, float _size = 20, sf::Color color = sf::Color::White, Board* board = {});
+    Ball(float x, float y, float radius = 20, sf::Color color = sf::Color::White, Board* board = {});
 
-    float        getDistacne(float _x, float _y) const;
+    float        getDistacne(float x, float y) const;
     void         checkBounce();
     sf::Vector2f getPos() const;
-    bool         checkHover(float _x, float _y);
-    void         setSpeed(float _x, float _y);
+    bool         checkHover(float x, float y);
+    void         setSpeed(float x, float y);
     void         update();
 
     sf::CircleShape body;
@@ -25,13 +25,13 @@ public:
     Board          *m_board;
 
 private:
-    float x{};
-    float y{};
-    float vel_x{};
-    float vel_y{};
-    float decrease_vel_x{};
-    float decrease_vel_y{};
-    float friction{0.9f};
+    float m_x{};
+    float m_y{};
+    float m_vel_x{};
+    float m_vel_y{};
+    float m_decrease_vel_x{};
+    float m_decrease_vel_y{};
+    float m_friction{0.9f};
 };
 
 // void Ball::initialize(sf::Window *_window)

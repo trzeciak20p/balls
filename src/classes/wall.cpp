@@ -1,7 +1,7 @@
 #include "wall.h"
 
-Wall::Wall(int _x, int _y, int _size_x, int _size_y, Type _type)
-    : x{_x}, y{_y}, size_x{_size_x}, size_y{_size_y}, type{_type}
+Wall::Wall(int x, int y, int size_x, int size_y, Type type)
+    : m_x{x}, m_y{y}, m_size_x{size_x}, m_size_y{size_y}, m_type{type}
 {
     if (type == Type::dmg)
     {
@@ -16,25 +16,25 @@ Wall::Wall(int _x, int _y, int _size_x, int _size_y, Type _type)
         body.setFillColor(sf::Color(125, 125, 125));
     }
     body.setPosition(x, y);
-    body.setSize(sf::Vector2f(_size_x, _size_y));
+    body.setSize(sf::Vector2f(size_x, size_y));
 }
 
 int Wall::getTop() const
 {
-    return y;
+    return m_y;
 }
 
 int Wall::getBottom() const
 {
-    return y + size_y;
+    return m_y + m_size_y;
 }
 
 int Wall::getLeft() const
 {
-    return x;
+    return m_x;
 }
 
 int Wall::getRight() const
 {
-    return x + size_x;
+    return m_x + m_size_x;
 }
