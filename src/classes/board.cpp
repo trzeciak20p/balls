@@ -13,10 +13,11 @@ sf::Color convertToSFColor(std::ifstream &file)
         return sf::Color::White;
     }
 
-    return {*std::istream_iterator<sf::Uint8>(file), *std::istream_iterator<sf::Uint8>(file), *std::istream_iterator<sf::Uint8>(file)};
+    return {*std::istream_iterator<sf::Uint8>(file), *std::istream_iterator<sf::Uint8>(file),
+            *std::istream_iterator<sf::Uint8>(file)};
 }
 
-Ball makeBall(std::ifstream &file, Board* board)
+Ball makeBall(std::ifstream &file, Board *board)
 {
     float x{*std::istream_iterator<float>(file)};
     float y{*std::istream_iterator<float>(file)};

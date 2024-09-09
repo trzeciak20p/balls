@@ -2,7 +2,6 @@
 
 #include "ball.h"
 #include "board.h"
-#include "mapLoader.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>

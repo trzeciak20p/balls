@@ -37,7 +37,7 @@ void Ball::checkBounce()
     {
         const float new_x = m_x + m_vel_x;
         const float new_y = m_y + m_vel_y;
-        float       angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
+        const float angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
 
         // Cheking for corners
         if (const auto distance =
@@ -71,15 +71,6 @@ void Ball::checkBounce()
 
             std::cout << "diff x: " << m_x - wall.getLeft() << "diff y: " << m_y - wall.getTop() << "\n";
         }
-        else if (getDistacne(wall.getLeft() - m_vel_x, wall.getBottom() - m_vel_y) <= body.getRadius())
-        {
-        }
-        else if (getDistacne(wall.getRight() - m_vel_x, wall.getTop() - m_vel_y) <= body.getRadius())
-        {
-        }
-        else if (getDistacne(wall.getRight() - m_vel_x, wall.getBottom() - m_vel_y) <= body.getRadius())
-        {
-        }
         else
         {
             // Checking for sides
@@ -104,7 +95,7 @@ void Ball::checkBounce()
     // TODO(abfipes): uwzględnić prędkość obu piłek
 }
 
-bool Ball::checkHover(float x, float y)
+bool Ball::checkHover(float x, float y) const
 { // Checks if cursor hovers over ball
     return getDistacne(x, y) <= body.getRadius();
 }

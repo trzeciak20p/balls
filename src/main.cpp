@@ -1,7 +1,6 @@
 #include "classes/ball.h"
 #include "classes/board.h"
 #include "classes/game.h"
-#include "classes/mapLoader.h"
 #include "classes/wall.h"
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

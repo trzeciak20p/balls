@@ -9,15 +9,14 @@ class Ball;
 class Board
 {
 public:
+    Board(const std::string &str);
 
-Board(const std::string& str);
+    // const std::vector<Wall>& getWalls()
+    // {
+    //     return m_walls;
+    // }
 
-// const std::vector<Wall>& getWalls()
-// {
-//     return m_walls;
-// }
-
-// private:
+    // private:
     int               m_width;
     int               m_height;
     std::vector<Ball> m_balls;
@@ -25,4 +24,3 @@ Board(const std::string& str);
     std::vector<Wall> m_walls;
     bool              m_balls_movable = true;
 };
-

@@ -11,12 +11,12 @@ class Board;
 class Ball
 {
 public:
-    Ball(float x, float y, float radius = 20, sf::Color color = sf::Color::White, Board* board = {});
+    Ball(float x, float y, float radius = 20, sf::Color color = sf::Color::White, Board *board = {});
 
     float        getDistacne(float x, float y) const;
     void         checkBounce();
     sf::Vector2f getPos() const;
-    bool         checkHover(float x, float y);
+    bool         checkHover(float x, float y) const;
     void         setSpeed(float x, float y);
     void         update();
 
