@@ -1,4 +1,5 @@
 #include "classes/ball.h"
+#include "classes/board.h"
 #include "classes/game.h"
 #include "classes/mapLoader.h"
 #include "classes/wall.h"
@@ -15,9 +16,11 @@ int main()
 
     Game gra(&window);
 
-    Ball::initialize(&window);
-
-    loadMap(1);
+    Board board;
+    gra.to_board = &board;
+    loadMap(board, "../../src/maps/map1");
+    board.m_width = window.getSize().x;
+    board.m_height = window.getSize().y;
 
     while (window.isOpen())
     {
@@ -43,12 +46,12 @@ int main()
         switch (gra.getState())
         {
         case Game::Game::State::playing:
-            for (auto &i : walls)
+            for (auto &i : board.m_walls)
             {
                 window.draw(i.body);
             }
 
-            for (auto &i : balls)
+            for (auto &i : board.m_balls)
             { // updating positions
                 i.update();
                 window.draw(i.body);

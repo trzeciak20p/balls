@@ -10,26 +10,17 @@
 
 using std::numbers::pi;
 
-Ball::Ball(float _x, float _y, float _size, sf::Color _color)
-    : x{_x + _size}, y{_y + _size}, color{_color}
+Ball::Ball(float _x, float _y, float _size, sf::Color color, Board* board)
+    : x{_x + _size}, y{_y + _size}, m_color{color}, m_board {board}
 {
     body.setPosition(x, y);
     body.setRadius(_size);
-    body.setFillColor(_color);
+    body.setFillColor(color);
     body.setOrigin(sf::Vector2f(_size, _size));
-    balls.push_back(*this);
 }
 
 // Ball::~Ball() = default;
 // make some exsplosion effect
-
-void Ball::initialize(sf::Window *_window)
-{
-    Ball::window       = _window;
-    Ball::board_width  = window->getSize().x;
-    Ball::board_height = window->getSize().y;
-    Ball::friction     = 0.9;
-}
 
 sf::Vector2f Ball::getPos() const
 {
@@ -43,12 +34,11 @@ float Ball::getDistacne(float _x, float _y) const
 
 void Ball::checkBounce()
 {
-    for (auto &wall : walls)
+    for (auto &wall : m_board->m_walls)
     {
         const float new_x = x + vel_x;
         const float new_y = y + vel_y;
-        float       angle = NAN;
-        angle             = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
+        float       angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
 
         // Cheking for corners
         if (const auto distance =
@@ -117,23 +107,18 @@ void Ball::checkBounce()
 
 bool Ball::checkHover(float x, float y)
 { // Checks if cursor hovers over ball
-    if (getDistacne(x, y) <= body.getRadius())
-    {
-        Ball::active_ball = this;
-        return true;
-    }
-    return false;
+    return getDistacne(x, y) <= body.getRadius();
 }
 
 void Ball::setSpeed(float x, float y)
 {
-    if (movable)
+    if (m_board->m_balls_movable)
     {
-        movable        = false;
-        vel_x          = x / 2;
-        vel_y          = y / 2;
-        decrease_vel_x = x / Ball::friction;
-        decrease_vel_y = y / Ball::friction;
+        m_board->m_balls_movable = false;
+        vel_x                    = x / 2;
+        vel_y                    = y / 2;
+        decrease_vel_x           = x / friction;
+        decrease_vel_y           = y / friction;
     }
 }
 
@@ -144,12 +129,12 @@ void Ball::update()
         return;
     }
 
-    if (x + vel_x < body.getRadius() || x + vel_x >= Ball::board_width - body.getRadius())
+    if (x + vel_x < body.getRadius() || x + vel_x >= m_board->m_width - body.getRadius())
     { // changing directions from boundaries
         vel_x *= -1;
         decrease_vel_x *= -1;
     }
-    if (y + vel_y < body.getRadius() || y + vel_y >= Ball::board_height - body.getRadius())
+    if (y + vel_y < body.getRadius() || y + vel_y >= m_board->m_height - body.getRadius())
     {
         vel_y *= -1;
         decrease_vel_y *= -1;
@@ -162,12 +147,12 @@ void Ball::update()
 
     body.setPosition(sf::Vector2f(x, y));
 
-    vel_x *= Ball::friction; // lowering speed
-    vel_y *= Ball::friction;
+    vel_x *= friction; // lowering speed
+    vel_y *= friction;
 
     if (std::abs(vel_x) < 0.2 && std::abs(vel_y) < 0.2)
     {
-        vel_x = vel_y = 0;
-        Ball::movable = true;
+        vel_x = vel_y            = 0;
+        m_board->m_balls_movable = true;
     }
 }

@@ -17,8 +17,6 @@ Wall::Wall(int _x, int _y, int _size_x, int _size_y, Type _type)
     }
     body.setPosition(x, y);
     body.setSize(sf::Vector2f(_size_x, _size_y));
-
-    walls.push_back(*this);
 }
 
 int Wall::getTop() const

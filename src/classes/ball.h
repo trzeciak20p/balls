@@ -1,16 +1,18 @@
 #pragma once
 
+#include "board.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
+class Board;
+
 class Ball
 {
 public:
-    Ball(float _x, float _y, float _size = 20, sf::Color _color = sf::Color::White);
+    Ball(float _x, float _y, float _size = 20, sf::Color color = sf::Color::White, Board* board = {});
 
-    static void  initialize(sf::Window *_window); // Initializes classes static variables
     float        getDistacne(float _x, float _y) const;
     void         checkBounce();
     sf::Vector2f getPos() const;
@@ -18,15 +20,9 @@ public:
     void         setSpeed(float _x, float _y);
     void         update();
 
-    inline static sf::Window *window;         // for now using window
-    inline static bool        movable = true; // tells if ball can be moved
-    inline static int         board_width;    // switching to this when only a part of window will be playfield
-    inline static int         board_height;   // switching to this when only a part of window will be playfield
-    inline static float       friction;
-    inline static Ball       *active_ball;
-
     sf::CircleShape body;
-    sf::Color       color;
+    sf::Color       m_color;
+    Board          *m_board;
 
 private:
     float x{};
@@ -35,6 +31,13 @@ private:
     float vel_y{};
     float decrease_vel_x{};
     float decrease_vel_y{};
+    float friction{0.9f};
 };
 
-inline std::vector<Ball> balls; // Vector for storing every class instance
+// void Ball::initialize(sf::Window *_window)
+// {
+//     Ball::window       = _window;
+//     Ball::board_width  = window->getSize().x;
+//     Ball::board_height = window->getSize().y;
+//     Ball::friction     = 0.9;
+// }

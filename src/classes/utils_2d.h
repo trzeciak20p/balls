@@ -27,6 +27,9 @@ Equation getEquation(sf::Vector2f A, sf::Vector2f B);
 float    getEquationAngle(sf::Vector2f A, sf::Vector2f B);
 
 template <typename T>
-float getDistacne(T x1, T y1, T x2, T y2);
+float getDistacne(T x1, T y1, T x2, T y2)
+{
+    return std::sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
 
 } // namespace bnw

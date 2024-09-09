@@ -4,6 +4,7 @@
 #include "wall.h"
 #include <fstream>
 #include <iostream>
+#include "board.h"
 
-void loadMap(int level);               // Loads built-in maps
-void loadMap(const std::string &path); // Loads custom maps
+// void loadMap(int level);               // Loads built-in maps
+void loadMap(Board& board, const std::string &path); // Loads custom maps

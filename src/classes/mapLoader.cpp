@@ -1,5 +1,6 @@
 #include "mapLoader.h"
 #include "ball.h"
+#include "board.h"
 #include "wall.h"
 #include <SFML/Graphics/Color.hpp>
 #include <cmath>
@@ -26,7 +27,7 @@ sf::Color convertToSFColor(const std::string &str)
     return {color[0], color[1], color[2]};
 }
 
-void loadMap(const std::string &path)
+void loadMap(Board &board, const std::string &path)
 {
     std::fstream file;
     file.open(path, std::ios::in);
@@ -38,8 +39,8 @@ void loadMap(const std::string &path)
     }
 
     // Will probably be unnecessary after making menu
-    balls.clear();
-    walls.clear();
+    board.m_balls.clear();
+    board.m_walls.clear();
 
     char obj = 0;
     while (file >> obj)
@@ -74,7 +75,7 @@ void loadMap(const std::string &path)
             std::string color_str;
             file >> color_str;
             const sf::Color color = convertToSFColor(color_str);
-            Ball(x, y, r, color);
+            board.m_balls.emplace_back(x, y, r, color, &board);
         }
         else if (obj == 'w')
         {
@@ -88,16 +89,16 @@ void loadMap(const std::string &path)
             file >> y_size;
             std::string type;
             file >> type;
-            Wall(x, y, x_size, y_size, static_cast<Wall::Type>(type[5] - '0'));
+            board.m_walls.emplace_back(x, y, x_size, y_size, static_cast<Wall::Type>(type[5] - '0'));
         }
     }
 
     file.close();
 }
 
-void loadMap(int level)
-{
-    std::string path = "../../src/maps/map";
-    path += static_cast<char>(level + '0');
-    loadMap(path);
-}
+// void loadMap(int level)
+// {
+//     std::string path = "../../src/maps/map";
+//     path += static_cast<char>(level + '0');
+//     loadMap(path);
+// }

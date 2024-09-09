@@ -26,9 +26,7 @@ public:
 private:
     int  x;
     int  y;
-    int  size_x;
-    int  size_y;
+    int size_x;
+    int size_y;
     Type type;
 };
-
-inline std::vector<Wall> walls;

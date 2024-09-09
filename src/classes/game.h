@@ -4,6 +4,7 @@
 #include "mapLoader.h"
 #include "utils_2d.h"
 #include "wall.h"
+#include "board.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
@@ -31,7 +32,9 @@ public:
     sf::Vector2i mouse;
     sf::Vertex   trail[3];
 
+
+    Board* to_board;
 private:
-    sf::Window *window;
-    State       state;
+    sf::Window *m_window;
+    State       state {State::playing};
 };
