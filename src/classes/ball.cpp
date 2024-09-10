@@ -41,8 +41,8 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
         const float angle = bnw::getEquationAngle(getPos(), {new_x, new_y});
 
         // Cheking for corners
-        const float distance = getDistacne(wall.getLeft() - m_vel_x, wall.getTop() - m_vel_y);
-        if (distance <= body.getRadius())
+        bool distance = getDistacne(wall.getLeft() - m_vel_x, wall.getTop() - m_vel_y) <= body.getRadius();
+        if (distance)
         {
             if (angle < 0)
             {

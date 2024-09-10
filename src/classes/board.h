@@ -18,7 +18,6 @@ public:
     int   m_width{};
     int   m_height{};
     Ball *active_ball{};
-    bool  m_balls_movable{true};
 
     std::vector<Ball> m_balls{};
     std::vector<Wall> m_walls{};

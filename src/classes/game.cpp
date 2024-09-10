@@ -29,7 +29,7 @@ void Game::errorReport(const std::string &err)
 
 bool Game::calculateTrail()
 {
-    if (!(dragging && to_board->m_balls_movable))
+    if (!dragging)
     {
         return false;
     }

@@ -52,9 +52,9 @@ int main()
             {
                 window.draw(wall.body);
             }
-            
+
             for (auto &ball : board.m_balls)
-            { 
+            {
                 ball.update(board.m_walls);
                 window.draw(ball.body);
             }
@@ -63,6 +63,9 @@ int main()
             {
                 window.draw(gra.trail, 3, sf::Triangles);
             }
+            break;
+
+        default:
             break;
         }
 
