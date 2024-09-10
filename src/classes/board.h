@@ -4,12 +4,10 @@
 #include "wall.h"
 #include <vector>
 
-class Ball;
-
 class Board
 {
 public:
-    Board(const std::string &str);
+    Board(const std::string &path);
 
     // const std::vector<Wall>& getWalls()
     // {
@@ -17,10 +15,10 @@ public:
     // }
 
     // private:
-    int               m_width;
-    int               m_height;
-    std::vector<Ball> m_balls;
-    Ball             *active_ball;
-    std::vector<Wall> m_walls;
-    bool              m_balls_movable = true;
+    int               m_width{};
+    int               m_height{};
+    std::vector<Ball> m_balls{};
+    Ball             *active_ball{};
+    std::vector<Wall> m_walls{};
+    bool              m_balls_movable{true};
 };

@@ -28,12 +28,12 @@ public:
     State       getState();
 
     bool         dragging{};
-    sf::Vector2i mouse;
-    sf::Vertex   trail[3];
+    sf::Vector2i mouse{};
+    sf::Vertex   trail[3]{};
 
-    Board *to_board;
+    Board *to_board{};
 
 private:
-    sf::Window *m_window;
+    sf::Window *m_window{};
     State       m_state{State::playing};
 };

@@ -21,12 +21,12 @@ public:
     int getRight() const;
     int getLeft() const;
 
-    sf::RectangleShape body;
+    sf::RectangleShape body{};
 
 private:
-    int  m_x;
-    int  m_y;
-    int  m_size_x;
-    int  m_size_y;
-    Type m_type;
+    int  m_x{};
+    int  m_y{};
+    int  m_size_x{};
+    int  m_size_y{};
+    Type m_type{};
 };

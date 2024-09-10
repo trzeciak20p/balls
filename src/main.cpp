@@ -17,8 +17,6 @@ int main()
 
     Board board("../../src/maps/map1");
     gra.to_board = &board;
-    board.m_width  = window.getSize().x;
-    board.m_height = window.getSize().y;
 
     while (window.isOpen())
     {
@@ -47,15 +45,15 @@ int main()
         switch (gra.getState())
         {
         case Game::Game::State::playing:
-            for (auto &i : board.m_walls)
+            for (auto &wall : board.m_walls)
             {
-                window.draw(i.body);
+                window.draw(wall.body);
             }
 
-            for (auto &i : board.m_balls)
+            for (auto &ball : board.m_balls)
             { // updating positions
-                i.update();
-                window.draw(i.body);
+                ball.update(board.m_walls);
+                window.draw(ball.body);
             }
 
             if (gra.calculateTrail())

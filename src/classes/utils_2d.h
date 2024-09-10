@@ -18,9 +18,9 @@ struct Equation
         return a * x + b;
     }
 
-    float a;
-    float b;
-    float ang;
+    float a{};
+    float b{};
+    float ang{};
 };
 
 Equation getEquation(sf::Vector2f A, sf::Vector2f B);

@@ -6,11 +6,12 @@
 #include <cstdlib>
 #include <iostream>
 #include <numbers>
+#include <vector>
 
 using std::numbers::pi;
 
-Ball::Ball(float x, float y, float radius, sf::Color color, Board* board)
-    : m_x{x + radius}, m_y{y + radius}, m_color{color}, m_board {board}
+Ball::Ball(float x, float y, float radius, sf::Color color)
+    : m_x{x + radius}, m_y{y + radius}, m_color{color}
 {
     body.setPosition(m_x, m_y);
     body.setRadius(radius);
@@ -31,9 +32,9 @@ float Ball::getDistacne(float x, float y) const
     return std::sqrt((x - m_x) * (x - m_x) + (y - m_y) * (y - m_y));
 }
 
-void Ball::checkBounce()
+void Ball::checkBounce(const std::vector<Wall> &walls)
 {
-    for (auto &wall : m_board->m_walls)
+    for (const auto &wall : walls)
     {
         const float new_x = m_x + m_vel_x;
         const float new_y = m_y + m_vel_y;
@@ -60,11 +61,11 @@ void Ball::checkBounce()
             }
             else
             {
-                m_x                        = wall.getLeft() + cos(pi / 2 + angle) * (distance * 10 + body.getRadius());
-                m_y                        = wall.getTop() - sin(pi / 2 + angle) * (distance * 10 + body.getRadius());
+                m_x                      = wall.getLeft() + cos(pi / 2 + angle) * (distance * 10 + body.getRadius());
+                m_y                      = wall.getTop() - sin(pi / 2 + angle) * (distance * 10 + body.getRadius());
                 const float vel_x_buffer = m_vel_x;
-                m_vel_x                    = -m_vel_y;
-                m_vel_y                    = -vel_x_buffer;
+                m_vel_x                  = -m_vel_y;
+                m_vel_y                  = -vel_x_buffer;
                 m_decrease_vel_x *= -1;
                 m_decrease_vel_y *= -1;
             }
@@ -102,35 +103,31 @@ bool Ball::checkHover(float x, float y) const
 
 void Ball::setSpeed(float x, float y)
 {
-    if (m_board->m_balls_movable)
-    {
-        m_board->m_balls_movable = false;
-        m_vel_x                    = x / 2;
-        m_vel_y                    = y / 2;
-        m_decrease_vel_x           = x / m_friction;
-        m_decrease_vel_y           = y / m_friction;
-    }
+    m_vel_x          = x / 2;
+    m_vel_y          = y / 2;
+    m_decrease_vel_x = x / m_friction;
+    m_decrease_vel_y = y / m_friction;
 }
 
-void Ball::update()
+void Ball::update(const std::vector<Wall> &walls)
 {
     if (m_vel_x == 0.0 && m_vel_y == 0.0)
     {
         return;
     }
 
-    if (m_x + m_vel_x < body.getRadius() || m_x + m_vel_x >= m_board->m_width - body.getRadius())
+    if (m_x + m_vel_x < body.getRadius() /* || m_x + m_vel_x >= m_board->m_width - body.getRadius() */)
     { // changing directions from boundaries
         m_vel_x *= -1;
         m_decrease_vel_x *= -1;
     }
-    if (m_y + m_vel_y < body.getRadius() || m_y + m_vel_y >= m_board->m_height - body.getRadius())
+    if (m_y + m_vel_y < body.getRadius() /* || m_y + m_vel_y >= m_board->m_height - body.getRadius() */)
     {
         m_vel_y *= -1;
         m_decrease_vel_y *= -1;
     }
 
-    checkBounce();
+    checkBounce(walls);
 
     m_x += m_vel_x;
     m_y += m_vel_y;
@@ -142,7 +139,6 @@ void Ball::update()
 
     if (std::abs(m_vel_x) < 0.2 && std::abs(m_vel_y) < 0.2)
     {
-        m_vel_x = m_vel_y            = 0;
-        m_board->m_balls_movable = true;
+        m_vel_x = m_vel_y = 0;
     }
 }
