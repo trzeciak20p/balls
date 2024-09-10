@@ -16,7 +16,7 @@ Ball::Ball(float x, float y, float radius, sf::Color color)
     body.setPosition(m_x, m_y);
     body.setRadius(radius);
     body.setFillColor(color);
-    body.setOrigin(sf::Vector2f(radius, radius));
+    body.setOrigin({radius, radius});
 }
 
 // Ball::~Ball() = default;
@@ -38,16 +38,17 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
     {
         const float new_x = m_x + m_vel_x;
         const float new_y = m_y + m_vel_y;
-        const float angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
+        const float angle = bnw::getEquationAngle(getPos(), {new_x, new_y});
 
         // Cheking for corners
-        if (const auto distance =
-                static_cast<float>(getDistacne(wall.getLeft() - m_vel_x, wall.getTop() - m_vel_y) <= body.getRadius()))
+        const float distance = getDistacne(wall.getLeft() - m_vel_x, wall.getTop() - m_vel_y);
+        if (distance <= body.getRadius())
         {
             if (angle < 0)
             {
+                // Determining which side is ball comming from
                 if (m_x > m_y)
-                { // Determining which side is ball comming from
+                {
                     // right
                     m_x = wall.getLeft() + cos(pi + pi / 4 + angle) * (distance * 10 + body.getRadius());
                     m_y = wall.getTop() - sin(pi + pi / 4 + angle) * (distance * 10 + body.getRadius());
@@ -61,11 +62,11 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
             }
             else
             {
-                m_x                      = wall.getLeft() + cos(pi / 2 + angle) * (distance * 10 + body.getRadius());
-                m_y                      = wall.getTop() - sin(pi / 2 + angle) * (distance * 10 + body.getRadius());
-                const float vel_x_buffer = m_vel_x;
-                m_vel_x                  = -m_vel_y;
-                m_vel_y                  = -vel_x_buffer;
+                m_x = wall.getLeft() + cos(pi / 2 + angle) * (distance * 10 + body.getRadius());
+                m_y = wall.getTop() - sin(pi / 2 + angle) * (distance * 10 + body.getRadius());
+                std::swap(m_vel_x, m_vel_y);
+                m_vel_x *= -1;
+                m_vel_y *= -1;
                 m_decrease_vel_x *= -1;
                 m_decrease_vel_y *= -1;
             }
@@ -96,8 +97,9 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
     // TODO(abfipes): uwzględnić prędkość obu piłek
 }
 
+// Checks if cursor hovers over ball
 bool Ball::checkHover(float x, float y) const
-{ // Checks if cursor hovers over ball
+{
     return getDistacne(x, y) <= body.getRadius();
 }
 
@@ -116,8 +118,9 @@ void Ball::update(const std::vector<Wall> &walls)
         return;
     }
 
+    // changing directions from boundaries
     if (m_x + m_vel_x < body.getRadius() /* || m_x + m_vel_x >= m_board->m_width - body.getRadius() */)
-    { // changing directions from boundaries
+    {
         m_vel_x *= -1;
         m_decrease_vel_x *= -1;
     }

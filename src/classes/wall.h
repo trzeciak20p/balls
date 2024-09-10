@@ -14,19 +14,19 @@ public:
         bouncy = 1 << 1,
     };
 
-    Wall(int x, int y, int size_x, int size_y, Type type = Type::normal);
+    Wall(float x, float y, float size_x, float size_y, Type type = Type::normal);
 
-    int getTop() const;
-    int getBottom() const;
-    int getRight() const;
-    int getLeft() const;
+    float getTop() const;
+    float getBottom() const;
+    float getRight() const;
+    float getLeft() const;
 
     sf::RectangleShape body{};
 
 private:
-    int  m_x{};
-    int  m_y{};
-    int  m_size_x{};
-    int  m_size_y{};
+    float  m_x{};
+    float  m_y{};
+    float  m_size_x{};
+    float  m_size_y{};
     Type m_type{};
 };

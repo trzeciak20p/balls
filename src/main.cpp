@@ -37,6 +37,9 @@ int main()
             case sf::Event::MouseButtonReleased:
                 gra.mouseRelease();
                 break;
+
+            default:
+                break;
             }
         }
 
@@ -49,9 +52,9 @@ int main()
             {
                 window.draw(wall.body);
             }
-
+            
             for (auto &ball : board.m_balls)
-            { // updating positions
+            { 
                 ball.update(board.m_walls);
                 window.draw(ball.body);
             }

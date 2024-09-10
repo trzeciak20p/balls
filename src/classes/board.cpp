@@ -43,14 +43,14 @@ Ball makeBall(std::ifstream &file)
 
 Wall makeWall(std::ifstream &file)
 {
-    int x{};
+    float x{};
     file >> x;
-    int y{};
+    float y{};
     file >> y;
 
-    int x_size{};
+    float x_size{};
     file >> x_size;
-    int y_size{};
+    float y_size{};
     file >> y_size;
 
     const Wall::Type type{*std::istream_iterator<int>(file)};
