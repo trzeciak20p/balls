@@ -97,12 +97,13 @@ void Game::mousePress()
         mouse = sf::Mouse::getPosition(*m_window);
         for (auto &i : to_board->m_balls)
         { // checking if hovered over ball
-            if (i.checkHover(mouse.x, mouse.y))
+            if (!i.checkHover(mouse.x, mouse.y))
             {
-                to_board->active_ball = &i;
-                dragging              = true;
-                break;
+                continue;
             }
+            to_board->active_ball = &i;
+            dragging              = true;
+            break;
         }
         break;
 
@@ -123,13 +124,15 @@ void Game::mouseRelease()
         break;
 
     case Game::State::playing:
-        if (dragging)
+        if (!dragging)
         {
-            to_board->active_ball->setSpeed((mouse.x - sf::Mouse::getPosition(*m_window).x) / 3,
-                                            (mouse.y - sf::Mouse::getPosition(*m_window).y) / 3);
-            to_board->active_ball->body.setFillColor(to_board->active_ball->m_color);
-            dragging = false;
+            break;
         }
+
+        to_board->active_ball->setSpeed((mouse.x - sf::Mouse::getPosition(*m_window).x) / 3,
+                                        (mouse.y - sf::Mouse::getPosition(*m_window).y) / 3);
+        to_board->active_ball->body.setFillColor(to_board->active_ball->m_color);
+        dragging = false;
         break;
 
     default:

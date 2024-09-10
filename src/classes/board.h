@@ -7,7 +7,7 @@
 class Board
 {
 public:
-    Board(const std::string &path);
+    explicit Board(const std::string &path);
 
     // const std::vector<Wall>& getWalls()
     // {
@@ -19,6 +19,6 @@ public:
     int   m_height{};
     Ball *active_ball{};
 
-    std::vector<Ball> m_balls{};
-    std::vector<Wall> m_walls{};
+    std::vector<Ball> m_balls;
+    std::vector<Wall> m_walls;
 };

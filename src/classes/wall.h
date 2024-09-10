@@ -21,12 +21,12 @@ public:
     float getRight() const;
     float getLeft() const;
 
-    sf::RectangleShape body{};
+    sf::RectangleShape body;
 
 private:
-    float  m_x{};
-    float  m_y{};
-    float  m_size_x{};
-    float  m_size_y{};
-    Type m_type{};
+    float m_x{};
+    float m_y{};
+    float m_size_x{};
+    float m_size_y{};
+    Type  m_type{};
 };

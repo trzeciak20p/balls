@@ -13,12 +13,14 @@ public:
     float        getDistacne(float x, float y) const;
     void         checkBounce(const std::vector<Wall> &walls);
     sf::Vector2f getPos() const;
+    void         cornerCheck(bool distance, float angle, const Wall &wall);
+    void         sideCheck(const Wall &wall, float new_x, float new_y);
     bool         checkHover(float x, float y) const;
     void         setSpeed(float x, float y);
     void         update(const std::vector<Wall> &walls);
 
-    sf::CircleShape body{};
-    sf::Color       m_color{};
+    sf::CircleShape body;
+    sf::Color       m_color;
 
 private:
     float m_x{};
@@ -27,5 +29,5 @@ private:
     float m_vel_y{};
     float m_decrease_vel_x{};
     float m_decrease_vel_y{};
-    float m_friction{0.9f};
+    float m_friction{0.9F};
 };

@@ -19,7 +19,7 @@ public:
         map_selection
     };
 
-    Game(sf::Window *window);
+    explicit Game(sf::Window *window);
 
     static void errorReport(const std::string &err);
     bool        calculateTrail(); // Calculates trail for drawing
@@ -28,7 +28,7 @@ public:
     State       getState();
 
     bool         dragging{};
-    sf::Vector2i mouse{};
+    sf::Vector2i mouse;
     sf::Vertex   trail[3]{};
     Board       *to_board{};
 
