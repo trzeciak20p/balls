@@ -7,7 +7,7 @@
 class Wall : public sf::RectangleShape
 {
 public:
-    enum class Type
+    enum class Type : int8_t
     {
         normal = 0 << 1,
         dmg    = 1 << 0,

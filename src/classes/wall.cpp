@@ -1,4 +1,6 @@
 #include "wall.h"
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/System/Vector2.hpp>
 
 Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
     : sf::RectangleShape{size}, m_type{type}

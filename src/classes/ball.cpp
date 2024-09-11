@@ -1,7 +1,9 @@
 #include "ball.h"
 #include "utils_2d.h"
 #include "wall.h"
+#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <cmath>
 #include <cstdlib>
 #include <numbers>
@@ -15,7 +17,7 @@ Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
 {
     setPosition(pos.x + radius, pos.y + radius);
     setFillColor(color);
-    setOrigin({radius, radius});
+    setOrigin(radius, radius);
 }
 
 // Ball::~Ball() = default;
@@ -31,11 +33,11 @@ void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
 {
     if (angle >= 0)
     {
-        setPosition(wall.getLeft() + cos(pi / 2 + angle) * (static_cast<int>(distance) * 10 + getRadius()),
-                    wall.getTop() - sin(pi / 2 + angle) * (static_cast<int>(distance) * 10 + getRadius()));
+        setPosition(wall.getLeft() + cos(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
+                    wall.getTop() - sin(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
         std::swap(m_vel.x, m_vel.y);
-        m_vel *= -1.0f;
-        m_decrease_vel *= -1.0f;
+        m_vel *= -1.0F;
+        m_decrease_vel *= -1.0F;
 
         return;
     }
@@ -44,14 +46,14 @@ void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
     if (getPosition().x > getPosition().y)
     {
         // right
-        setPosition(wall.getLeft() + cos(pi + pi / 4 + angle) * (static_cast<int>(distance) * 10 + getRadius()),
-                    wall.getTop() - sin(pi + pi / 4 + angle) * (static_cast<int>(distance) * 10 + getRadius()));
+        setPosition(wall.getLeft() + cos(pi + pi / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
+                    wall.getTop() - sin(pi + pi / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
     }
     else
     {
         // left
-        setPosition(wall.getLeft() + cos(angle - pi / 4) * (static_cast<int>(distance) * 10 + getRadius()),
-                    wall.getTop() - sin(angle - pi / 4) * (static_cast<int>(distance) * 10 + getRadius()));
+        setPosition(wall.getLeft() + cos(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()),
+                    wall.getTop() - sin(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()));
     }
 }
 
@@ -98,7 +100,7 @@ bool Ball::checkHover(sf::Vector2f pos) const
 
 void Ball::setSpeed(sf::Vector2f speed)
 {
-    m_vel = speed / 2.0f;
+    m_vel = speed;
     m_decrease_vel / m_friction;
 }
 

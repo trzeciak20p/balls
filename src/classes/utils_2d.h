@@ -8,15 +8,15 @@ namespace bnw
 
 struct Equation
 {
-    float getX(float y) const
-    {
-        return (y - b) / a;
-    }
+    // float getX(float y) const
+    // {
+    //     return (y - b) / a;
+    // }
 
-    float getY(float x) const
-    {
-        return a * x + b;
-    }
+    // float getY(float x) const
+    // {
+    //     return a * x + b;
+    // }
 
     float a{};
     float b{};

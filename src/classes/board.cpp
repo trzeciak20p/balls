@@ -3,9 +3,11 @@
 #include "wall.h"
 #include <SFML/Config.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <string>
 
 sf::Color makeColor(std::ifstream &file)
 {
@@ -51,7 +53,7 @@ Wall makeWall(std::ifstream &file)
     float y_size{};
     file >> y_size;
 
-    const Wall::Type type{*std::istream_iterator<int>(file)};
+    const Wall::Type type{*std::istream_iterator<int8_t>(file)};
 
     return {{x, y}, {x_size, y_size}, type};
 }

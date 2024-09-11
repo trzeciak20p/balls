@@ -17,7 +17,6 @@ public:
     // private:
     int   m_width{};
     int   m_height{};
-    Ball *active_ball{};
 
     std::vector<Ball> m_balls;
     std::vector<Wall> m_walls;

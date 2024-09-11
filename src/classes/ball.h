@@ -8,7 +8,7 @@
 class Ball : public sf::CircleShape
 {
 public:
-    Ball(sf::Vector2f pos, float radius = 20, sf::Color color = sf::Color::White);
+    Ball(sf::Vector2f pos, float radius, sf::Color color = sf::Color::White);
 
     float getDistacne(sf::Vector2f pos) const;
     void  checkBounce(const std::vector<Wall> &walls);
