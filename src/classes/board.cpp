@@ -6,7 +6,6 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
-#include <string>
 
 sf::Color makeColor(std::ifstream &file)
 {

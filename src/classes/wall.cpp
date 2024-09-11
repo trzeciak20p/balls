@@ -5,18 +5,18 @@ Wall::Wall(float x, float y, float size_x, float size_y, Type type)
 {
     if (type == Type::dmg)
     {
-        body.setFillColor(sf::Color(255, 20, 20));
+        setFillColor(sf::Color(255, 20, 20));
     }
     else if (type == Type::bouncy)
     {
-        body.setFillColor(sf::Color(235, 40, 255));
+        setFillColor(sf::Color(235, 40, 255));
     }
     else
     {
-        body.setFillColor(sf::Color(125, 125, 125));
+        setFillColor(sf::Color(125, 125, 125));
     }
-    body.setPosition(x, y);
-    body.setSize({size_x, size_y});
+    setPosition(x, y);
+    setSize({size_x, size_y});
 }
 
 float Wall::getTop() const

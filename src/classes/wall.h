@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-class Wall
+class Wall : public sf::RectangleShape
 {
 public:
     enum class Type
@@ -20,8 +20,6 @@ public:
     float getBottom() const;
     float getRight() const;
     float getLeft() const;
-
-    sf::RectangleShape body;
 
 private:
     float m_x{};

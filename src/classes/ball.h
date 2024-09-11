@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-class Ball
+class Ball : public sf::CircleShape
 {
 public:
     Ball(float x, float y, float radius = 20, sf::Color color = sf::Color::White);
@@ -19,8 +19,7 @@ public:
     void         setSpeed(float x, float y);
     void         update(const std::vector<Wall> &walls);
 
-    sf::CircleShape body;
-    sf::Color       m_color;
+    sf::Color m_color;
 
 private:
     float m_x{};

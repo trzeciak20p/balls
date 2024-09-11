@@ -36,8 +36,8 @@ bool Game::calculateTrail()
     const float distance = sqrt(pow(mouse.x - sf::Mouse::getPosition(*m_window).x, 2) +
                                 pow(mouse.y - sf::Mouse::getPosition(*m_window).y, 2));
     const float angle    = bnw::getEquationAngle(sf::Vector2f(mouse), sf::Vector2f(sf::Mouse::getPosition(*m_window)));
-    const float x        = cos(angle + pi / 2) * to_board->active_ball->body.getRadius() / 2;
-    const float y        = sin(angle + pi / 2) * to_board->active_ball->body.getRadius() / 2;
+    const float x        = cos(angle + pi / 2) * to_board->active_ball->getRadius() / 2;
+    const float y        = sin(angle + pi / 2) * to_board->active_ball->getRadius() / 2;
 
     if (distance < 200)
     {
@@ -52,7 +52,7 @@ bool Game::calculateTrail()
             sf::Vector2f(2 * sf::Vector2i(to_board->active_ball->getPos()) - sf::Mouse::getPosition(*m_window)),
             trail_color);
 
-        to_board->active_ball->body.setFillColor(trail_color);
+        to_board->active_ball->setFillColor(trail_color);
     }
     else
     { // speed velocity cap
@@ -78,7 +78,7 @@ bool Game::calculateTrail()
                 sf::Vector2f(to_board->active_ball->getPos().x - tip_x, to_board->active_ball->getPos().y - tip_y),
                 sf::Color::Red);
         }
-        to_board->active_ball->body.setFillColor(sf::Color::Red);
+        to_board->active_ball->setFillColor(sf::Color::Red);
     }
     return true;
 }
@@ -131,7 +131,7 @@ void Game::mouseRelease()
 
         to_board->active_ball->setSpeed((mouse.x - sf::Mouse::getPosition(*m_window).x) / 3,
                                         (mouse.y - sf::Mouse::getPosition(*m_window).y) / 3);
-        to_board->active_ball->body.setFillColor(to_board->active_ball->m_color);
+        to_board->active_ball->setFillColor(to_board->active_ball->m_color);
         dragging = false;
         break;
 

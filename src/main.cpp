@@ -50,13 +50,13 @@ int main()
         case Game::Game::State::playing:
             for (auto &wall : board.m_walls)
             {
-                window.draw(wall.body);
+                window.draw(wall);
             }
 
             for (auto &ball : board.m_balls)
             {
                 ball.update(board.m_walls);
-                window.draw(ball.body);
+                window.draw(ball);
             }
 
             if (gra.calculateTrail())
