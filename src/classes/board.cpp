@@ -36,8 +36,7 @@ Ball makeBall(std::ifstream &file)
     float r{};
     file >> r;
 
-    const sf::Color color = makeColor(file);
-    return {x, y, r, color};
+    return {x, y, r, makeColor(file)};
 }
 
 Wall makeWall(std::ifstream &file)
@@ -54,7 +53,7 @@ Wall makeWall(std::ifstream &file)
 
     const Wall::Type type{*std::istream_iterator<int>(file)};
 
-    return {x, y, x_size, y_size, type};
+    return {{x, y}, {x_size, y_size}, type};
 }
 
 Board::Board(const std::string &path)

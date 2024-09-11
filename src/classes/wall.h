@@ -14,7 +14,7 @@ public:
         bouncy = 1 << 1,
     };
 
-    Wall(float x, float y, float size_x, float size_y, Type type = Type::normal);
+    Wall(sf::Vector2f pos, sf::Vector2f size, Type type = Type::normal);
 
     float getTop() const;
     float getBottom() const;
@@ -22,9 +22,5 @@ public:
     float getLeft() const;
 
 private:
-    float m_x{};
-    float m_y{};
-    float m_size_x{};
-    float m_size_y{};
-    Type  m_type{};
+    Type m_type{};
 };

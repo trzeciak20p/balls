@@ -1,7 +1,7 @@
 #include "wall.h"
 
-Wall::Wall(float x, float y, float size_x, float size_y, Type type)
-    : m_x{x}, m_y{y}, m_size_x{size_x}, m_size_y{size_y}, m_type{type}
+Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
+    : sf::RectangleShape{size}, m_type{type}
 {
     if (type == Type::dmg)
     {
@@ -15,26 +15,25 @@ Wall::Wall(float x, float y, float size_x, float size_y, Type type)
     {
         setFillColor(sf::Color(125, 125, 125));
     }
-    setPosition(x, y);
-    setSize({size_x, size_y});
+    setPosition(pos.x, pos.y);
 }
 
 float Wall::getTop() const
 {
-    return m_y;
+    return getPosition().y;
 }
 
 float Wall::getBottom() const
 {
-    return m_y + m_size_y;
+    return getPosition().y + getSize().y;
 }
 
 float Wall::getLeft() const
 {
-    return m_x;
+    return getPosition().x;
 }
 
 float Wall::getRight() const
 {
-    return m_x + m_size_x;
+    return getPosition().x + getSize().x;
 }
