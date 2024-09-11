@@ -10,11 +10,10 @@
 
 using std::numbers::pi;
 
-Ball::Ball(float x, float y, float radius, sf::Color color)
-    : m_x{x + radius}, m_y{y + radius}, m_color{color}
+Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
+    : m_color{color}, sf::CircleShape{radius}
 {
-    setPosition(m_x, m_y);
-    setRadius(radius);
+    setPosition(pos.x + radius, pos.y + radius);
     setFillColor(color);
     setOrigin({radius, radius});
 }
@@ -22,59 +21,53 @@ Ball::Ball(float x, float y, float radius, sf::Color color)
 // Ball::~Ball() = default;
 // make some exsplosion effect
 
-sf::Vector2f Ball::getPos() const
+float Ball::getDistacne(sf::Vector2f pos) const
 {
-    return {m_x, m_y};
-}
-
-float Ball::getDistacne(float x, float y) const
-{
-    return std::sqrt((x - m_x) * (x - m_x) + (y - m_y) * (y - m_y));
+    auto ae = getPosition() - pos;
+    return std::sqrt(ae.x * ae.x + ae.y * ae.y);
 }
 
 void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
 {
     if (angle >= 0)
     {
-        m_x = wall.getLeft() + cos(pi / 2 + angle) * (static_cast<int>(distance) * 10 + getRadius());
-        m_y = wall.getTop() - sin(pi / 2 + angle) * (static_cast<int>(distance) * 10 + getRadius());
-        std::swap(m_vel_x, m_vel_y);
-        m_vel_x *= -1;
-        m_vel_y *= -1;
-        m_decrease_vel_x *= -1;
-        m_decrease_vel_y *= -1;
+        setPosition(wall.getLeft() + cos(pi / 2 + angle) * (static_cast<int>(distance) * 10 + getRadius()),
+                    wall.getTop() - sin(pi / 2 + angle) * (static_cast<int>(distance) * 10 + getRadius()));
+        std::swap(m_vel.x, m_vel.y);
+        m_vel *= -1.0f;
+        m_decrease_vel *= -1.0f;
 
         return;
     }
 
     // Determining which side is ball comming from
-    if (m_x > m_y)
+    if (getPosition().x > getPosition().y)
     {
         // right
-        m_x = wall.getLeft() + cos(pi + pi / 4 + angle) * (static_cast<int>(distance) * 10 + getRadius());
-        m_y = wall.getTop() - sin(pi + pi / 4 + angle) * (static_cast<int>(distance) * 10 + getRadius());
+        setPosition(wall.getLeft() + cos(pi + pi / 4 + angle) * (static_cast<int>(distance) * 10 + getRadius()),
+                    wall.getTop() - sin(pi + pi / 4 + angle) * (static_cast<int>(distance) * 10 + getRadius()));
     }
     else
     {
         // left
-        m_x = wall.getLeft() + cos(angle - pi / 4) * (static_cast<int>(distance) * 10 + getRadius());
-        m_y = wall.getTop() - sin(angle - pi / 4) * (static_cast<int>(distance) * 10 + getRadius());
+        setPosition(wall.getLeft() + cos(angle - pi / 4) * (static_cast<int>(distance) * 10 + getRadius()),
+                    wall.getTop() - sin(angle - pi / 4) * (static_cast<int>(distance) * 10 + getRadius()));
     }
 }
 
-void Ball::sideCheck(const Wall &wall, float new_x, float new_y)
+void Ball::sideCheck(const Wall &wall, sf::Vector2f new_pos)
 {
-    if ((new_x + getRadius() > wall.getLeft() || new_x - getRadius() > wall.getRight()) &&
-        (new_y >= wall.getTop() && new_y <= wall.getBottom()))
+    if ((new_pos.x + getRadius() > wall.getLeft() || new_pos.x - getRadius() > wall.getRight()) &&
+        (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom()))
     {
-        m_vel_x *= -1;
-        m_decrease_vel_x *= -1;
+        m_vel.x *= -1;
+        m_decrease_vel.x *= -1;
     }
-    if ((new_y + getRadius() > wall.getTop() || new_y - getRadius() > wall.getBottom()) &&
-        (new_x >= wall.getLeft() && new_x <= wall.getRight()))
+    if ((new_pos.y + getRadius() > wall.getTop() || new_pos.y - getRadius() > wall.getBottom()) &&
+        (new_pos.x >= wall.getLeft() && new_pos.x <= wall.getRight()))
     {
-        m_vel_y *= -1;
-        m_decrease_vel_y *= -1;
+        m_vel.y *= -1;
+        m_decrease_vel.y *= -1;
     }
 }
 
@@ -82,67 +75,60 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
 {
     for (const auto &wall : walls)
     {
-        const float new_x = m_x + m_vel_x;
-        const float new_y = m_y + m_vel_y;
-        const float angle = bnw::getEquationAngle(getPos(), {new_x, new_y});
+        const auto  new_pos = getPosition() + m_vel;
+        const float angle   = bnw::getEquationAngle(getPosition(), new_pos);
 
-        const bool distance = getDistacne(wall.getLeft() - m_vel_x, wall.getTop() - m_vel_y) <= getRadius();
+        const bool distance = getDistacne({wall.getLeft() - m_vel.x, wall.getTop() - m_vel.y}) <= getRadius();
         if (distance)
         {
             cornerCheck(distance, angle, wall);
         }
         else
         {
-            sideCheck(wall, new_x, new_y);
+            sideCheck(wall, new_pos);
         }
     }
 }
 
 // Checks if cursor hovers over ball
-bool Ball::checkHover(float x, float y) const
+bool Ball::checkHover(sf::Vector2f pos) const
 {
-    return getDistacne(x, y) <= getRadius();
+    return getDistacne(pos) <= getRadius();
 }
 
-void Ball::setSpeed(float x, float y)
+void Ball::setSpeed(sf::Vector2f speed)
 {
-    m_vel_x          = x / 2;
-    m_vel_y          = y / 2;
-    m_decrease_vel_x = x / m_friction;
-    m_decrease_vel_y = y / m_friction;
+    m_vel = speed / 2.0f;
+    m_decrease_vel / m_friction;
 }
 
 void Ball::update(const std::vector<Wall> &walls)
 {
-    if (m_vel_x == 0.0 && m_vel_y == 0.0)
+    if (m_vel == sf::Vector2f{})
     {
         return;
     }
 
     // changing directions from boundaries
-    if (m_x + m_vel_x < getRadius())
+    if (getPosition().x + m_vel.x < getRadius())
     {
-        m_vel_x *= -1;
-        m_decrease_vel_x *= -1;
+        m_vel.x *= -1;
+        m_decrease_vel.x *= -1;
     }
-    if (m_y + m_vel_y < getRadius())
+    if (getPosition().y + m_vel.y < getRadius())
     {
-        m_vel_y *= -1;
-        m_decrease_vel_y *= -1;
+        m_vel.y *= -1;
+        m_decrease_vel.y *= -1;
     }
 
     checkBounce(walls);
 
-    m_x += m_vel_x;
-    m_y += m_vel_y;
+    move(m_vel);
 
-    setPosition({m_x, m_y});
+    m_vel *= m_friction; // lowering speed
 
-    m_vel_x *= m_friction; // lowering speed
-    m_vel_y *= m_friction;
-
-    if (std::abs(m_vel_x) < 0.2 && std::abs(m_vel_y) < 0.2)
+    if (std::abs(m_vel.x) < 0.2 && std::abs(m_vel.y) < 0.2)
     {
-        m_vel_x = m_vel_y = 0;
+        m_vel = {};
     }
 }

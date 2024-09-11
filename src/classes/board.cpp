@@ -36,7 +36,7 @@ Ball makeBall(std::ifstream &file)
     float r{};
     file >> r;
 
-    return {x, y, r, makeColor(file)};
+    return {{x, y}, r, makeColor(file)};
 }
 
 Wall makeWall(std::ifstream &file)

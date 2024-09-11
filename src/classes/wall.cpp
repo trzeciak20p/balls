@@ -15,7 +15,7 @@ Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
     {
         setFillColor(sf::Color(125, 125, 125));
     }
-    setPosition(pos.x, pos.y);
+    setPosition(pos);
 }
 
 float Wall::getTop() const

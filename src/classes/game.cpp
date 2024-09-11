@@ -45,11 +45,13 @@ bool Game::calculateTrail()
                                     (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
 
         trail[0] = sf::Vertex(
-            sf::Vector2f(to_board->active_ball->getPos().x + x, to_board->active_ball->getPos().y + y), trail_color);
+            sf::Vector2f(to_board->active_ball->getPosition().x + x, to_board->active_ball->getPosition().y + y),
+            trail_color);
         trail[1] = sf::Vertex(
-            sf::Vector2f(to_board->active_ball->getPos().x - x, to_board->active_ball->getPos().y - y), trail_color);
+            sf::Vector2f(to_board->active_ball->getPosition().x - x, to_board->active_ball->getPosition().y - y),
+            trail_color);
         trail[2] = sf::Vertex(
-            sf::Vector2f(2 * sf::Vector2i(to_board->active_ball->getPos()) - sf::Mouse::getPosition(*m_window)),
+            sf::Vector2f(2 * sf::Vector2i(to_board->active_ball->getPosition()) - sf::Mouse::getPosition(*m_window)),
             trail_color);
 
         to_board->active_ball->setFillColor(trail_color);
@@ -57,26 +59,28 @@ bool Game::calculateTrail()
     else
     { // speed velocity cap
         trail[0] = sf::Vertex(
-            sf::Vector2f(to_board->active_ball->getPos().x + x, to_board->active_ball->getPos().y + y), sf::Color::Red);
+            sf::Vector2f(to_board->active_ball->getPosition().x + x, to_board->active_ball->getPosition().y + y),
+            sf::Color::Red);
         trail[1] = sf::Vertex(
-            sf::Vector2f(to_board->active_ball->getPos().x - x, to_board->active_ball->getPos().y - y), sf::Color::Red);
+            sf::Vector2f(to_board->active_ball->getPosition().x - x, to_board->active_ball->getPosition().y - y),
+            sf::Color::Red);
         const float tip_x = std::cos(angle) * 200;
         const float tip_y = std::sin(angle) * 200;
 
-        std::cout << sf::Mouse::getPosition(*m_window).x << " " << to_board->active_ball->getPos().x << " " << angle
-                  << " \n";
+        std::cout << sf::Mouse::getPosition(*m_window).x << " " << to_board->active_ball->getPosition().x << " "
+                  << angle << " \n";
 
-        if (sf::Mouse::getPosition(*m_window).x < to_board->active_ball->getPos().x + 2.5)
+        if (sf::Mouse::getPosition(*m_window).x < to_board->active_ball->getPosition().x + 2.5)
         {
-            trail[2] = sf::Vertex(
-                sf::Vector2f(to_board->active_ball->getPos().x + tip_x, to_board->active_ball->getPos().y + tip_y),
-                sf::Color::Red);
+            trail[2] = sf::Vertex(sf::Vector2f(to_board->active_ball->getPosition().x + tip_x,
+                                               to_board->active_ball->getPosition().y + tip_y),
+                                  sf::Color::Red);
         }
         else
         {
-            trail[2] = sf::Vertex(
-                sf::Vector2f(to_board->active_ball->getPos().x - tip_x, to_board->active_ball->getPos().y - tip_y),
-                sf::Color::Red);
+            trail[2] = sf::Vertex(sf::Vector2f(to_board->active_ball->getPosition().x - tip_x,
+                                               to_board->active_ball->getPosition().y - tip_y),
+                                  sf::Color::Red);
         }
         to_board->active_ball->setFillColor(sf::Color::Red);
     }
@@ -97,7 +101,7 @@ void Game::mousePress()
         mouse = sf::Mouse::getPosition(*m_window);
         for (auto &i : to_board->m_balls)
         { // checking if hovered over ball
-            if (!i.checkHover(mouse.x, mouse.y))
+            if (!i.checkHover({float(mouse.x), float(mouse.y)}))
             {
                 continue;
             }
@@ -129,8 +133,8 @@ void Game::mouseRelease()
             break;
         }
 
-        to_board->active_ball->setSpeed((mouse.x - sf::Mouse::getPosition(*m_window).x) / 3,
-                                        (mouse.y - sf::Mouse::getPosition(*m_window).y) / 3);
+        to_board->active_ball->setSpeed(
+            {(mouse.x - sf::Mouse::getPosition(*m_window).x) / 3.0f, (mouse.y - sf::Mouse::getPosition(*m_window).y) / 3.0f});
         to_board->active_ball->setFillColor(to_board->active_ball->m_color);
         dragging = false;
         break;
