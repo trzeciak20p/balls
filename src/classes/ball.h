@@ -5,17 +5,17 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-class Ball : public sf::CircleShape
+class Ball final : public sf::CircleShape
 {
 public:
     Ball(sf::Vector2f pos, float radius, sf::Color color = sf::Color::White);
 
-    void  checkBounce(const std::vector<Wall> &walls);
-    void  cornerCheck(bool distance, float angle, const Wall &wall);
-    void  sideCheck(const Wall &wall, sf::Vector2f new_pos);
-    bool  checkHover(sf::Vector2f pos) const;
-    void  setSpeed(sf::Vector2f speed);
-    void  update(const std::vector<Wall> &walls);
+    void setSpeed(sf::Vector2f speed);
+    bool checkHover(sf::Vector2f pos) const;
+    void update(const std::vector<Wall> &walls);
+    void checkBounce(const std::vector<Wall> &walls);
+    void sideCheck(const Wall &wall, sf::Vector2f new_pos);
+    void cornerCheck(bool distance, float angle, const Wall &wall);
 
     sf::Color m_color;
 

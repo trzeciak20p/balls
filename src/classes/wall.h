@@ -17,9 +17,9 @@ public:
     Wall(sf::Vector2f pos, sf::Vector2f size, Type type = Type::normal);
 
     float getTop() const;
-    float getBottom() const;
-    float getRight() const;
     float getLeft() const;
+    float getRight() const;
+    float getBottom() const;
 
 private:
     Type m_type{};

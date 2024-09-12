@@ -21,23 +21,20 @@ public:
 
     explicit Game(sf::Window *window);
 
-    bool  calculateTrail(); // Calculates trail for drawing
+    State getState();
     void  mousePress();
     void  mouseRelease();
-    State getState();
+    bool  calculateTrail(); // Calculates trail for drawing
 
-    const sf::VertexArray &getTrial()
-    {
-        return trail;
-    }
+    const sf::VertexArray &getTrial();
 
     Board *to_board{};
 
 private:
-    bool            dragging{};
-    sf::Vector2i    mouse;
-    sf::VertexArray trail{sf::Triangles, 3};
-    Ball           *active_ball{};
+    sf::Vector2i    m_mouse;
     sf::Window     *m_window{};
+    bool            m_dragging{};
+    Ball           *m_active_ball{};
     State           m_state{State::playing};
+    sf::VertexArray m_trail{sf::Triangles, 3};
 };

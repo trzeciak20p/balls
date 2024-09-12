@@ -26,9 +26,8 @@ set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
 
 add_executable(main src/main.cpp src/classes/ball.cpp src/classes/board.cpp src/classes/wall.cpp src/classes/utils_2d.cpp src/classes/game.cpp)
 
-# basycznie powinno sie używać analizatora ale jeszcze go nie ma wiec jest ściana (wall)
-# target_compile_options(main PRIVATE "-Wall;-Wextra;-Wpedantic;-pedantic-errors;-fanalyzer;-Wshadow;-Wnull-dereference;-Wduplicated-cond;-Wredundant-decls;-Wduplicated-branches;-Wlogical-op;-Wcast-qual;-Wfloat-equal")
-# target_compile_options(main PRIVATE "--all-warnings -Weverything -Wno-c++98-compat -Wno-c++98-c++11-compat -Wno-c++98-c++11-c++14-compat -Wno-padded -Wno-c++98-compat-pedantic")
+# clang warningi
+# target_compile_options(main PRIVATE -Weverything -Wno-padded -Wno-c++98-compat-pedantic)
 set_target_properties(main PROPERTIES CXX_STANDARD 20)
 set_target_properties(main PROPERTIES OUTPUT_NAME baluminc)
 

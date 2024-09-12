@@ -13,11 +13,11 @@
 constexpr float pi{std::numbers::pi_v<float>};
 
 Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
-    : m_color{color}, sf::CircleShape{radius}
+    : sf::CircleShape{radius}, m_color{color}
 {
-    setPosition(pos.x + radius, pos.y + radius);
     setFillColor(color);
     setOrigin(radius, radius);
+    setPosition(pos.x + radius, pos.y + radius);
 }
 
 // Ball::~Ball() = default;
@@ -118,7 +118,7 @@ void Ball::update(const std::vector<Wall> &walls)
 
     m_vel *= m_friction; // lowering speed
 
-    if (bnw::getDistacne(m_vel) < 0.2)
+    if (bnw::getDistacne(m_vel) < 0.2F)
     {
         m_vel = {};
     }

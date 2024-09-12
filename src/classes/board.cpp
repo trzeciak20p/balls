@@ -63,7 +63,7 @@ Board::Board(const std::string &path)
     std::ifstream file(path);
     if (!file.is_open())
     {
-        std::cout << "COULDN'T FIND A FILE TO LOAD MAP under path:\"" << path << "\"\n";
+        std::cerr << "COULDN'T FIND A FILE TO LOAD MAP under path:\"" << path << "\"\n";
         return;
     }
 
