@@ -19,14 +19,14 @@ sf::Color makeColor(std::ifstream &file)
         return sf::Color::White;
     }
 
-    sf::Uint8 r{};
+    int r{};
     file >> r;
-    sf::Uint8 g{};
+    int g{};
     file >> g;
-    sf::Uint8 b{};
+    int b{};
     file >> b;
 
-    return {r, g, b};
+    return {sf::Uint8(r), sf::Uint8(g), sf::Uint8(b)};
 }
 
 Ball makeBall(std::ifstream &file)
