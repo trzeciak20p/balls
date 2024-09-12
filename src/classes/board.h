@@ -15,8 +15,8 @@ public:
     // }
 
     // private:
-    int   m_width{};
-    int   m_height{};
+    int m_width{};
+    int m_height{};
 
     std::vector<Ball> m_balls;
     std::vector<Wall> m_walls;

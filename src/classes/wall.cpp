@@ -5,18 +5,19 @@
 Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
     : sf::RectangleShape{size}, m_type{type}
 {
-    if (type == Type::dmg)
+    switch (type)
     {
+    case Type::dmg:
         setFillColor(sf::Color(255, 20, 20));
-    }
-    else if (type == Type::bouncy)
-    {
+        break;
+    case Type::bouncy:
         setFillColor(sf::Color(235, 40, 255));
-    }
-    else
-    {
+        break;
+    default:
         setFillColor(sf::Color(125, 125, 125));
+        break;
     }
+
     setPosition(pos);
 }
 

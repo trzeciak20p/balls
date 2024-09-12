@@ -26,13 +26,18 @@ public:
     void  mouseRelease();
     State getState();
 
-    bool         dragging{};
-    sf::Vector2i mouse;
-    sf::Vertex   trail[3]{};
-    Board       *to_board{};
-    Ball        *active_ball{};
+    const sf::VertexArray &getTrial()
+    {
+        return trail;
+    }
+
+    Board *to_board{};
 
 private:
-    sf::Window *m_window{};
-    State       m_state{State::playing};
+    bool            dragging{};
+    sf::Vector2i    mouse;
+    sf::VertexArray trail{sf::Triangles, 3};
+    Ball           *active_ball{};
+    sf::Window     *m_window{};
+    State           m_state{State::playing};
 };

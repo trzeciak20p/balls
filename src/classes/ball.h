@@ -10,7 +10,6 @@ class Ball : public sf::CircleShape
 public:
     Ball(sf::Vector2f pos, float radius, sf::Color color = sf::Color::White);
 
-    float getDistacne(sf::Vector2f pos) const;
     void  checkBounce(const std::vector<Wall> &walls);
     void  cornerCheck(bool distance, float angle, const Wall &wall);
     void  sideCheck(const Wall &wall, sf::Vector2f new_pos);

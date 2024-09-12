@@ -9,7 +9,7 @@
 #include <iostream>
 #include <numbers>
 
-using std::numbers::pi;
+constexpr float pi{std::numbers::pi_v<float>};
 
 Game::Game(sf::Window *window)
     : m_window{window}
@@ -28,7 +28,7 @@ bool Game::calculateTrail()
         return false;
     }
     const float distance = bnw::getDistacne(sf::Vector2f(mouse), sf::Vector2f(sf::Mouse::getPosition(*m_window)));
-    const float angle    = bnw::getEquationAngle(sf::Vector2f(sf::Mouse::getPosition(*m_window) - mouse));
+    const float angle    = bnw::getAngle(sf::Vector2f(sf::Mouse::getPosition(*m_window) - mouse));
     const float x        = std::cos(angle + pi / 2) * active_ball->getRadius() / 2;
     const float y        = std::sin(angle + pi / 2) * active_ball->getRadius() / 2;
 
@@ -37,17 +37,17 @@ bool Game::calculateTrail()
         const sf::Color trail_color((distance <= 100) ? (distance / 100 * 255) : (255),
                                     (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
 
-        trail[0] = sf::Vertex(active_ball->getPosition() + sf::Vector2f(x, y), trail_color);
-        trail[1] = sf::Vertex(active_ball->getPosition() - sf::Vector2f(x, y), trail_color);
-        trail[2] = sf::Vertex(active_ball->getPosition() * 2.0F - sf::Vector2f(sf::Mouse::getPosition(*m_window)),
-                              trail_color);
+        trail[0] = {active_ball->getPosition() + sf::Vector2f(x, y), trail_color};
+        trail[1] = {active_ball->getPosition() - sf::Vector2f(x, y), trail_color};
+        trail[2] = {active_ball->getPosition() * 2.0F - sf::Vector2f(sf::Mouse::getPosition(*m_window)), trail_color};
 
         active_ball->setFillColor(trail_color);
     }
     else
     { // speed velocity cap
-        trail[0]          = sf::Vertex(active_ball->getPosition() + sf::Vector2f(x, y), sf::Color::Red);
-        trail[1]          = sf::Vertex(active_ball->getPosition() - sf::Vector2f(x, y), sf::Color::Red);
+        trail[0] = {active_ball->getPosition() + sf::Vector2f(x, y), sf::Color::Red};
+        trail[1] = {active_ball->getPosition() - sf::Vector2f(x, y), sf::Color::Red};
+
         const float tip_x = std::cos(angle) * 200;
         const float tip_y = std::sin(angle) * 200;
 
@@ -56,11 +56,11 @@ bool Game::calculateTrail()
 
         if (sf::Mouse::getPosition(*m_window).x < active_ball->getPosition().x + 2.5)
         {
-            trail[2] = sf::Vertex(active_ball->getPosition() + sf::Vector2f(tip_x, tip_y), sf::Color::Red);
+            trail[2] = {active_ball->getPosition() + sf::Vector2f(tip_x, tip_y), sf::Color::Red};
         }
         else
         {
-            trail[2] = sf::Vertex(active_ball->getPosition() - sf::Vector2f(tip_x, tip_y), sf::Color::Red);
+            trail[2] = {active_ball->getPosition() - sf::Vector2f(tip_x, tip_y), sf::Color::Red};
         }
         active_ball->setFillColor(sf::Color::Red);
     }

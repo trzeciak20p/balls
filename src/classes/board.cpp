@@ -26,7 +26,7 @@ sf::Color makeColor(std::ifstream &file)
     int b{};
     file >> b;
 
-    return {sf::Uint8(r), sf::Uint8(g), sf::Uint8(b)};
+    return {static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b)};
 }
 
 Ball makeBall(std::ifstream &file)

@@ -10,7 +10,7 @@
 #include <utility>
 #include <vector>
 
-using std::numbers::pi;
+constexpr float pi{std::numbers::pi_v<float>};
 
 Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
     : m_color{color}, sf::CircleShape{radius}
@@ -23,17 +23,12 @@ Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
 // Ball::~Ball() = default;
 // make some exsplosion effect
 
-float Ball::getDistacne(sf::Vector2f pos) const
-{
-    return bnw::getDistacne(getPosition(), pos);
-}
-
 void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
 {
     if (angle >= 0)
     {
-        setPosition(wall.getLeft() + cos(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
-                    wall.getTop() - sin(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
+        setPosition(wall.getLeft() + std::cos(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
+                    wall.getTop() - std::sin(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
         std::swap(m_vel.x, m_vel.y);
         m_vel *= -1.0F;
 
@@ -44,14 +39,14 @@ void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
     if (getPosition().x > getPosition().y)
     {
         // right
-        setPosition(wall.getLeft() + cos(pi + pi / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
-                    wall.getTop() - sin(pi + pi / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
+        setPosition(wall.getLeft() + std::cos(pi * 5 / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
+                    wall.getTop() - std::sin(pi * 5 / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
     }
     else
     {
         // left
-        setPosition(wall.getLeft() + cos(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()),
-                    wall.getTop() - sin(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()));
+        setPosition(wall.getLeft() + std::cos(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()),
+                    wall.getTop() - std::sin(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()));
     }
 }
 
@@ -74,7 +69,7 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
     for (const auto &wall : walls)
     {
         const auto  new_pos = getPosition() + m_vel;
-        const float angle   = bnw::getEquationAngle(new_pos);
+        const float angle   = bnw::getAngle(new_pos);
 
         const bool distance = bnw::getDistacne({wall.getLeft(), wall.getTop()}, m_vel) <= getRadius();
         if (distance)
@@ -91,7 +86,7 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
 // Checks if cursor hovers over ball
 bool Ball::checkHover(sf::Vector2f pos) const
 {
-    return getDistacne(pos) <= getRadius();
+    return bnw::getDistacne(getPosition(), pos) <= getRadius();
 }
 
 void Ball::setSpeed(sf::Vector2f speed)

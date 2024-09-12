@@ -2,6 +2,7 @@ Checks:
 - bugprone-*
 - cert-*
 - concurrency-*
+- clang-analyzer-*
 - cppcoreguidelines-*
 - -cppcoreguidelines-avoid-magic-numbers
 - google-*

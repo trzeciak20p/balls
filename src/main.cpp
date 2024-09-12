@@ -1,7 +1,6 @@
 #include "classes/ball.h"
 #include "classes/board.h"
 #include "classes/game.h"
-#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/WindowStyle.hpp>
@@ -60,7 +59,7 @@ int main()
 
             if (gra.calculateTrail())
             {
-                window.draw(gra.trail, 3, sf::Triangles);
+                window.draw(gra.getTrial());
             }
             break;
 
