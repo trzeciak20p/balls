@@ -45,7 +45,7 @@ int main()
 
         switch (gra.getState())
         {
-        case Game::Game::State::playing:
+        case Game::playing:
             for (auto &wall : board.m_walls)
             {
                 window.draw(wall);

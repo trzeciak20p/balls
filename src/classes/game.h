@@ -10,7 +10,7 @@
 class Game
 {
 public:
-    enum class State : int8_t
+    enum State : int8_t
     {
         paused,
         playing,
@@ -35,6 +35,6 @@ private:
     sf::Window     *m_window{};
     bool            m_dragging{};
     Ball           *m_active_ball{};
-    State           m_state{State::playing};
+    State           m_state{playing};
     sf::VertexArray m_trail{sf::Triangles, 3};
 };

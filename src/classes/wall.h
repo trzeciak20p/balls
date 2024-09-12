@@ -7,14 +7,14 @@
 class Wall : public sf::RectangleShape
 {
 public:
-    enum class Type : int8_t
+    enum Type : int8_t
     {
         normal = 0 << 1,
         dmg    = 1 << 0,
         bouncy = 1 << 1,
     };
 
-    Wall(sf::Vector2f pos, sf::Vector2f size, Type type = Type::normal);
+    Wall(sf::Vector2f pos, sf::Vector2f size, Type type = normal);
 
     float getTop() const;
     float getLeft() const;

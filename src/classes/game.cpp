@@ -45,7 +45,8 @@ bool Game::calculateTrail()
         m_active_ball->setFillColor(trail_color);
     }
     else
-    { // speed velocity cap
+    {
+        // speed velocity cap
         m_trail[0] = {m_active_ball->getPosition() + sf::Vector2f(x, y), sf::Color::Red};
         m_trail[1] = {m_active_ball->getPosition() - sf::Vector2f(x, y), sf::Color::Red};
 
@@ -69,13 +70,13 @@ void Game::mousePress()
 {
     switch (m_state)
     {
-    case Game::State::menu:
-    case Game::State::map_selection:
-    case Game::State::settings:
-    case Game::State::paused:
+    case menu:
+    case map_selection:
+    case settings:
+    case paused:
         break;
 
-    case Game::State::playing:
+    case playing:
         m_mouse = sf::Mouse::getPosition(*m_window);
         for (auto &i : to_board->m_balls)
         {
@@ -105,13 +106,13 @@ void Game::mouseRelease()
 {
     switch (m_state)
     {
-    case Game::State::menu:
-    case Game::State::map_selection:
-    case Game::State::settings:
-    case Game::State::paused:
+    case menu:
+    case map_selection:
+    case settings:
+    case paused:
         break;
 
-    case Game::State::playing:
+    case playing:
         if (!m_dragging)
         {
             break;
