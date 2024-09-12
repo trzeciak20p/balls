@@ -22,6 +22,5 @@ public:
 
 private:
     sf::Vector2f m_vel;
-    sf::Vector2f m_decrease_vel;
     float        m_friction{0.9F};
 };

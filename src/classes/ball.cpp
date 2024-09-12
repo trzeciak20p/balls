@@ -25,8 +25,7 @@ Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
 
 float Ball::getDistacne(sf::Vector2f pos) const
 {
-    auto ae = getPosition() - pos;
-    return std::sqrt(ae.x * ae.x + ae.y * ae.y);
+    return bnw::getDistacne(getPosition(), pos);
 }
 
 void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
@@ -37,7 +36,6 @@ void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
                     wall.getTop() - sin(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
         std::swap(m_vel.x, m_vel.y);
         m_vel *= -1.0F;
-        m_decrease_vel *= -1.0F;
 
         return;
     }
@@ -63,13 +61,11 @@ void Ball::sideCheck(const Wall &wall, sf::Vector2f new_pos)
         (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom()))
     {
         m_vel.x *= -1;
-        m_decrease_vel.x *= -1;
     }
     if ((new_pos.y + getRadius() > wall.getTop() || new_pos.y - getRadius() > wall.getBottom()) &&
         (new_pos.x >= wall.getLeft() && new_pos.x <= wall.getRight()))
     {
         m_vel.y *= -1;
-        m_decrease_vel.y *= -1;
     }
 }
 
@@ -78,9 +74,9 @@ void Ball::checkBounce(const std::vector<Wall> &walls)
     for (const auto &wall : walls)
     {
         const auto  new_pos = getPosition() + m_vel;
-        const float angle   = bnw::getEquationAngle(getPosition(), new_pos);
+        const float angle   = bnw::getEquationAngle(new_pos);
 
-        const bool distance = getDistacne({wall.getLeft() - m_vel.x, wall.getTop() - m_vel.y}) <= getRadius();
+        const bool distance = bnw::getDistacne({wall.getLeft(), wall.getTop()}, m_vel) <= getRadius();
         if (distance)
         {
             cornerCheck(distance, angle, wall);
@@ -101,7 +97,6 @@ bool Ball::checkHover(sf::Vector2f pos) const
 void Ball::setSpeed(sf::Vector2f speed)
 {
     m_vel = speed;
-    m_decrease_vel / m_friction;
 }
 
 void Ball::update(const std::vector<Wall> &walls)
@@ -112,15 +107,14 @@ void Ball::update(const std::vector<Wall> &walls)
     }
 
     // changing directions from boundaries
-    if (getPosition().x + m_vel.x < getRadius())
+    // ograniczenia zostana planowane być wzniesione
+    if (getPosition().x + m_vel.x < getRadius() || getPosition().x + m_vel.x > 800 - getRadius())
     {
         m_vel.x *= -1;
-        m_decrease_vel.x *= -1;
     }
-    if (getPosition().y + m_vel.y < getRadius())
+    if (getPosition().y + m_vel.y < getRadius() || getPosition().y + m_vel.y > 700 - getRadius())
     {
         m_vel.y *= -1;
-        m_decrease_vel.y *= -1;
     }
 
     checkBounce(walls);
@@ -129,7 +123,7 @@ void Ball::update(const std::vector<Wall> &walls)
 
     m_vel *= m_friction; // lowering speed
 
-    if (std::abs(m_vel.x) < 0.2 && std::abs(m_vel.y) < 0.2)
+    if (bnw::getDistacne(m_vel) < 0.2)
     {
         m_vel = {};
     }

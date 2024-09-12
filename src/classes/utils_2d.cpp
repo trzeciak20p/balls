@@ -10,14 +10,20 @@ Equation getEquation(sf::Vector2f A, sf::Vector2f B)
     return {(B.y - A.y) / (B.x - A.x), ((B.x * A.y) - (A.x * B.y)) / B.x - A.x, std::atan((B.y - A.y) / (B.x - A.x))};
 }
 
-float getEquationAngle(sf::Vector2f A, sf::Vector2f B)
+float getEquationAngle(sf::Vector2f A)
 {
-    return std::atan((B.y - A.y) / (B.x - A.x));
+    return std::atan(A.y / A.x);
 }
 
-float getDistacne(float x1, float y1, float x2, float y2)
+float getDistacne(sf::Vector2f A, sf::Vector2f B)
 {
-    return std::sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    auto diff = A - B;
+    return std::sqrt(diff.x * diff.x + diff.y * diff.y);
+}
+
+float getDistacne(sf::Vector2f A)
+{
+    return std::sqrt(A.x * A.x + A.y * A.y);
 }
 
 } // namespace bnw

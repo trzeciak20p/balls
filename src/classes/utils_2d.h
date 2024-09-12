@@ -24,7 +24,8 @@ struct Equation
 };
 
 Equation getEquation(sf::Vector2f A, sf::Vector2f B);
-float    getEquationAngle(sf::Vector2f A, sf::Vector2f B);
-float    getDistacne(float x1, float y1, float x2, float y2);
+float    getEquationAngle(sf::Vector2f A);
+float    getDistacne(sf::Vector2f A, sf::Vector2f B);
+float    getDistacne(sf::Vector2f A);
 
 } // namespace bnw
