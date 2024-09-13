@@ -4,23 +4,28 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-class Wall : public sf::RectangleShape
+class Wall
 {
 public:
-    enum Type : int8_t
+    enum class Type
     {
         normal = 0 << 1,
-        dmg    = 1 << 0,
+        dmg = 1 << 0,
         bouncy = 1 << 1,
     };
 
-    Wall(sf::Vector2f pos, sf::Vector2f size, Type type = normal);
+    sf::RectangleShape body;
 
-    float getTop() const;
-    float getLeft() const;
-    float getRight() const;
-    float getBottom() const;
+    Wall(int _x, int _y, int _size_x, int _size_y, Type _type = Type::normal);
+
+    int getTop() const;
+    int getBottom() const;
+    int getRight() const;
+    int getLeft() const;
 
 private:
-    Type m_type{};
+    int x, y, size_x, size_y;
+    Type type;
 };
+
+inline std::vector<Wall> walls;
