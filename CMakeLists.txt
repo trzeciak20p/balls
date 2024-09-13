@@ -24,7 +24,14 @@ set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
     "Debug" "Release" "MinSizeRel" "RelWithDebInfo" "Speed")
 set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
 
-add_executable(main src/main.cpp src/classes/ball.cpp src/classes/board.cpp src/classes/wall.cpp src/classes/utils_2d.cpp src/classes/game.cpp)
+add_executable(main
+    src/main.cpp
+    src/classes/ball.cpp
+    src/classes/board.cpp
+    src/classes/wall.cpp
+    src/classes/utils_2d.cpp
+    src/classes/game.cpp
+)
 
 # clang warningi
 # target_compile_options(main PRIVATE -Weverything -Wno-padded -Wno-c++98-compat-pedantic)
