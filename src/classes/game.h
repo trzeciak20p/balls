@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ball.h"
-#include "board.h"
+#include "mapLoader.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
@@ -10,7 +10,7 @@
 class Game
 {
 public:
-    enum State : int8_t
+    enum class State
     {
         paused,
         playing,
@@ -19,22 +19,21 @@ public:
         map_selection
     };
 
-    explicit Game(sf::Window *window);
+    bool dragging{};
+    sf::Vector2i mouse;
+    sf::Vertex trail[3];
+
+    Game(sf::Window *window);
 
     State getState();
-    void  mousePress();
-    void  mouseRelease();
-    bool  calculateTrail(); // Calculates trail for drawing
 
-    const sf::VertexArray &getTrial();
+    void errorReport(const std::string &err);
+    bool calculateTrail(); // Calculates trail for drawing
 
-    Board *to_board{};
+    void mousePress();
+    void mouseRelease();
 
 private:
-    sf::Vector2i    m_mouse;
-    sf::Window     *m_window{};
-    bool            m_dragging{};
-    Ball           *m_active_ball{};
-    State           m_state{playing};
-    sf::VertexArray m_trail{sf::Triangles, 3};
+    sf::Window *window;
+    State state;
 };

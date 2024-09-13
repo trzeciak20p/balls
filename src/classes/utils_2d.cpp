@@ -2,23 +2,21 @@
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
-namespace bnw // Balls n' Walls
+namespace bnw
+{ // Balls n' Walls
+Equation getEquation(sf::Vector2f A, sf::Vector2f B)
 {
-
-float getAngle(sf::Vector2f A)
-{
-    return std::atan(A.y / A.x);
+    return Equation{(B.y - A.y) / (B.x - A.x), ((B.x * A.y) - (A.x * B.y)) / B.x - A.x,
+                    std::atan((B.y - A.y) / (B.x - A.x))};
 }
 
-float getDistacne(sf::Vector2f A, sf::Vector2f B)
+float getEquationAngle(sf::Vector2f A, sf::Vector2f B)
 {
-    auto diff = A - B;
-    return std::sqrt(diff.x * diff.x + diff.y * diff.y);
+    return std::atan((B.y - A.y) / (B.x - A.x));
 }
 
-float getDistacne(sf::Vector2f A)
+template <typename T> float getDistacne(T x1, T y1, T x2, T y2)
 {
-    return std::sqrt(A.x * A.x + A.y * A.y);
+    return std::sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
-
 } // namespace bnw

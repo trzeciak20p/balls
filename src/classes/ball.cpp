@@ -1,125 +1,169 @@
 #include "ball.h"
 #include "utils_2d.h"
 #include "wall.h"
-#include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
-#include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Window.hpp>
 #include <cmath>
 #include <cstdlib>
-#include <numbers>
-#include <utility>
-#include <vector>
+#include <iostream>
 
-constexpr float pi{std::numbers::pi_v<float>};
-
-Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
-    : sf::CircleShape{radius}, m_color{color}
+Ball::Ball(float _x, float _y, float _size, sf::Color _color) : x{_x + _size}, y{_y + _size}, color{_color}
 {
-    setFillColor(color);
-    setOrigin(radius, radius);
-    setPosition(pos.x + radius, pos.y + radius);
+    body.setPosition(x, y);
+    body.setRadius(_size);
+    body.setFillColor(_color);
+    body.setOrigin(sf::Vector2f(_size, _size));
+    balls.push_back(*this);
 }
 
 // Ball::~Ball() = default;
 // make some exsplosion effect
 
-void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
+void Ball::initialize(sf::Window *_window)
 {
-    if (angle >= 0)
-    {
-        setPosition(wall.getLeft() + std::cos(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
-                    wall.getTop() - std::sin(pi / 2 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
-        std::swap(m_vel.x, m_vel.y);
-        m_vel *= -1.0F;
-
-        return;
-    }
-
-    // Determining which side is ball comming from
-    if (getPosition().x > getPosition().y)
-    {
-        // right
-        setPosition(wall.getLeft() + std::cos(pi * 5 / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()),
-                    wall.getTop() - std::sin(pi * 5 / 4 + angle) * (static_cast<float>(distance) * 10 + getRadius()));
-    }
-    else
-    {
-        // left
-        setPosition(wall.getLeft() + std::cos(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()),
-                    wall.getTop() - std::sin(angle - pi / 4) * (static_cast<float>(distance) * 10 + getRadius()));
-    }
+    Ball::window = _window;
+    Ball::board_width = window->getSize().x;
+    Ball::board_height = window->getSize().y;
+    Ball::friction = 0.9;
 }
 
-void Ball::sideCheck(const Wall &wall, sf::Vector2f new_pos)
+sf::Vector2f Ball::getPos() const
 {
-    if ((new_pos.x + getRadius() > wall.getLeft() || new_pos.x - getRadius() > wall.getRight()) &&
-        (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom()))
-    {
-        m_vel.x *= -1;
-    }
-    if ((new_pos.y + getRadius() > wall.getTop() || new_pos.y - getRadius() > wall.getBottom()) &&
-        (new_pos.x >= wall.getLeft() && new_pos.x <= wall.getRight()))
-    {
-        m_vel.y *= -1;
-    }
+    return {x, y};
 }
 
-void Ball::checkBounce(const std::vector<Wall> &walls)
+float Ball::getDistacne(float _x, float _y) const
 {
-    for (const auto &wall : walls)
-    {
-        const auto  new_pos = getPosition() + m_vel;
-        const float angle   = bnw::getAngle(new_pos);
+    return sqrt((_x - x) * (_x - x) + (_y - y) * (_y - y));
+}
 
-        const bool distance = bnw::getDistacne({wall.getLeft(), wall.getTop()}, m_vel) <= getRadius();
-        if (distance)
+void Ball::checkBounce()
+{
+    for (auto &wall : walls)
+    {
+        float const new_x = x + vel_x;
+        float const new_y = y + vel_y;
+        float angle = NAN;
+        angle = bnw::getEquationAngle(getPos(), sf::Vector2f(new_x, new_y));
+
+        // Cheking for corners
+        if (auto const distance =
+                static_cast<float>(getDistacne(wall.getLeft() - vel_x, wall.getTop() - vel_y) <= body.getRadius()))
         {
-            cornerCheck(distance, angle, wall);
+            if (angle < 0)
+            {
+                if (x > y)
+                { // Determining which side is ball comming from
+                    // right
+                    x = wall.getLeft() + cos(M_PI + M_PI_4 + angle) * (distance * 10 + body.getRadius());
+                    y = wall.getTop() - sin(M_PI + M_PI_4 + angle) * (distance * 10 + body.getRadius());
+                }
+                else
+                {
+                    // left
+                    x = wall.getLeft() + cos(angle - M_PI_4) * (distance * 10 + body.getRadius());
+                    y = wall.getTop() - sin(angle - M_PI_4) * (distance * 10 + body.getRadius());
+                }
+            }
+            else
+            {
+                x = wall.getLeft() + cos(M_PI_2 + angle) * (distance * 10 + body.getRadius());
+                y = wall.getTop() - sin(M_PI_2 + angle) * (distance * 10 + body.getRadius());
+                float const vel_x_buffer = vel_x;
+                vel_x = -vel_y;
+                vel_y = -vel_x_buffer;
+                decrease_vel_x *= -1;
+                decrease_vel_y *= -1;
+            }
+
+            std::cout << "diff x: " << x - wall.getLeft() << "diff y: " << y - wall.getTop() << "\r\n";
+        }
+        else if (getDistacne(wall.getLeft() - vel_x, wall.getBottom() - vel_y) <= body.getRadius())
+        {
+        }
+        else if (getDistacne(wall.getRight() - vel_x, wall.getTop() - vel_y) <= body.getRadius())
+        {
+        }
+        else if (getDistacne(wall.getRight() - vel_x, wall.getBottom() - vel_y) <= body.getRadius())
+        {
         }
         else
         {
-            sideCheck(wall, new_pos);
+            // Checking for sides
+            if ((new_x + body.getRadius() > wall.getLeft() || new_x - body.getRadius() > wall.getRight()) &&
+                (new_y >= wall.getTop() && new_y <= wall.getBottom()))
+            {
+                vel_x *= -1;
+                decrease_vel_x *= -1;
+            }
+            if ((new_y + body.getRadius() > wall.getTop() || new_y - body.getRadius() > wall.getBottom()) &&
+                (new_x >= wall.getLeft() && new_x <= wall.getRight()))
+            {
+                vel_y *= -1;
+                decrease_vel_y *= -1;
+            }
+            return;
         }
+
+        std::cout << "angle: " << atan(angle) << "\r\n";
+    }
+
+    // TODO uwzględnić prędkość obu piłek
+}
+
+bool Ball::checkHover(float _x, float _y)
+{ // Checks if cursor hovers over ball
+    if (getDistacne(_x, _y) <= body.getRadius())
+    {
+        Ball::active_ball = this;
+        return true;
+    }
+    return false;
+}
+
+void Ball::setSpeed(float _x, float _y)
+{
+    if (movable)
+    {
+        movable = false;
+        vel_x = _x / 2;
+        vel_y = _y / 2;
+        decrease_vel_x = _x / Ball::friction;
+        decrease_vel_y = _y / Ball::friction;
     }
 }
 
-// Checks if cursor hovers over ball
-bool Ball::checkHover(sf::Vector2f pos) const
+void Ball::update()
 {
-    return bnw::getDistacne(getPosition(), pos) <= getRadius();
-}
-
-void Ball::setSpeed(sf::Vector2f speed)
-{
-    m_vel = speed;
-}
-
-void Ball::update(const std::vector<Wall> &walls)
-{
-    if (m_vel == sf::Vector2f{})
+    if (vel_x == 0.0 && vel_y == 0.0)
     {
         return;
     }
 
-    // changing directions from boundaries
-    // ograniczenia zostana planowane być wzniesione
-    if (getPosition().x + m_vel.x < getRadius() || getPosition().x + m_vel.x > 800 - getRadius())
-    {
-        m_vel.x *= -1;
+    if (x + vel_x < body.getRadius() || x + vel_x >= Ball::board_width - body.getRadius())
+    { // changing directions from boundaries
+        vel_x *= -1;
+        decrease_vel_x *= -1;
     }
-    if (getPosition().y + m_vel.y < getRadius() || getPosition().y + m_vel.y > 700 - getRadius())
+    if (y + vel_y < body.getRadius() || y + vel_y >= Ball::board_height - body.getRadius())
     {
-        m_vel.y *= -1;
+        vel_y *= -1;
+        decrease_vel_y *= -1;
     }
 
-    checkBounce(walls);
+    checkBounce();
 
-    move(m_vel);
+    x += vel_x;
+    y += vel_y;
 
-    m_vel *= m_friction; // lowering speed
+    body.setPosition(sf::Vector2f(x, y));
 
-    if (bnw::getDistacne(m_vel) < 0.2F)
+    vel_x *= Ball::friction; // lowering speed
+    vel_y *= Ball::friction;
+
+    if (std::abs(vel_x) < 0.2 && std::abs(vel_y) < 0.2)
     {
-        m_vel = {};
+        vel_x = vel_y = 0;
+        Ball::movable = true;
     }
 }
