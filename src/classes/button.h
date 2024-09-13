@@ -10,7 +10,7 @@
 class Button
 {
 private:
-    sf::Vector2i m_pos{0, 0};
+    sf::Vector2f m_pos{0, 0};
     sf::RectangleShape m_body{};
     sf::Text m_text{};
     inline static Button *m_active_button{};
