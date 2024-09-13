@@ -10,14 +10,13 @@
 class Button
 {
 private:
-    sf::Window *window;
-    int pos_x = 0, pos_y = 0;
-    sf::RectangleShape body{};
-    sf::Text text{};
-    inline static Button *active_button{};
+    sf::Vector2i m_pos{0, 0};
+    sf::RectangleShape m_body{};
+    sf::Text m_text{};
+    inline static Button *m_active_button{};
 
 public:
-    Button(int _pos_x, int _pos_y, int _size_x, int _size_y, std::string _name);
+    Button(int pos_x, int pos_y, int size_x, int size_y, std::string name);
 
     void setActive();
     static void clearActive();

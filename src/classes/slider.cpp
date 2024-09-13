@@ -1,6 +1,7 @@
 #include "slider.h"
 
-Slider::Slider(int *_reference, std::string _name) : reference{_reference}
+Slider::Slider(int *reference, std::string name)
 {
-    text.setString(_name);
+    m_reference = reference;
+    m_text.setString(name);
 }
