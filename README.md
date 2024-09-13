@@ -13,3 +13,7 @@
  touch and drag a BALL
 
 ## JEdnak nie
+
+## Chciałbym śmeiszne zrobić zobaczymy czy wyjdzie
+
+tak naprawde to nie
