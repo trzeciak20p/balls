@@ -14,7 +14,7 @@ Checks:
 - -readability-identifier-length
 - -readability-magic-numbers
 
-HeaderFilterRegex: 'src/'
+HeaderFilterRegex: 'src/*'
 FormatStyle: 'file'
 
 CheckOptions:

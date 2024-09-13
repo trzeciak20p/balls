@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.28)
-project(BallsWithYourFriends LANGUAGES CXX)
+
+project(BallsWithYourFriends
+    VERSION 0.0.1
+    LANGUAGES CXX
+)
+
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -18,8 +24,6 @@ else()
     find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
 endif()
 
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
     "Debug" "Release" "MinSizeRel" "RelWithDebInfo" "Speed")
 set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
@@ -33,10 +37,8 @@ add_executable(main
     src/classes/game.cpp
 )
 
-# clang warningi
-# target_compile_options(main PRIVATE -Weverything -Wno-padded -Wno-c++98-compat-pedantic)
 set_target_properties(main PROPERTIES CXX_STANDARD 20)
-set_target_properties(main PROPERTIES OUTPUT_NAME baluminc)
+set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 target_include_directories(main PRIVATE src/clasees)
 target_link_libraries(main PRIVATE sfml-graphics)
