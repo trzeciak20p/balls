@@ -6,23 +6,8 @@
 namespace bnw
 { // Balls n' Walls
 
-struct Equation
-{
-    float a;
-    float b;
-    float ang;
-    float getX(float y)
-    {
-        return (y - b) / a;
-    }
-    float getY(float x)
-    {
-        return a * x + b;
-    }
-};
+float getAngle(sf::Vector2f A);
+float getDistacne(sf::Vector2f A);
+float getDistacne(sf::Vector2f A, sf::Vector2f B);
 
-Equation getEquation(sf::Vector2f A, sf::Vector2f B);
-float getEquationAngle(sf::Vector2f A, sf::Vector2f B);
-
-template <typename T> float getDistacne(T x1, T y1, T x2, T y2);
 } // namespace bnw
