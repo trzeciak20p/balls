@@ -13,3 +13,5 @@
  touch and drag a BALL
 
 ## Chciałbym śmeiszne zrobić zobaczymy czy wyjdzie
+
+tak naprawde to nie
