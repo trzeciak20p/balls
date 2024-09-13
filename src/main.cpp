@@ -1,10 +1,17 @@
 #include "classes/ball.h"
-#include "classes/board.h"
 #include "classes/game.h"
+#include "classes/mapLoader.h"
+#include "classes/utils_2d.h"
+#include "classes/wall.h"
+#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Vertex.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cmath>
+#include <iostream>
 
 int main()
 {
@@ -13,31 +20,26 @@ int main()
 
     Game gra(&window);
 
-    Board board("../../src/maps/map1");
-    gra.to_board = &board;
+    Ball::initialize(&window);
+
+    loadMap(1);
 
     while (window.isOpen())
     {
         sf::Event event{};
-
         while (window.pollEvent(event))
         {
-            switch (event.type)
+            if (event.type == sf::Event::Closed)
             {
-            case sf::Event::Closed:
                 window.close();
-                break;
-
-            case sf::Event::MouseButtonPressed:
+            }
+            else if (event.type == sf::Event::MouseButtonPressed)
+            {
                 gra.mousePress();
-                break;
-
-            case sf::Event::MouseButtonReleased:
+            }
+            if (event.type == sf::Event::MouseButtonReleased)
+            {
                 gra.mouseRelease();
-                break;
-
-            default:
-                break;
             }
         }
 
@@ -45,21 +47,21 @@ int main()
 
         switch (gra.getState())
         {
-        case Game::playing:
-            for (const auto &wall : board.m_walls)
+        case Game::Game::State::playing:
+            for (auto &i : walls)
             {
-                window.draw(wall);
+                window.draw(i.body);
             }
 
-            for (auto &ball : board.m_balls)
-            {
-                ball.update(board.m_walls);
-                window.draw(ball);
+            for (auto &i : balls)
+            { // updating positions
+                i.update();
+                window.draw(i.body);
             }
 
             if (gra.calculateTrail())
             {
-                window.draw(gra.getTrial());
+                window.draw(gra.trail, 3, sf::Triangles);
             }
             break;
 
