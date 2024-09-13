@@ -15,5 +15,5 @@
 2. mix everything together
 3. Freeze to 350 °C
 
- ## How to play:
+## How to play:
  touch and drag a BALL
