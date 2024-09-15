@@ -13,7 +13,7 @@ int main()
 
     Game gra(&window);
 
-    Board board("../../src/maps/map1");
+    Board board("maps/map1");
     gra.to_board = &board;
 
     while (window.isOpen())
