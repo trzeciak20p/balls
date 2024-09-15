@@ -9,20 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(WIN32)
-    option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-
-    include(FetchContent)
-    FetchContent_Declare(SFML
-        GIT_REPOSITORY https://github.com/SFML/SFML.git
-        GIT_TAG 2.6.x
-        GIT_SHALLOW ON
-        EXCLUDE_FROM_ALL
-        SYSTEM)
-    FetchContent_MakeAvailable(SFML)
-else()
-    find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
-endif()
+include(cmake/addSFML.cmake)
 
 # basycznie powinno sie używać analizatora ale jeszcze go nie ma wiec jest ściana (wall)
 # target_compile_options(main PRIVATE "-Wall;-Wextra;-Wpedantic;-pedantic-errors;-fanalyzer;-Wshadow;-Wnull-dereference;-Wduplicated-cond;-Wredundant-decls;-Wduplicated-branches;-Wlogical-op;-Wcast-qual;-Wfloat-equal")
@@ -43,9 +30,14 @@ add_executable(main
     src/classes/button.cpp
     src/classes/fontLoader.cpp
 )
-
-set_target_properties(main PROPERTIES CXX_STANDARD 20)
 set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
+target_compile_features(main PRIVATE cxx_std_20)
 target_include_directories(main PRIVATE src/clasees)
 target_link_libraries(main PRIVATE sfml-graphics)
+
+add_custom_command(
+    TARGET main 
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/bin
+    DEPENDS ${CMAKE_SOURCE_DIR}/assets
+)

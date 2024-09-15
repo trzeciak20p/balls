@@ -24,7 +24,7 @@ int main()
     buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
     sliders.push_back(Slider(window.getSize().x / 2, 200, 100, "ziuum"));
 
-    Board board("../../src/maps/map1");
+    Board board("maps/map1");
     gra.to_board = &board;
 
     while (window.isOpen())
