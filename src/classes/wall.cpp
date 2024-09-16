@@ -1,39 +1,42 @@
 #include "wall.h"
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/System/Vector2.hpp>
 
-Wall::Wall(int _x, int _y, int _size_x, int _size_y, Type _type)
-    : x{_x}, y{_y}, size_x{_size_x}, size_y{_size_y}, type{_type}
+Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
+    : sf::RectangleShape{size}, m_type{type}
 {
-    if (type == Type::dmg)
+    switch (type)
     {
-        body.setFillColor(sf::Color(255, 20, 20));
+    case dmg:
+        setFillColor(sf::Color(255, 20, 20));
+        break;
+    case bouncy:
+        setFillColor(sf::Color(235, 40, 255));
+        break;
+    default:
+        setFillColor(sf::Color(125, 125, 125));
+        break;
     }
-    else if (type == Type::bouncy)
-    {
-        body.setFillColor(sf::Color(235, 40, 255));
-    }
-    else
-    {
-        body.setFillColor(sf::Color(125, 125, 125));
-    }
-    body.setPosition(x, y);
-    body.setSize(sf::Vector2f(_size_x, _size_y));
 
-    walls.push_back(*this);
+    setPosition(pos);
 }
 
-int Wall::getTop() const
+float Wall::getTop() const
 {
-    return y;
+    return getPosition().y;
 }
-int Wall::getBottom() const
+
+float Wall::getBottom() const
 {
-    return y + size_y;
+    return getPosition().y + getSize().y;
 }
-int Wall::getLeft() const
+
+float Wall::getLeft() const
 {
-    return x;
+    return getPosition().x;
 }
-int Wall::getRight() const
+
+float Wall::getRight() const
 {
-    return x + size_x;
+    return getPosition().x + getSize().x;
 }
