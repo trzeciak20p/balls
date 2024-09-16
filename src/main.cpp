@@ -1,20 +1,16 @@
 #include "classes/ball.h"
+#include "classes/board.h"
 #include "classes/button.h"
 #include "classes/fontLoader.h"
 #include "classes/game.h"
-#include "classes/mapLoader.h"
 #include "classes/slider.h"
 #include "classes/utils_2d.h"
 #include "classes/wall.h"
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Vertex.hpp>
-#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cmath>
-#include <iostream>
 
 int main()
 {
@@ -22,32 +18,39 @@ int main()
     window.setFramerateLimit(60);
 
     Game gra(&window);
-    Ball::initialize(&window);
-
-    loadMap(1);
     bnw::loadFont("../comic.ttf");
 
     buttons.push_back(Button(5, 5, 200, 100, "AAAA"));
     buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
     sliders.push_back(Slider(window.getSize().x / 2, 200, 100, "ziuum"));
 
+    Board board("../../src/maps/map1");
+    gra.to_board = &board;
+
     while (window.isOpen())
     {
         sf::Event event{};
+
         while (window.pollEvent(event))
         {
             gra.updateMouse();
-            if (event.type == sf::Event::Closed)
+
+            switch (event.type)
             {
+            case sf::Event::Closed:
                 window.close();
-            }
-            else if (event.type == sf::Event::MouseButtonPressed)
-            {
+                break;
+
+            case sf::Event::MouseButtonPressed:
                 gra.mousePress();
-            }
-            if (event.type == sf::Event::MouseButtonReleased)
-            {
+                break;
+
+            case sf::Event::MouseButtonReleased:
                 gra.mouseRelease();
+                break;
+
+            default:
+                break;
             }
         }
 
@@ -56,14 +59,14 @@ int main()
 
         switch (gra.getState())
         {
-        case Game::Game::State::map_selection:
+        case Game::map_selection:
             break;
-        case Game::Game::State::paused:
+        case Game::paused:
             break;
-        case Game::Game::State::menu:
+        case Game::menu:
             for (auto &button : buttons)
             {
-                if (button.checkHover(gra.mouse))
+                if (button.checkHover(gra.m_mouse))
                 {
                     button.setActive();
                 }
@@ -77,14 +80,14 @@ int main()
             }
             for (auto &slider : sliders)
             {
-                if (slider.checkHover(gra.mouse))
+                if (slider.checkHover(gra.m_mouse))
                 {
 
                     slider.onHover();
                 }
                 if (Slider::getActive() != nullptr)
                 {
-                    Slider::getActive()->onUse(gra.mouse.y);
+                    Slider::getActive()->onUse(gra.m_mouse.y);
                 }
 
                 window.draw(slider.getBody());
@@ -93,21 +96,21 @@ int main()
             }
             break;
 
-        case Game::Game::State::playing:
-            for (auto &i : walls)
+        case Game::playing:
+            for (const auto &wall : board.m_walls)
             {
-                window.draw(i.body);
+                window.draw(wall);
             }
 
-            for (auto &i : balls)
-            { // updating positions
-                i.update();
-                window.draw(i.body);
+            for (auto &ball : board.m_balls)
+            {
+                ball.update(board.m_walls);
+                window.draw(ball);
             }
 
             if (gra.calculateTrail())
             {
-                window.draw(gra.trail, 3, sf::Triangles);
+                window.draw(gra.getTrial());
             }
             break;
 

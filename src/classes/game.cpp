@@ -9,153 +9,144 @@
 #include <SFML/Window/Window.hpp>
 #include <cmath>
 #include <iostream>
-#include <string>
+#include <numbers>
 
-Game::Game(sf::Window *_window) : window{_window}, state(State::menu)
+constexpr float pi{std::numbers::pi_v<float>};
+
+Game::Game(sf::Window *window)
+    : m_window{window}
 {
 }
 
 Game::State Game::getState()
 {
-    return state;
-}
-
-void Game::errorReport(const std::string &err)
-{
-    std::cout << err << "\r\n";
+    return m_state;
 }
 
 bool Game::calculateTrail()
 {
-    if (!(dragging && Ball::movable))
+    if (!m_dragging)
     {
         return false;
     }
-    float const distance =
-        sqrt(pow(mouse.x - sf::Mouse::getPosition(*window).x, 2) + pow(mouse.y - sf::Mouse::getPosition(*window).y, 2));
-    float const angle = bnw::getEquationAngle((sf::Vector2f)mouse, (sf::Vector2f)sf::Mouse::getPosition(*window));
-    float const x = cos(angle + M_PI_2) * Ball::active_ball->body.getRadius() / 2;
-    float const y = sin(angle + M_PI_2) * Ball::active_ball->body.getRadius() / 2;
+    const float distance = bnw::getDistacne(sf::Vector2f(m_mouse), sf::Vector2f(sf::Mouse::getPosition(*m_window)));
+    const float angle    = bnw::getAngle(sf::Vector2f(sf::Mouse::getPosition(*m_window) - m_mouse));
+    const float x        = std::cos(angle + pi / 2) * m_active_ball->getRadius() / 2;
+    const float y        = std::sin(angle + pi / 2) * m_active_ball->getRadius() / 2;
 
     if (distance < 200)
     {
-        sf::Color const trail_color((distance <= 100) ? (distance / 100 * 255) : (255),
+        const sf::Color trail_color((distance <= 100) ? (distance / 100 * 255) : (255),
                                     (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
 
-        trail[0] =
-            sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x + x, Ball::active_ball->getPos().y + y), trail_color);
-        trail[1] =
-            sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x - x, Ball::active_ball->getPos().y - y), trail_color);
-        trail[2] = sf::Vertex(
-            sf::Vector2f(2 * (sf::Vector2i)Ball::active_ball->getPos() - sf::Mouse::getPosition(*window)), trail_color);
+        m_trail[0] = {m_active_ball->getPosition() + sf::Vector2f(x, y), trail_color};
+        m_trail[1] = {m_active_ball->getPosition() - sf::Vector2f(x, y), trail_color};
+        m_trail[2] = {m_active_ball->getPosition() * 2.0F - sf::Vector2f(sf::Mouse::getPosition(*m_window)),
+                      trail_color};
 
-        Ball::active_ball->body.setFillColor(trail_color);
+        m_active_ball->setFillColor(trail_color);
     }
     else
-    { // speed velocity cap
-        trail[0] = sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x + x, Ball::active_ball->getPos().y + y),
-                              sf::Color::Red);
-        trail[1] = sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x - x, Ball::active_ball->getPos().y - y),
-                              sf::Color::Red);
-        float const tip_x = cos(angle) * 200;
-        float const tip_y = sin(angle) * 200;
+    {
+        // speed velocity cap
+        m_trail[0] = {m_active_ball->getPosition() + sf::Vector2f(x, y), sf::Color::Red};
+        m_trail[1] = {m_active_ball->getPosition() - sf::Vector2f(x, y), sf::Color::Red};
 
-        std::cout << sf::Mouse::getPosition(*window).x << " " << Ball::active_ball->getPos().x << " " << angle
-                  << " \r\n";
+        const float tip_x = std::cos(angle) * 200;
+        const float tip_y = std::sin(angle) * 200;
 
-        if (sf::Mouse::getPosition(*window).x < Ball::active_ball->getPos().x + 2.5)
+        if (sf::Mouse::getPosition(*m_window).x < m_active_ball->getPosition().x + 2.5F)
         {
-            trail[2] =
-                sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x + tip_x, Ball::active_ball->getPos().y + tip_y),
-                           sf::Color::Red);
+            m_trail[2] = {m_active_ball->getPosition() + sf::Vector2f(tip_x, tip_y), sf::Color::Red};
         }
         else
         {
-            trail[2] =
-                sf::Vertex(sf::Vector2f(Ball::active_ball->getPos().x - tip_x, Ball::active_ball->getPos().y - tip_y),
-                           sf::Color::Red);
+            m_trail[2] = {m_active_ball->getPosition() - sf::Vector2f(tip_x, tip_y), sf::Color::Red};
         }
-        Ball::active_ball->body.setFillColor(sf::Color::Red);
+        m_active_ball->setFillColor(sf::Color::Red);
     }
     return true;
 }
 
 void Game::updateMouse()
 {
-    mouse = sf::Mouse::getPosition(*window);
+    m_mouse = sf::Mouse::getPosition(*m_window);
 }
 
 void Game::mousePress()
 {
-    switch (state)
+    switch (m_state)
     {
-    case Game::State::menu:
+    case menu:
         for (auto &button : buttons)
         {
-            if (button.checkHover(mouse))
+            if (button.checkHover(m_mouse))
             {
                 button.onUse();
             }
         }
         for (auto &slider : sliders)
         {
-            if (slider.checkHover(mouse))
+            if (slider.checkHover(m_mouse))
             {
                 slider.setActive();
             }
         }
         break;
-    case Game::State::map_selection:
-    case Game::State::settings:
+    case map_selection:
+    case settings:
 
         break;
 
-    case Game::State::playing:
-        for (auto &i : balls)
+    case playing:
+        for (auto &i : to_board->m_balls)
         { // checking if hovered over ball
-            if (i.checkHover(mouse.x, mouse.y))
+            if (!i.checkHover(sf::Vector2f(m_mouse)))
             {
-                dragging = true;
-                break;
+                continue;
             }
+            m_active_ball = &i;
+            m_dragging    = true;
+            break;
         }
-
         break;
-    case Game::State::paused:
 
-        break;
     default:
-        errorReport("MOSUE CLICK SWITCH ERROR");
+        std::cerr << "MOSUE CLICK SWITCH ERROR\n";
         break;
     }
 }
 
+const sf::VertexArray &Game::getTrial()
+{
+    return m_trail;
+}
+
 void Game::mouseRelease()
 {
-    switch (state)
+    switch (m_state)
     {
-    case Game::State::menu:
+    case menu:
         Slider::clearActive();
         break;
-    case Game::State::map_selection:
-    case Game::State::settings:
+    case map_selection:
+    case settings:
 
         break;
 
-    case Game::State::playing:
-        if (dragging)
+    case playing:
+        if (!m_dragging)
         {
-            Ball::active_ball->setSpeed((mouse.x - sf::Mouse::getPosition(*window).x) / 3,
-                                        (mouse.y - sf::Mouse::getPosition(*window).y) / 3);
-            Ball::active_ball->body.setFillColor(Ball::active_ball->color);
-            dragging = false;
+            break;
         }
-        break;
-    case Game::State::paused:
 
+        m_active_ball->setSpeed(sf::Vector2f(m_mouse - sf::Mouse::getPosition(*m_window)) / 6.0F);
+        m_active_ball->setFillColor(m_active_ball->m_color);
+        m_dragging = false;
         break;
+
     default:
-        errorReport("MOSUE CLICK SWITCH ERROR");
+        std::cerr << "MOSUE CLICK SWITCH ERROR\n";
         break;
     }
 }
