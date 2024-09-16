@@ -23,16 +23,15 @@ public:
 
     State getState();
     void  mousePress();
+    void  updateMouse();
     void  mouseRelease();
     bool  calculateTrail(); // Calculates trail for drawing
 
     const sf::VertexArray &getTrial();
 
-    void updateMouse();
-    void mousePress();
-    void mouseRelease();
+    sf::Vector2i m_mouse;
+    Board       *to_board{};
 
-    sf::Vector2i    m_mouse;
 private:
     sf::Window     *m_window{};
     bool            m_dragging{};

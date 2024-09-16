@@ -1,7 +1,8 @@
 #include "slider.h"
 #include "fontLoader.h"
 
-Slider::Slider(float pos_x, float pos_y, float size, std::string name) : m_name{name}
+Slider::Slider(float pos_x, float pos_y, float size, std::string name)
+    : m_name{name}
 {
     m_pos = {pos_x, pos_y};
     m_text.setPosition(m_pos);
@@ -21,11 +22,13 @@ void Slider::setActive()
 {
     this->onHover();
     Slider::m_active_slider = this;
-};
+}
+
 Slider *Slider::getActive()
 {
     return m_active_slider;
-};
+}
+
 void Slider::clearActive()
 {
     if (m_active_slider != nullptr)
@@ -33,20 +36,22 @@ void Slider::clearActive()
         Slider::m_active_slider->onHoverRelease();
         Slider::m_active_slider = nullptr;
     }
-};
+}
 
 sf::Text Slider::getText()
 {
     return m_text;
-};
+}
+
 sf::RectangleShape Slider::getBody()
 {
     return m_body;
-};
+}
+
 sf::RectangleShape Slider::getControler()
 {
     return m_controler;
-};
+}
 
 bool Slider::checkHover(sf::Vector2i pos)
 {
@@ -58,7 +63,8 @@ bool Slider::checkHover(sf::Vector2i pos)
         return true;
     }
     return false;
-};
+}
+
 void Slider::onUse(float height)
 {
     m_value = (height - m_body.getPosition().y) / m_body.getSize().y * 100;
@@ -78,14 +84,16 @@ void Slider::onUse(float height)
     }
 
     m_text.setString(m_name + ": " + std::to_string(m_value));
-};
+}
+
 void Slider::onHover()
 {
     m_body.setFillColor(sf::Color::Cyan);
     m_text.setFillColor(sf::Color::Yellow);
-};
+}
+
 void Slider::onHoverRelease()
 {
     m_body.setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
-};
+}
