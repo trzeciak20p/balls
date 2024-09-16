@@ -1,6 +1,7 @@
 #include "game.h"
 #include "ball.h"
 #include "button.h"
+#include "slider.h"
 #include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -89,11 +90,18 @@ void Game::mousePress()
     switch (state)
     {
     case Game::State::menu:
-        for (auto &i : buttons)
+        for (auto &button : buttons)
         {
-            if (i.checkHover(mouse))
+            if (button.checkHover(mouse))
             {
-                i.onUse();
+                button.onUse();
+            }
+        }
+        for (auto &slider : sliders)
+        {
+            if (slider.checkHover(mouse))
+            {
+                slider.setActive();
             }
         }
         break;
@@ -127,6 +135,8 @@ void Game::mouseRelease()
     switch (state)
     {
     case Game::State::menu:
+        Slider::clearActive();
+        break;
     case Game::State::map_selection:
     case Game::State::settings:
 

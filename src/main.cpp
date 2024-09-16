@@ -3,6 +3,7 @@
 #include "classes/fontLoader.h"
 #include "classes/game.h"
 #include "classes/mapLoader.h"
+#include "classes/slider.h"
 #include "classes/utils_2d.h"
 #include "classes/wall.h"
 #include <SFML/Graphics/PrimitiveType.hpp>
@@ -28,6 +29,7 @@ int main()
 
     buttons.push_back(Button(5, 5, 200, 100, "AAAA"));
     buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
+    sliders.push_back(Slider(window.getSize().x / 2, 200, 100, "ziuum"));
 
     while (window.isOpen())
     {
@@ -59,19 +61,35 @@ int main()
         case Game::Game::State::paused:
             break;
         case Game::Game::State::menu:
-            for (auto &i : buttons)
+            for (auto &button : buttons)
             {
-                if (i.checkHover(gra.mouse))
+                if (button.checkHover(gra.mouse))
                 {
-                    i.setActive();
+                    button.setActive();
                 }
-                else if (Button::getActive() != nullptr)
+                else
                 {
                     Button::clearActive();
                 }
 
-                window.draw(i.getBody());
-                window.draw(i.getText());
+                window.draw(button.getBody());
+                window.draw(button.getText());
+            }
+            for (auto &slider : sliders)
+            {
+                if (slider.checkHover(gra.mouse))
+                {
+
+                    slider.onHover();
+                }
+                if (Slider::getActive() != nullptr)
+                {
+                    Slider::getActive()->onUse(gra.mouse.y);
+                }
+
+                window.draw(slider.getBody());
+                window.draw(slider.getControler());
+                window.draw(slider.getText());
             }
             break;
 

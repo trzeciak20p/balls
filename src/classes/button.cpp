@@ -1,12 +1,12 @@
 #include "button.h"
 #include "fontLoader.h"
 
-Button::Button(int pos_x, int pos_y, int size_x, int size_y, std::string name)
+Button::Button(float pos_x, float pos_y, float size_x, float size_y, std::string name)
 {
     m_pos = {pos_x, pos_y};
     m_text.setFont(bnw::font1);
     m_text.setString(name);
-    m_text.setCharacterSize(20);
+    m_text.setCharacterSize(bnw::font1_size);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
     m_text.setPosition(m_pos.x + size_x / 2, m_pos.y + size_y / 2);
     m_body.setPosition(m_pos.x, m_pos.y);

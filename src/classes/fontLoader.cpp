@@ -2,7 +2,9 @@
 
 namespace bnw
 {
+// klasa z tego miałaby sens
 sf::Font font1{};
+int font1_size = 20;
 void loadFont(std::string path)
 {
     if (!font1.loadFromFile(path))
