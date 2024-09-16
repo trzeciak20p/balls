@@ -1,5 +1,7 @@
 #include "game.h"
 #include "ball.h"
+#include "button.h"
+#include "slider.h"
 #include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -66,21 +68,39 @@ bool Game::calculateTrail()
     return true;
 }
 
+void Game::updateMouse()
+{
+    m_mouse = sf::Mouse::getPosition(*m_window);
+}
+
 void Game::mousePress()
 {
     switch (m_state)
     {
     case menu:
+        for (auto &button : buttons)
+        {
+            if (button.checkHover(m_mouse))
+            {
+                button.onUse();
+            }
+        }
+        for (auto &slider : sliders)
+        {
+            if (slider.checkHover(m_mouse))
+            {
+                slider.setActive();
+            }
+        }
+        break;
     case map_selection:
     case settings:
-    case paused:
+
         break;
 
     case playing:
-        m_mouse = sf::Mouse::getPosition(*m_window);
         for (auto &i : to_board->m_balls)
-        {
-            // checking if hovered over ball
+        { // checking if hovered over ball
             if (!i.checkHover(sf::Vector2f(m_mouse)))
             {
                 continue;
@@ -107,9 +127,11 @@ void Game::mouseRelease()
     switch (m_state)
     {
     case menu:
+        Slider::clearActive();
+        break;
     case map_selection:
     case settings:
-    case paused:
+
         break;
 
     case playing:

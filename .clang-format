@@ -5,8 +5,6 @@ AlignConsecutiveAssignments: AcrossComments
 AlignConsecutiveDeclarations: AcrossComments
 AlwaysBreakTemplateDeclarations: Yes
 # BreakTemplateDeclarations: Yes
-InsertBraces: true
-InsertNewlineAtEOF: true
 IntegerLiteralSeparator:
   Binary: 8
   Decimal: 3

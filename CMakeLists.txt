@@ -24,6 +24,9 @@ else()
     find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
 endif()
 
+# basycznie powinno sie używać analizatora ale jeszcze go nie ma wiec jest ściana (wall)
+# target_compile_options(main PRIVATE "-Wall;-Wextra;-Wpedantic;-pedantic-errors;-fanalyzer;-Wshadow;-Wnull-dereference;-Wduplicated-cond;-Wredundant-decls;-Wduplicated-branches;-Wlogical-op;-Wcast-qual;-Wfloat-equal")
+# target_compile_options(main PRIVATE "-Weverything;-Wno-c++98-compat")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
     "Debug" "Release" "MinSizeRel" "RelWithDebInfo" "Speed")
 set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
@@ -35,6 +38,10 @@ add_executable(main
     src/classes/wall.cpp
     src/classes/utils_2d.cpp
     src/classes/game.cpp
+    src/classes/slider.cpp
+    src/classes/button.cpp
+    src/classes/button.cpp
+    src/classes/fontLoader.cpp
 )
 
 set_target_properties(main PROPERTIES CXX_STANDARD 20)
