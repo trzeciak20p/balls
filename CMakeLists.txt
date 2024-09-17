@@ -11,9 +11,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(cmake/addSFML.cmake)
 
-# basycznie powinno sie używać analizatora ale jeszcze go nie ma wiec jest ściana (wall)
-# target_compile_options(main PRIVATE "-Wall;-Wextra;-Wpedantic;-pedantic-errors;-fanalyzer;-Wshadow;-Wnull-dereference;-Wduplicated-cond;-Wredundant-decls;-Wduplicated-branches;-Wlogical-op;-Wcast-qual;-Wfloat-equal")
-# target_compile_options(main PRIVATE "-Weverything;-Wno-c++98-compat")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
     "Debug" "Release" "MinSizeRel" "RelWithDebInfo" "Speed")
 set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
@@ -26,7 +23,6 @@ add_executable(main
     src/classes/utils_2d.cpp
     src/classes/game.cpp
     src/classes/slider.cpp
-    src/classes/button.cpp
     src/classes/button.cpp
     src/classes/fontLoader.cpp
 )

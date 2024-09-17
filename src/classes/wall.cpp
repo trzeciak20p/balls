@@ -5,6 +5,8 @@
 Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
     : sf::RectangleShape{size}, m_type{type}
 {
+    setPosition(pos);
+
     switch (type)
     {
     case dmg:
@@ -17,8 +19,6 @@ Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
         setFillColor(sf::Color(125, 125, 125));
         break;
     }
-
-    setPosition(pos);
 }
 
 float Wall::getTop() const

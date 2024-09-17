@@ -1,66 +1,65 @@
 #include "button.h"
 #include "fontLoader.h"
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <cstdio>
+#include <string>
 
-Button::Button(float pos_x, float pos_y, float size_x, float size_y, std::string name)
+Button::Button(sf::Vector2f pos, sf::Vector2f size, const std::string &name)
+    : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
 {
-    m_pos = {pos_x, pos_y};
-    m_text.setFont(bnw::font1);
-    m_text.setString(name);
-    m_text.setCharacterSize(bnw::font1_size);
+    setPosition(pos);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
-    m_text.setPosition(m_pos.x + size_x / 2, m_pos.y + size_y / 2);
-    m_body.setPosition(m_pos.x, m_pos.y);
-    m_body.setSize(sf::Vector2f(size_x, size_y));
-    this->onHoverRelease(); // sets default colors for text and body
+    m_text.setPosition(pos.x + size.x / 2, pos.y + size.y / 2);
+    onHoverRelease(); // sets default colors for text and body
 }
 
 void Button::setActive()
 {
-    this->onHover();
-    Button::m_active_button = this;
-};
+    onHover();
+    m_active_button = this;
+}
+
 Button *Button::getActive()
 {
     return m_active_button;
-};
+}
+
 void Button::clearActive()
 {
-    if (m_active_button != nullptr)
+    if (m_active_button == nullptr)
     {
-        Button::m_active_button->onHoverRelease();
-        Button::m_active_button = nullptr;
+        return;
     }
-};
+
+    m_active_button->onHoverRelease();
+    m_active_button = nullptr;
+}
 
 sf::Text Button::getText()
 {
     return m_text;
-};
-sf::RectangleShape Button::getBody()
-{
-    return m_body;
-};
+}
 
-bool Button::checkHover(sf::Vector2i pos)
+bool Button::checkHover(sf::Vector2f pos)
 {
-    if (pos.x >= m_body.getPosition().x && pos.x <= m_body.getPosition().x + m_body.getSize().x &&
-        pos.y >= m_body.getPosition().y && pos.y <= m_body.getPosition().y + m_body.getSize().y)
-    {
-        return true;
-    }
-    return false;
-};
+    return pos.x >= getPosition().x && pos.x <= getPosition().x + getSize().x && pos.y >= getPosition().y &&
+           pos.y <= getPosition().y + getSize().y;
+}
+
 void Button::onUse()
 {
-    std::fprintf(stderr, "clicked  :D \r\n");
-};
+}
+
 void Button::onHover()
 {
-    m_body.setFillColor(sf::Color::Cyan);
+    setFillColor(sf::Color::Cyan);
     m_text.setFillColor(sf::Color::Yellow);
-};
+}
+
 void Button::onHoverRelease()
 {
-    m_body.setFillColor(sf::Color::Black);
+    setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
-};
+}

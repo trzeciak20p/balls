@@ -80,14 +80,14 @@ void Game::mousePress()
     case menu:
         for (auto &button : buttons)
         {
-            if (button.checkHover(m_mouse))
+            if (button.checkHover(sf::Vector2f(m_mouse)))
             {
                 button.onUse();
             }
         }
         for (auto &slider : sliders)
         {
-            if (slider.checkHover(m_mouse))
+            if (slider.checkHover(sf::Vector2f(m_mouse)))
             {
                 slider.setActive();
             }

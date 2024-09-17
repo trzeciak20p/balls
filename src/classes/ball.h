@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-class Ball final : public sf::CircleShape
+class Ball : public sf::CircleShape
 {
 public:
     Ball(sf::Vector2f pos, float radius, sf::Color color = sf::Color::White);

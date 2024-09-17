@@ -9,6 +9,7 @@ IntegerLiteralSeparator:
   Binary: 8
   Decimal: 3
   Hex: 4
+InsertBraces: true
 PackConstructorInitializers: NextLineOnly
 QualifierAlignment: Left
 RemoveParentheses: ReturnStatement

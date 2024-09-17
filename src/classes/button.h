@@ -7,29 +7,26 @@
 #include <string>
 #include <vector>
 
-class Button
+class Button : public sf::RectangleShape
 {
-private:
-    inline static Button *m_active_button = nullptr;
-
-    sf::Vector2f m_pos{0, 0};
-    sf::RectangleShape m_body{};
-    sf::Text m_text{};
-
 public:
-    Button(float pos_x, float pos_y, float size_x, float size_y, std::string name);
+    Button(sf::Vector2f pos, sf::Vector2f size, const std::string &name);
 
-    void setActive();
-    static void clearActive();
+    void           setActive();
+    static void    clearActive();
     static Button *getActive();
 
     sf::Text getText();
-    sf::RectangleShape getBody();
 
     void onUse();
     void onHover();
     void onHoverRelease();
-    bool checkHover(sf::Vector2i pos);
+    bool checkHover(sf::Vector2f pos);
+
+private:
+    static inline Button *m_active_button{};
+
+    sf::Text m_text;
 };
 
 inline std::vector<Button> buttons; // Vector for storing every class instance

@@ -4,9 +4,6 @@
 #include "classes/fontLoader.h"
 #include "classes/game.h"
 #include "classes/slider.h"
-#include "classes/utils_2d.h"
-#include "classes/wall.h"
-#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/WindowStyle.hpp>
@@ -18,15 +15,12 @@ int main()
     window.setFramerateLimit(60);
 
     Game gra(&window);
-    bnw::loadFont("../comic.ttf");
+    bnw::loadFont("fonts/comic.ttf");
 
-<<<<<<< HEAD
-    buttons.push_back(Button(5, 5, 200, 100, "AAAA"));
-    buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
-    sliders.push_back(Slider(window.getSize().x / 2, 200, 100, "ziuum"));
+    buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
+    buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
+    sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
 
-=======
->>>>>>> afbe8410a6bad99a02978c60217a6e75e9dadf2b
     Board board("maps/map1");
     gra.to_board = &board;
 
@@ -63,13 +57,12 @@ int main()
         switch (gra.getState())
         {
         case Game::map_selection:
-            break;
         case Game::paused:
             break;
         case Game::menu:
             for (auto &button : buttons)
             {
-                if (button.checkHover(gra.m_mouse))
+                if (button.checkHover(sf::Vector2f(gra.m_mouse)))
                 {
                     button.setActive();
                 }
@@ -78,12 +71,12 @@ int main()
                     Button::clearActive();
                 }
 
-                window.draw(button.getBody());
+                window.draw(button);
                 window.draw(button.getText());
             }
             for (auto &slider : sliders)
             {
-                if (slider.checkHover(gra.m_mouse))
+                if (slider.checkHover(sf::Vector2f(gra.m_mouse)))
                 {
 
                     slider.onHover();
@@ -93,7 +86,7 @@ int main()
                     Slider::getActive()->onUse(gra.m_mouse.y);
                 }
 
-                window.draw(slider.getBody());
+                window.draw(slider);
                 window.draw(slider.getControler());
                 window.draw(slider.getText());
             }

@@ -28,4 +28,4 @@ CheckOptions:
 - { key: readability-identifier-naming.TypeAliasCase, value: CamelCase }
 - { key: readability-identifier-naming.TemplateParameterCase, value: CamelCase }
 - { key: readability-identifier-naming.PrivateMemberPrefix, value: m_ }
-# - { key: readability-identifier-naming.NamespaceCase, value: ??? moze lower_case }
+- { key: readability-identifier-naming.NamespaceCase, value: lower_case }
