@@ -37,6 +37,6 @@ private:
     sf::Window     *m_window{};
     bool            m_dragging{};
     Ball           *m_active_ball{};
-    State           m_state{playing};
+    State           m_state{menu};
     sf::VertexArray m_trail{sf::Triangles, 3};
 };

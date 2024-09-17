@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <string>
 
@@ -14,13 +15,10 @@ public:
     static void    clearActive();
     static Slider *getActive();
 
-    sf::Text           getText();
-    sf::RectangleShape getControler();
-
-    // void update(float value);
+    void draw(sf::RenderWindow *window);
     void onUse(float height);
-    void onHover();
-    void onHoverRelease();
+    void colorActive();
+    void colorDefault();
     bool checkHover(sf::Vector2f pos);
 
 private:

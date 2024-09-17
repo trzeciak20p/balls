@@ -70,8 +70,7 @@ int main()
                     Button::clearActive();
                 }
 
-                window.draw(button);
-                window.draw(button.getText());
+                button.draw(&window);
             }
             for (auto &slider : sliders)
             {
@@ -80,9 +79,7 @@ int main()
                     Slider::getActive()->onUse(gra.getMouse().y);
                 }
 
-                window.draw(slider);
-                window.draw(slider.getControler());
-                window.draw(slider.getText());
+                slider.draw(&window);
             }
             break;
 
