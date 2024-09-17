@@ -24,18 +24,19 @@ public:
     State getState();
     void  mousePress();
     void  updateMouse();
-    void  mouseRelease();
     bool  calculateTrail(); // Calculates trail for drawing
+    void  mouseRelease();
 
+    sf::Vector2f           getMouse();
     const sf::VertexArray &getTrial();
 
-    sf::Vector2i m_mouse;
+    sf::Vector2f m_mouse;
     Board       *to_board{};
 
 private:
     sf::Window     *m_window{};
     bool            m_dragging{};
     Ball           *m_active_ball{};
-    State           m_state{menu};
+    State           m_state{playing};
     sf::VertexArray m_trail{sf::Triangles, 3};
 };

@@ -12,8 +12,7 @@ float getAngle(sf::Vector2f A)
 
 float getDistacne(sf::Vector2f A, sf::Vector2f B)
 {
-    auto diff = A - B;
-    return std::sqrt(diff.x * diff.x + diff.y * diff.y);
+    return getDistacne(A - B);
 }
 
 float getDistacne(sf::Vector2f A)

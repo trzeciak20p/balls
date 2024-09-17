@@ -30,8 +30,6 @@ int main()
 
         while (window.pollEvent(event))
         {
-            gra.updateMouse();
-
             switch (event.type)
             {
             case sf::Event::Closed:
@@ -62,7 +60,7 @@ int main()
         case Game::menu:
             for (auto &button : buttons)
             {
-                if (button.checkHover(sf::Vector2f(gra.m_mouse)))
+                if (button.checkHover(gra.getMouse()))
                 {
                     button.setActive();
                 }
@@ -76,14 +74,13 @@ int main()
             }
             for (auto &slider : sliders)
             {
-                if (slider.checkHover(sf::Vector2f(gra.m_mouse)))
+                if (slider.checkHover(gra.getMouse()))
                 {
-
                     slider.onHover();
                 }
                 if (Slider::getActive() != nullptr)
                 {
-                    Slider::getActive()->onUse(gra.m_mouse.y);
+                    Slider::getActive()->onUse(gra.getMouse().y);
                 }
 
                 window.draw(slider);

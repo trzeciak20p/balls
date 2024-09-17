@@ -29,8 +29,8 @@ bool Game::calculateTrail()
     {
         return false;
     }
-    const float distance = bnw::getDistacne(sf::Vector2f(m_mouse), sf::Vector2f(sf::Mouse::getPosition(*m_window)));
-    const float angle    = bnw::getAngle(sf::Vector2f(sf::Mouse::getPosition(*m_window) - m_mouse));
+    const float distance = bnw::getDistacne(m_mouse, getMouse());
+    const float angle    = bnw::getAngle(getMouse() - m_mouse);
     const float x        = std::cos(angle + pi / 2) * m_active_ball->getRadius() / 2;
     const float y        = std::sin(angle + pi / 2) * m_active_ball->getRadius() / 2;
 
@@ -41,8 +41,7 @@ bool Game::calculateTrail()
 
         m_trail[0] = {m_active_ball->getPosition() + sf::Vector2f(x, y), trail_color};
         m_trail[1] = {m_active_ball->getPosition() - sf::Vector2f(x, y), trail_color};
-        m_trail[2] = {m_active_ball->getPosition() * 2.0F - sf::Vector2f(sf::Mouse::getPosition(*m_window)),
-                      trail_color};
+        m_trail[2] = {m_active_ball->getPosition() * 2.0F - getMouse(), trail_color};
 
         m_active_ball->setFillColor(trail_color);
     }
@@ -55,7 +54,7 @@ bool Game::calculateTrail()
         const float tip_x = std::cos(angle) * 200;
         const float tip_y = std::sin(angle) * 200;
 
-        if (sf::Mouse::getPosition(*m_window).x < m_active_ball->getPosition().x + 2.5F)
+        if (getMouse().x < m_active_ball->getPosition().x + 2.5F)
         {
             m_trail[2] = {m_active_ball->getPosition() + sf::Vector2f(tip_x, tip_y), sf::Color::Red};
         }
@@ -70,24 +69,31 @@ bool Game::calculateTrail()
 
 void Game::updateMouse()
 {
-    m_mouse = sf::Mouse::getPosition(*m_window);
+    m_mouse = getMouse();
+}
+
+sf::Vector2f Game::getMouse()
+{
+    return sf::Vector2f(sf::Mouse::getPosition(*m_window));
 }
 
 void Game::mousePress()
 {
+    updateMouse();
+
     switch (m_state)
     {
     case menu:
         for (auto &button : buttons)
         {
-            if (button.checkHover(sf::Vector2f(m_mouse)))
+            if (button.checkHover(m_mouse))
             {
                 button.onUse();
             }
         }
         for (auto &slider : sliders)
         {
-            if (slider.checkHover(sf::Vector2f(m_mouse)))
+            if (slider.checkHover(m_mouse))
             {
                 slider.setActive();
             }
@@ -101,7 +107,7 @@ void Game::mousePress()
     case playing:
         for (auto &i : to_board->m_balls)
         { // checking if hovered over ball
-            if (!i.checkHover(sf::Vector2f(m_mouse)))
+            if (!i.checkHover(m_mouse))
             {
                 continue;
             }
@@ -140,7 +146,7 @@ void Game::mouseRelease()
             break;
         }
 
-        m_active_ball->setSpeed(sf::Vector2f(m_mouse - sf::Mouse::getPosition(*m_window)) / 6.0F);
+        m_active_ball->setSpeed((m_mouse - getMouse()) / 6.0F);
         m_active_ball->setFillColor(m_active_ball->m_color);
         m_dragging = false;
         break;
