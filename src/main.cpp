@@ -20,6 +20,7 @@ int main()
     buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
     buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
     sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
+    sliders.emplace_back(sf::Vector2f(window.getSize().x / 3 * 2, 200), 100, "ziuum");
 
     Board board("maps/map1");
     gra.to_board = &board;
@@ -74,10 +75,6 @@ int main()
             }
             for (auto &slider : sliders)
             {
-                if (slider.checkHover(gra.getMouse()))
-                {
-                    slider.onHover();
-                }
                 if (Slider::getActive() != nullptr)
                 {
                     Slider::getActive()->onUse(gra.getMouse().y);

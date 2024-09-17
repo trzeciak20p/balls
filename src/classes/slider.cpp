@@ -18,6 +18,7 @@ Slider::Slider(sf::Vector2f pos, float size, const std::string &name)
     m_controler.setOrigin(m_controler.getSize().x / 2, m_controler.getSize().y / 2);
 
     onUse(pos.y);
+    onHoverRelease();
 }
 
 void Slider::setActive()
@@ -62,6 +63,7 @@ bool Slider::checkHover(sf::Vector2f pos)
 
 void Slider::onUse(float height)
 {
+    onHover();
     m_value = (height - getPosition().y) / getSize().y * 100;
     if (m_value <= 0)
     {
