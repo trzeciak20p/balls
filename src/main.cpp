@@ -20,10 +20,13 @@ int main()
     Game gra(&window);
     bnw::loadFont("../comic.ttf");
 
+<<<<<<< HEAD
     buttons.push_back(Button(5, 5, 200, 100, "AAAA"));
     buttons.push_back(Button(400, 400, 200, 100, "bbbb"));
     sliders.push_back(Slider(window.getSize().x / 2, 200, 100, "ziuum"));
 
+=======
+>>>>>>> afbe8410a6bad99a02978c60217a6e75e9dadf2b
     Board board("maps/map1");
     gra.to_board = &board;
 

@@ -52,13 +52,15 @@ void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
 
 void Ball::sideCheck(const Wall &wall, sf::Vector2f new_pos)
 {
-    if ((new_pos.x + getRadius() > wall.getLeft() || new_pos.x - getRadius() > wall.getRight()) &&
-        (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom()))
+    if (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom() &&
+        ((new_pos.x + getRadius() > wall.getLeft() && new_pos.x < wall.getRight()) ||
+         (new_pos.x - getRadius() < wall.getRight() && new_pos.x > wall.getLeft())))
     {
         m_vel.x *= -1;
     }
-    if ((new_pos.y + getRadius() > wall.getTop() || new_pos.y - getRadius() > wall.getBottom()) &&
-        (new_pos.x >= wall.getLeft() && new_pos.x <= wall.getRight()))
+    if (new_pos.x >= wall.getLeft() && new_pos.x <= wall.getRight() &&
+        (new_pos.y + getRadius() > wall.getTop() && new_pos.y < wall.getBottom() ||
+         (new_pos.y - getRadius() < wall.getBottom() && new_pos.y > wall.getTop())))
     {
         m_vel.y *= -1;
     }
