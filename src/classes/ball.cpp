@@ -23,7 +23,7 @@ Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
 // Ball::~Ball() = default;
 // make some exsplosion effect
 
-void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
+void Ball::cornerCheck(bool distance, float angle, const Wall& wall)
 {
     if (angle >= 0)
     {
@@ -50,7 +50,7 @@ void Ball::cornerCheck(bool distance, float angle, const Wall &wall)
     }
 }
 
-void Ball::sideCheck(const Wall &wall, sf::Vector2f new_pos)
+void Ball::sideCheck(const Wall& wall, sf::Vector2f new_pos)
 {
     if (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom() &&
         ((new_pos.x + getRadius() > wall.getLeft() && new_pos.x < wall.getRight()) ||
@@ -66,9 +66,9 @@ void Ball::sideCheck(const Wall &wall, sf::Vector2f new_pos)
     }
 }
 
-void Ball::checkBounce(const std::vector<Wall> &walls)
+void Ball::checkBounce(const std::vector<Wall>& walls)
 {
-    for (const auto &wall : walls)
+    for (const auto& wall : walls)
     {
         const auto  new_pos = getPosition() + m_vel;
         const float angle   = bnw::getAngle(new_pos);
@@ -96,7 +96,7 @@ void Ball::setSpeed(sf::Vector2f speed)
     m_vel = speed;
 }
 
-void Ball::update(const std::vector<Wall> &walls)
+void Ball::update(const std::vector<Wall>& walls)
 {
     if (m_vel == sf::Vector2f{})
     {

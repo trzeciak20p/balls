@@ -8,11 +8,11 @@
 class Slider : public sf::RectangleShape
 {
 public:
-    Slider(sf::Vector2f pos, float size, const std::string &name);
+    Slider(sf::Vector2f pos, float size, const std::string& name);
 
     void           setActive();
     static void    clearActive();
-    static Slider *getActive();
+    static Slider* getActive();
 
     sf::Text           getText();
     sf::RectangleShape getControler();
@@ -24,7 +24,7 @@ public:
     bool checkHover(sf::Vector2f pos);
 
 private:
-    inline static Slider *m_active_slider{};
+    inline static Slider* m_active_slider{};
 
     int                m_value{};
     int                m_size{};

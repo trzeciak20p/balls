@@ -10,11 +10,11 @@
 class Button : public sf::RectangleShape
 {
 public:
-    Button(sf::Vector2f pos, sf::Vector2f size, const std::string &name);
+    Button(sf::Vector2f pos, sf::Vector2f size, const std::string& name);
 
     void           setActive();
     static void    clearActive();
-    static Button *getActive();
+    static Button* getActive();
 
     sf::Text getText();
 
@@ -24,7 +24,7 @@ public:
     bool checkHover(sf::Vector2f pos);
 
 private:
-    static inline Button *m_active_button{};
+    static inline Button* m_active_button{};
 
     sf::Text m_text;
 };

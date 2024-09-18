@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
-project(BallsWithYourFriends
+project(FriendssWithYourBall
     VERSION 0.0.1
     LANGUAGES CXX
 )
@@ -34,6 +34,6 @@ target_link_libraries(main PRIVATE sfml-graphics)
 
 add_custom_command(
     TARGET main 
-    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/bin
+    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/assets ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     DEPENDS ${CMAKE_SOURCE_DIR}/assets
 )

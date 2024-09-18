@@ -7,7 +7,7 @@ namespace bnw
 {
 // klasa z tego miałaby sans
 
-void loadFont(const std::string &path)
+void loadFont(const std::string& path)
 {
     if (!font1.loadFromFile(path))
     {

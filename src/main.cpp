@@ -51,7 +51,7 @@ int main()
         }
 
         // Rendering
-        window.clear(sf::Color(102, 102, 102));
+        window.clear({102, 102, 102});
 
         switch (gra.getState())
         {

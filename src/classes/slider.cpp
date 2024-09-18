@@ -5,7 +5,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <string>
 
-Slider::Slider(sf::Vector2f pos, float size, const std::string &name)
+Slider::Slider(sf::Vector2f pos, float size, const std::string& name)
     : RectangleShape{{5.F, size}}, m_name{name}, m_text{name + ": ", bnw::font1, bnw::font1_size}
 {
     setPosition(pos.x, pos.y + m_text.getLocalBounds().height + 10);
@@ -27,7 +27,7 @@ void Slider::setActive()
     Slider::m_active_slider = this;
 }
 
-Slider *Slider::getActive()
+Slider* Slider::getActive()
 {
     return m_active_slider;
 }

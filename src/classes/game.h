@@ -19,7 +19,7 @@ public:
         map_selection
     };
 
-    explicit Game(sf::Window *window);
+    explicit Game(sf::Window* window);
 
     State getState();
     void  mousePress();
@@ -28,15 +28,15 @@ public:
     void  mouseRelease();
 
     sf::Vector2f           getMouse();
-    const sf::VertexArray &getTrial();
+    const sf::VertexArray& getTrial();
 
     sf::Vector2f m_mouse;
-    Board       *to_board{};
+    Board*       to_board{};
 
 private:
-    sf::Window     *m_window{};
+    sf::Window*     m_window{};
     bool            m_dragging{};
-    Ball           *m_active_ball{};
+    Ball*           m_active_ball{};
     State           m_state{playing};
     sf::VertexArray m_trail{sf::Triangles, 3};
 };

@@ -10,13 +10,13 @@ Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
     switch (type)
     {
     case dmg:
-        setFillColor(sf::Color(255, 20, 20));
+        setFillColor({255, 20, 20});
         break;
     case bouncy:
-        setFillColor(sf::Color(235, 40, 255));
+        setFillColor({235, 40, 255});
         break;
     default:
-        setFillColor(sf::Color(125, 125, 125));
+        setFillColor({125, 125, 125});
         break;
     }
 }

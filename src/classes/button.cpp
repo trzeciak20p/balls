@@ -6,7 +6,7 @@
 #include <cstdio>
 #include <string>
 
-Button::Button(sf::Vector2f pos, sf::Vector2f size, const std::string &name)
+Button::Button(sf::Vector2f pos, sf::Vector2f size, const std::string& name)
     : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
 {
     setPosition(pos);
@@ -21,7 +21,7 @@ void Button::setActive()
     m_active_button = this;
 }
 
-Button *Button::getActive()
+Button* Button::getActive()
 {
     return m_active_button;
 }

@@ -7,7 +7,7 @@
 class Board
 {
 public:
-    explicit Board(const std::string &path);
+    explicit Board(const std::string& path);
 
     // const std::vector<Wall>& getWalls()
     // {

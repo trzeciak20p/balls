@@ -9,7 +9,7 @@
 #include <iterator>
 #include <string>
 
-sf::Color makeColor(std::ifstream &file)
+sf::Color makeColor(std::ifstream& file)
 {
     std::string str{};
     file >> str;
@@ -29,7 +29,7 @@ sf::Color makeColor(std::ifstream &file)
     return {static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b)};
 }
 
-Ball makeBall(std::ifstream &file)
+Ball makeBall(std::ifstream& file)
 {
     float x{};
     file >> x;
@@ -41,7 +41,7 @@ Ball makeBall(std::ifstream &file)
     return {{x, y}, r, makeColor(file)};
 }
 
-Wall makeWall(std::ifstream &file)
+Wall makeWall(std::ifstream& file)
 {
     float x{};
     file >> x;
@@ -58,7 +58,7 @@ Wall makeWall(std::ifstream &file)
     return {{x, y}, {x_size, y_size}, type};
 }
 
-Board::Board(const std::string &path)
+Board::Board(const std::string& path)
 {
     std::ifstream file(path);
     if (!file.is_open())
@@ -70,7 +70,7 @@ Board::Board(const std::string &path)
     file >> m_width;
     file >> m_height;
 
-    char obj = 0;
+    char obj{};
     while (file >> obj)
     {
         if (obj == 'b')

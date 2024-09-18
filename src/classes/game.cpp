@@ -13,7 +13,7 @@
 
 constexpr float pi{std::numbers::pi_v<float>};
 
-Game::Game(sf::Window *window)
+Game::Game(sf::Window* window)
     : m_window{window}
 {
 }
@@ -84,14 +84,14 @@ void Game::mousePress()
     switch (m_state)
     {
     case menu:
-        for (auto &button : buttons)
+        for (auto& button : buttons)
         {
             if (button.checkHover(m_mouse))
             {
                 button.onUse();
             }
         }
-        for (auto &slider : sliders)
+        for (auto& slider : sliders)
         {
             if (slider.checkHover(m_mouse))
             {
@@ -105,7 +105,7 @@ void Game::mousePress()
         break;
 
     case playing:
-        for (auto &i : to_board->m_balls)
+        for (auto& i : to_board->m_balls)
         { // checking if hovered over ball
             if (!i.checkHover(m_mouse))
             {
@@ -123,7 +123,7 @@ void Game::mousePress()
     }
 }
 
-const sf::VertexArray &Game::getTrial()
+const sf::VertexArray& Game::getTrial()
 {
     return m_trail;
 }
