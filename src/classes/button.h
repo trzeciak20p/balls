@@ -16,11 +16,10 @@ public:
     static void    clearActive();
     static Button* getActive();
 
-    sf::Text getText();
-
+    void draw(sf::RenderWindow *window);
     void onUse();
-    void onHover();
-    void onHoverRelease();
+    void colorDefault();
+    void colorActive();
     bool checkHover(sf::Vector2f pos);
 
 private:

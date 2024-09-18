@@ -18,12 +18,12 @@ Slider::Slider(sf::Vector2f pos, float size, const std::string& name)
     m_controler.setOrigin(m_controler.getSize().x / 2, m_controler.getSize().y / 2);
 
     onUse(pos.y);
-    onHoverRelease();
+    colorDefault();
 }
 
 void Slider::setActive()
 {
-    onHover();
+    colorActive();
     Slider::m_active_slider = this;
 }
 
@@ -39,18 +39,8 @@ void Slider::clearActive()
         return;
     }
 
-    Slider::m_active_slider->onHoverRelease();
+    Slider::m_active_slider->colorDefault();
     Slider::m_active_slider = nullptr;
-}
-
-sf::Text Slider::getText()
-{
-    return m_text;
-}
-
-sf::RectangleShape Slider::getControler()
-{
-    return m_controler;
 }
 
 bool Slider::checkHover(sf::Vector2f pos)
@@ -61,9 +51,16 @@ bool Slider::checkHover(sf::Vector2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
+void Slider::draw(sf::RenderWindow *window)
+{
+    window->draw(*this);
+    window->draw(m_text);
+    window->draw(m_controler);
+}
+
 void Slider::onUse(float height)
 {
-    onHover();
+    colorActive();
     m_value = (height - getPosition().y) / getSize().y * 100;
     if (m_value <= 0)
     {
@@ -83,13 +80,13 @@ void Slider::onUse(float height)
     m_text.setString(m_name + ": " + std::to_string(m_value));
 }
 
-void Slider::onHover()
+void Slider::colorActive()
 {
     setFillColor(sf::Color::Cyan);
     m_text.setFillColor(sf::Color::Yellow);
 }
 
-void Slider::onHoverRelease()
+void Slider::colorDefault()
 {
     setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);

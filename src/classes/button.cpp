@@ -12,12 +12,12 @@ Button::Button(sf::Vector2f pos, sf::Vector2f size, const std::string& name)
     setPosition(pos);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
     m_text.setPosition(pos.x + size.x / 2, pos.y + size.y / 2);
-    onHoverRelease(); // sets default colors for text and body
+    colorDefault(); // sets default colors for text and body
 }
 
 void Button::setActive()
 {
-    onHover();
+    colorActive();
     m_active_button = this;
 }
 
@@ -33,13 +33,8 @@ void Button::clearActive()
         return;
     }
 
-    m_active_button->onHoverRelease();
+    m_active_button->colorDefault();
     m_active_button = nullptr;
-}
-
-sf::Text Button::getText()
-{
-    return m_text;
 }
 
 bool Button::checkHover(sf::Vector2f pos)
@@ -48,17 +43,23 @@ bool Button::checkHover(sf::Vector2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
+void Button::draw(sf::RenderWindow *window)
+{
+    window->draw(*this);
+    window->draw(m_text);
+}
+
 void Button::onUse()
 {
 }
 
-void Button::onHover()
+void Button::colorActive()
 {
     setFillColor(sf::Color::Cyan);
     m_text.setFillColor(sf::Color::Yellow);
 }
 
-void Button::onHoverRelease()
+void Button::colorDefault()
 {
     setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
