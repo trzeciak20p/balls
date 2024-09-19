@@ -90,20 +90,7 @@ void Game::mousePress()
     switch (m_state)
     {
     case menu:
-        for (auto& button : buttons)
-        {
-            if (button.checkHover(m_mouse))
-            {
-                button.onUse();
-            }
-        }
-        for (auto& slider : sliders)
-        {
-            if (slider.checkHover(m_mouse))
-            {
-                slider.setActive();
-            }
-        }
+        to_ui->mousePress(m_mouse);
         break;
     case map_selection:
     case settings:
@@ -111,13 +98,13 @@ void Game::mousePress()
         break;
 
     case playing:
-        for (auto& i : to_board->m_balls)
-        { // checking if hovered over ball
-            if (!i.checkHover(m_mouse))
+        for (auto& ball : to_board->m_balls)
+        {
+            if (!ball.checkHover(m_mouse))
             {
                 continue;
             }
-            m_active_ball = &i;
+            m_active_ball = &ball;
             m_dragging    = true;
             break;
         }

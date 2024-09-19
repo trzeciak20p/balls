@@ -1,4 +1,17 @@
+#pragma once
 
-class Ui
+#include "button.h"
+#include "slider.h"
+#include <vector>
+
+class UI
 {
+public:
+    void mousePress(sf::Vector2f mouse);
+    void update(sf::Vector2f mouse);
+    void draw(sf::RenderWindow* window);
+
+    // private:
+    std::vector<Button> m_buttons;
+    std::vector<Slider> m_sliders;
 };

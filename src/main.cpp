@@ -4,6 +4,7 @@
 #include "classes/fontLoader.h"
 #include "classes/game.h"
 #include "classes/slider.h"
+#include "classes/ui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/WindowStyle.hpp>
@@ -18,10 +19,12 @@ int main()
     Game gra(&window);
     bnw::loadFont("fonts/comic.ttf");
 
-    buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
-    buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
-    sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
-    sliders.emplace_back(sf::Vector2f(window.getSize().x / 3 * 2, 200), 100, "ziuum");
+    UI ui     = UI();
+    gra.to_ui = &ui;
+    ui.m_buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
+    ui.m_buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
+    ui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
+    ui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 3 * 2, 200), 100, "ziuum");
 
     Board board("maps/map1");
     gra.to_board = &board;
@@ -72,28 +75,8 @@ int main()
         case Game::paused:
             break;
         case Game::menu:
-            for (auto& button : buttons)
-            {
-                if (button.checkHover(gra.getMouse()))
-                {
-                    button.setActive();
-                }
-                else
-                {
-                    Button::clearActive();
-                }
-
-                button.draw(&window);
-            }
-            for (auto& slider : sliders)
-            {
-                if (Slider::getActive() != nullptr)
-                {
-                    Slider::getActive()->onUse(gra.getMouse().y);
-                }
-
-                slider.draw(&window);
-            }
+            ui.update(gra.getMouse());
+            ui.draw(&window);
             break;
 
         case Game::playing:
