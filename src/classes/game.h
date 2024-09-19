@@ -24,11 +24,10 @@ public:
     State getState();
     void  mousePress();
     void  updateMouse();
-    bool  calculateTrail(); // Calculates trail for drawing
+    void  drawTrail();
     void  mouseRelease();
 
-    sf::Vector2f           getMouse();
-    const sf::VertexArray& getTrial();
+    sf::Vector2f getMouse();
 
     sf::Vector2f m_mouse;
     Board*       to_board{};
@@ -38,5 +37,4 @@ private:
     bool              m_dragging{};
     Ball*             m_active_ball{};
     State             m_state{playing};
-    sf::VertexArray   m_trail{sf::Triangles, 3};
 };

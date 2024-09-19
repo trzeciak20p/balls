@@ -9,6 +9,9 @@ class Board
 public:
     explicit Board(const std::string& path);
 
+    void update();
+    void draw(sf::RenderWindow* window);
+
     // const std::vector<Wall>& getWalls()
     // {
     //     return m_walls;

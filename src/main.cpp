@@ -97,21 +97,10 @@ int main()
             break;
 
         case Game::playing:
-            for (const auto& wall : board.m_walls)
-            {
-                window.draw(wall);
-            }
+            board.update();
+            board.draw(&window);
+            gra.drawTrail();
 
-            for (auto& ball : board.m_balls)
-            {
-                ball.update(board.m_walls);
-                window.draw(ball);
-            }
-
-            if (gra.calculateTrail())
-            {
-                window.draw(gra.getTrial());
-            }
             break;
 
         default:

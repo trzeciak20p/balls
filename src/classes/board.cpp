@@ -85,3 +85,23 @@ Board::Board(const std::string& path)
 
     file.close();
 }
+
+void Board::update()
+{
+    for (auto& ball : m_balls)
+    {
+        ball.update(m_walls);
+    }
+}
+
+void Board::draw(sf::RenderWindow* window)
+{
+    for (const auto& wall : m_walls)
+    {
+        window->draw(wall);
+    }
+    for (auto& ball : m_balls)
+    {
+        window->draw(ball);
+    }
+}
