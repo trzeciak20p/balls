@@ -1,4 +1,3 @@
-#include "classes/ball.h"
 #include "classes/board.h"
 #include "classes/button.h"
 #include "classes/fontLoader.h"
@@ -74,6 +73,7 @@ int main()
         case Game::map_selection:
         case Game::paused:
             break;
+
         case Game::menu:
             ui.update(gra.getMouse());
             ui.draw(&window);
@@ -83,7 +83,6 @@ int main()
             board.update();
             board.draw(&window);
             gra.drawTrail();
-
             break;
 
         default:

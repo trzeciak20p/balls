@@ -30,7 +30,7 @@ public:
 
     sf::Vector2f getMouse();
 
-    sf::Vector2f m_mouse;
+    sf::Vector2f m_mouse{};
     Board*       to_board{};
     UI*          to_ui{};
 
