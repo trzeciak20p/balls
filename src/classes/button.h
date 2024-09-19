@@ -16,7 +16,7 @@ public:
     static void    clearActive();
     static Button* getActive();
 
-    void draw(sf::RenderWindow *window);
+    void draw(sf::RenderWindow* window);
     void onUse();
     void colorDefault();
     void colorActive();

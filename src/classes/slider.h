@@ -15,7 +15,7 @@ public:
     static void    clearActive();
     static Slider* getActive();
 
-    void draw(sf::RenderWindow *window);
+    void draw(sf::RenderWindow* window);
     void onUse(float height);
     void colorActive();
     void colorDefault();

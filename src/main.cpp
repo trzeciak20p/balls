@@ -8,6 +8,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cmath>
+#include <iostream>
 
 int main()
 {
@@ -24,6 +25,10 @@ int main()
 
     Board board("maps/map1");
     gra.to_board = &board;
+
+    sf::View view;
+    view.reset(sf::FloatRect(0, 0, 800, 700));
+    window.setView(view);
 
     while (window.isOpen())
     {
@@ -45,6 +50,14 @@ int main()
                 gra.mouseRelease();
                 break;
 
+            case sf::Event::KeyPressed:
+                std::cerr << "kpress: " << sf::Keyboard::getDescription(event.key.scancode).toAnsiString() << '\n';
+                view.move(0, 10);
+                window.setView(view);
+                break;
+
+            case sf::Event::KeyReleased:
+
             default:
                 break;
             }
@@ -59,7 +72,7 @@ int main()
         case Game::paused:
             break;
         case Game::menu:
-            for (auto &button : buttons)
+            for (auto& button : buttons)
             {
                 if (button.checkHover(gra.getMouse()))
                 {
@@ -72,7 +85,7 @@ int main()
 
                 button.draw(&window);
             }
-            for (auto &slider : sliders)
+            for (auto& slider : sliders)
             {
                 if (Slider::getActive() != nullptr)
                 {
@@ -84,12 +97,12 @@ int main()
             break;
 
         case Game::playing:
-            for (const auto &wall : board.m_walls)
+            for (const auto& wall : board.m_walls)
             {
                 window.draw(wall);
             }
 
-            for (auto &ball : board.m_balls)
+            for (auto& ball : board.m_balls)
             {
                 ball.update(board.m_walls);
                 window.draw(ball);

@@ -43,7 +43,7 @@ bool Button::checkHover(sf::Vector2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
-void Button::draw(sf::RenderWindow *window)
+void Button::draw(sf::RenderWindow* window)
 {
     window->draw(*this);
     window->draw(m_text);

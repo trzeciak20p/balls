@@ -51,7 +51,7 @@ bool Slider::checkHover(sf::Vector2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
-void Slider::draw(sf::RenderWindow *window)
+void Slider::draw(sf::RenderWindow* window)
 {
     window->draw(*this);
     window->draw(m_text);

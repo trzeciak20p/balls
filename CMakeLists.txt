@@ -30,7 +30,7 @@ set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
 target_compile_features(main PRIVATE cxx_std_20)
 target_include_directories(main PRIVATE src/clasees)
-target_link_libraries(main PRIVATE sfml-graphics)
+target_link_libraries(main PRIVATE sfml-window sfml-graphics)
 
 add_custom_command(
     TARGET main 

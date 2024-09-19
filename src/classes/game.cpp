@@ -13,7 +13,7 @@
 
 constexpr float pi{std::numbers::pi_v<float>};
 
-Game::Game(sf::Window* window)
+Game::Game(sf::RenderWindow* window)
     : m_window{window}
 {
 }
@@ -74,7 +74,13 @@ void Game::updateMouse()
 
 sf::Vector2f Game::getMouse()
 {
-    return sf::Vector2f(sf::Mouse::getPosition(*m_window));
+    // return sf::Vector2f(sf::Mouse::getPosition(*m_window));
+
+    // get the current mouse position in the window
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(*m_window);
+
+    // convert it to world coordinates
+    return m_window->mapPixelToCoords(pixelPos);
 }
 
 void Game::mousePress()
