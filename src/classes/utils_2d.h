@@ -6,9 +6,9 @@
 namespace bnw
 { // Balls n' Walls
 
-float getAngle(sf::Vector2f A);
-float getDistacne(sf::Vector2f A);
-float getDistacne(sf::Vector2f A, sf::Vector2f B);
-float dotProduct(sf::Vector2f A, sf::Vector2f B);
+float getAngle(sf::Vector2f a);
+float getDistacne(sf::Vector2f a);
+float getDistacne(sf::Vector2f a, sf::Vector2f b);
+float dotProduct(sf::Vector2f a, sf::Vector2f b);
 
 } // namespace bnw

@@ -4,12 +4,10 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <array>
+#include <algorithm>
 #include <cmath>
 #include <cstdlib>
 #include <numbers>
-#include <ranges>
-#include <utility>
 #include <vector>
 
 constexpr float pi{std::numbers::pi_v<float>};
@@ -44,7 +42,7 @@ void Ball::cornerCheck(const Wall& wall, sf::Vector2f new_pos)
         return;
     }
 
-    float dot = bnw::dotProduct(m_vel, nearest_corner - new_pos);
+    const float dot = bnw::dotProduct(m_vel, nearest_corner - new_pos);
     m_vel -= (nearest_corner - new_pos) / bnw::getDistacne(nearest_corner, new_pos) * dot /
              bnw::getDistacne(nearest_corner, new_pos) * 2.0F;
 }
@@ -92,17 +90,6 @@ void Ball::update(const std::vector<Wall>& walls)
     if (m_vel == sf::Vector2f{})
     {
         return;
-    }
-
-    // changing directions from boundaries
-    // ograniczenia zostana planowane być wzniesione
-    if (getPosition().x + m_vel.x < getRadius() || getPosition().x + m_vel.x > 800 - getRadius())
-    {
-        m_vel.x *= -1;
-    }
-    if (getPosition().y + m_vel.y < getRadius() || getPosition().y + m_vel.y > 700 - getRadius())
-    {
-        m_vel.y *= -1;
     }
 
     checkBounce(walls);

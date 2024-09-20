@@ -30,5 +30,3 @@ private:
     sf::Text           m_text;
     sf::RectangleShape m_controler;
 };
-
-inline std::vector<Slider> sliders; // Vector for storing every class instance

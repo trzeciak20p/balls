@@ -1,12 +1,11 @@
-#include "classes/ball.h"
 #include "classes/board.h"
-#include "classes/button.h"
 #include "classes/fontLoader.h"
 #include "classes/game.h"
-#include "classes/slider.h"
 #include "classes/ui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/View.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cmath>
 #include <iostream>
