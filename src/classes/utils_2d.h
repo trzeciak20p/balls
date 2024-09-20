@@ -9,5 +9,6 @@ namespace bnw
 float getAngle(sf::Vector2f A);
 float getDistacne(sf::Vector2f A);
 float getDistacne(sf::Vector2f A, sf::Vector2f B);
+float dotProduct(sf::Vector2f A, sf::Vector2f B);
 
 } // namespace bnw

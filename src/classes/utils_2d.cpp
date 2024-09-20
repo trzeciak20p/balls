@@ -20,4 +20,9 @@ float getDistacne(sf::Vector2f A)
     return std::sqrt(A.x * A.x + A.y * A.y);
 }
 
+float dotProduct(sf::Vector2f A, sf::Vector2f B)
+{
+    return A.x * B.x + A.y * B.y;
+}
+
 } // namespace bnw
