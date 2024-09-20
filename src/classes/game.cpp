@@ -86,18 +86,18 @@ void Game::mousePress()
 {
     updateMouse();
 
-    to_gui->mousePress(m_mouse);
+    gui.mousePress(m_mouse);
 
-    for (auto& ball : to_board->m_balls)
-    {
-        if (!ball.checkHover(m_mouse))
-        {
-            continue;
-        }
-        m_active_ball = &ball;
-        m_dragging    = true;
-        break;
-    }
+    // for (auto& ball : board.m_balls)
+    // {
+    //     if (!ball.checkHover(m_mouse))
+    //     {
+    //         continue;
+    //     }
+    //     m_active_ball = &ball;
+    //     m_dragging    = true;
+    //     break;
+    // }
 }
 
 void Game::mouseRelease()

@@ -1,8 +1,9 @@
 #pragma once
 
 #include "ball.h"
-#include "board.h"
 #include "gui.h"
+#include "input.h"
+#include "simulation.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
@@ -31,8 +32,9 @@ public:
     sf::Vector2f getMouse();
 
     sf::Vector2f m_mouse{};
-    Board*       to_board{};
-    GUI*         to_gui{};
+    Simulation   simulation{};
+    GUI          gui{};
+    Input        input{};
 
 private:
     sf::RenderWindow* m_window{};
