@@ -86,60 +86,29 @@ void Game::mousePress()
 {
     updateMouse();
 
-    switch (m_state)
+    to_gui->mousePress(m_mouse);
+
+    for (auto& ball : to_board->m_balls)
     {
-    case menu:
-        to_gui->mousePress(m_mouse);
-        break;
-    case map_selection:
-    case settings:
-
-        break;
-
-    case playing:
-        for (auto& ball : to_board->m_balls)
+        if (!ball.checkHover(m_mouse))
         {
-            if (!ball.checkHover(m_mouse))
-            {
-                continue;
-            }
-            m_active_ball = &ball;
-            m_dragging    = true;
-            break;
+            continue;
         }
-        break;
-
-    default:
-        std::cerr << "MOSUE CLICK SWITCH ERROR\n";
+        m_active_ball = &ball;
+        m_dragging    = true;
         break;
     }
 }
 
 void Game::mouseRelease()
 {
-    switch (m_state)
+    Slider::clearActive();
+
+    if (!m_dragging)
     {
-    case menu:
-        Slider::clearActive();
-        break;
-    case map_selection:
-    case settings:
-
-        break;
-
-    case playing:
-        if (!m_dragging)
-        {
-            break;
-        }
-
-        m_active_ball->setSpeed((m_mouse - getMouse()) / 6.0F);
-        m_active_ball->setFillColor(m_active_ball->m_color);
-        m_dragging = false;
-        break;
-
-    default:
-        std::cerr << "MOSUE CLICK SWITCH ERROR\n";
-        break;
+        return;
     }
+    m_active_ball->setSpeed((m_mouse - getMouse()) / 6.0F);
+    m_active_ball->setFillColor(m_active_ball->m_color);
+    m_dragging = false;
 }

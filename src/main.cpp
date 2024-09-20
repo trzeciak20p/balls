@@ -20,10 +20,6 @@ int main()
 
     GUI gui    = GUI();
     gra.to_gui = &gui;
-    gui.m_buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
-    gui.m_buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
-    gui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
-    gui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 3 * 2, 200), 100, "ziuum");
 
     Board board("maps/map1");
     gra.to_board = &board;
@@ -68,29 +64,14 @@ int main()
         // Rendering
         window.clear({102, 102, 102});
 
-        switch (gra.getState())
-        {
-        case Game::map_selection:
-        case Game::paused:
-            break;
+        gui.update(gra.getMouse());
+        board.update();
 
-        case Game::menu:
-            gui.update(gra.getMouse());
-            gui.draw(&window);
-            break;
-
-        case Game::playing:
-            board.update();
-            board.draw(&window);
-            gra.drawTrail();
-            break;
-
-        default:
-            break;
-        }
+        gui.draw(&window);
+        board.draw(&window);
+        gra.drawTrail();
 
         window.display();
     }
-
     return 0;
 }

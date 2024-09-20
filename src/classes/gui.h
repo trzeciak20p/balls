@@ -7,6 +7,8 @@
 class GUI
 {
 public:
+    GUI();
+
     void mousePress(sf::Vector2f mouse);
     void update(sf::Vector2f mouse);
     void draw(sf::RenderWindow* window);
