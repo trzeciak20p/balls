@@ -89,7 +89,7 @@ void Game::mousePress()
     switch (m_state)
     {
     case menu:
-        to_ui->mousePress(m_mouse);
+        to_gui->mousePress(m_mouse);
         break;
     case map_selection:
     case settings:

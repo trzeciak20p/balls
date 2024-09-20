@@ -1,8 +1,8 @@
-#include "ui.h"
+#include "gui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 
-void UI::mousePress(sf::Vector2f mouse)
+void GUI::mousePress(sf::Vector2f mouse)
 {
     for (auto& button : m_buttons)
     {
@@ -20,7 +20,7 @@ void UI::mousePress(sf::Vector2f mouse)
     }
 }
 
-void UI::update(sf::Vector2f mouse)
+void GUI::update(sf::Vector2f mouse)
 {
     Button::clearActive();
 
@@ -40,7 +40,7 @@ void UI::update(sf::Vector2f mouse)
     }
 }
 
-void UI::draw(sf::RenderWindow* window)
+void GUI::draw(sf::RenderWindow* window)
 {
     for (auto& button : m_buttons)
     {

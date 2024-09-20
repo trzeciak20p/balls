@@ -1,7 +1,7 @@
 #include "classes/board.h"
 #include "classes/fontLoader.h"
 #include "classes/game.h"
-#include "classes/ui.h"
+#include "classes/gui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Window/Event.hpp>
@@ -18,12 +18,12 @@ int main()
     Game gra(&window);
     bnw::loadFont("fonts/comic.ttf");
 
-    UI ui     = UI();
-    gra.to_ui = &ui;
-    ui.m_buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
-    ui.m_buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
-    ui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
-    ui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 3 * 2, 200), 100, "ziuum");
+    GUI gui    = GUI();
+    gra.to_gui = &gui;
+    gui.m_buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
+    gui.m_buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
+    gui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 2, 200), 100, "ziuum");
+    gui.m_sliders.emplace_back(sf::Vector2f(window.getSize().x / 3 * 2, 200), 100, "ziuum");
 
     Board board("maps/map1");
     gra.to_board = &board;
@@ -75,8 +75,8 @@ int main()
             break;
 
         case Game::menu:
-            ui.update(gra.getMouse());
-            ui.draw(&window);
+            gui.update(gra.getMouse());
+            gui.draw(&window);
             break;
 
         case Game::playing:

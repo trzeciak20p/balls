@@ -4,7 +4,7 @@
 #include "slider.h"
 #include <vector>
 
-class UI
+class GUI
 {
 public:
     void mousePress(sf::Vector2f mouse);

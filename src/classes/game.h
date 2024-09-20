@@ -2,7 +2,7 @@
 
 #include "ball.h"
 #include "board.h"
-#include "ui.h"
+#include "gui.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
@@ -32,7 +32,7 @@ public:
 
     sf::Vector2f m_mouse{};
     Board*       to_board{};
-    UI*          to_ui{};
+    GUI*         to_gui{};
 
 private:
     sf::RenderWindow* m_window{};
