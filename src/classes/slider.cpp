@@ -24,7 +24,6 @@ Slider::Slider(sf::Vector2f pos, float size, const std::string& name)
 
 void Slider::setActive()
 {
-    fprintf(stderr, "ACTIVE\r\n");
     colorActive();
     Slider::m_active_slider = this;
 }
@@ -36,8 +35,6 @@ Slider* Slider::getActive()
 
 void Slider::clearActive()
 {
-    fprintf(stderr, "not ACTIVE\r\n");
-
     if (m_active_slider == nullptr)
     {
         return;
@@ -64,9 +61,6 @@ void Slider::draw(sf::RenderWindow* window)
 
 void Slider::onUse(float height)
 {
-    fprintf(stderr, "usee\r\n");
-
-    // colorActive();
     m_value = (height - getPosition().y) / getSize().y * 100;
     if (m_value <= 0)
     {
@@ -88,14 +82,12 @@ void Slider::onUse(float height)
 
 void Slider::colorActive()
 {
-    fprintf(stderr, "color ACTIVE\r\n");
     setFillColor(sf::Color::Cyan);
     m_text.setFillColor(sf::Color::Yellow);
 }
 
 void Slider::colorDefault()
 {
-    fprintf(stderr, "Default\r\n");
     setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
 }
