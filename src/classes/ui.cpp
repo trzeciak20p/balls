@@ -1,4 +1,6 @@
 #include "ui.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
 
 void UI::mousePress(sf::Vector2f mouse)
 {

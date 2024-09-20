@@ -1,12 +1,13 @@
 #include "game.h"
 #include "ball.h"
-#include "button.h"
 #include "slider.h"
 #include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/PrimitiveType.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <SFML/Window/Window.hpp>
 #include <cmath>
 #include <iostream>
 #include <numbers>
@@ -74,13 +75,11 @@ void Game::updateMouse()
 
 sf::Vector2f Game::getMouse()
 {
-    // return sf::Vector2f(sf::Mouse::getPosition(*m_window));
-
     // get the current mouse position in the window
-    sf::Vector2i pixelPos = sf::Mouse::getPosition(*m_window);
+    const sf::Vector2i pixel_pos = sf::Mouse::getPosition(*m_window);
 
     // convert it to world coordinates
-    return m_window->mapPixelToCoords(pixelPos);
+    return m_window->mapPixelToCoords(pixel_pos);
 }
 
 void Game::mousePress()

@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <array>
 
 class Wall : public sf::RectangleShape
 {
@@ -20,6 +21,8 @@ public:
     float getLeft() const;
     float getRight() const;
     float getBottom() const;
+
+    std::array<sf::Vector2f, 4> getCorners() const;
 
 private:
     Type m_type{};

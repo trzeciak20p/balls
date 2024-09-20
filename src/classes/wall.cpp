@@ -1,6 +1,7 @@
 #include "wall.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <array>
 
 Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
     : sf::RectangleShape{size}, m_type{type}
@@ -19,6 +20,11 @@ Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
         setFillColor({125, 125, 125});
         break;
     }
+}
+
+std::array<sf::Vector2f, 4> Wall::getCorners() const
+{
+    return {{getPosition(), {getRight(), getTop()}, getPosition() + getSize(), {getLeft(), getBottom()}}};
 }
 
 float Wall::getTop() const

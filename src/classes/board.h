@@ -2,6 +2,7 @@
 
 #include "ball.h"
 #include "wall.h"
+#include <SFML/Graphics/RenderTexture.hpp>
 #include <vector>
 
 class Board
@@ -12,14 +13,7 @@ public:
     void update();
     void draw(sf::RenderWindow* window);
 
-    // const std::vector<Wall>& getWalls()
-    // {
-    //     return m_walls;
-    // }
-
-    // private:
-    int m_width{};
-    int m_height{};
+    // // private:
 
     std::vector<Ball> m_balls;
     std::vector<Wall> m_walls;

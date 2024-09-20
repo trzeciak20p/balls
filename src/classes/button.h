@@ -27,5 +27,3 @@ private:
 
     sf::Text m_text;
 };
-
-inline std::vector<Button> buttons; // Vector for storing every class instance

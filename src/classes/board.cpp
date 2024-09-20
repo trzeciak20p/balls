@@ -53,9 +53,10 @@ Wall makeWall(std::ifstream& file)
     float y_size{};
     file >> y_size;
 
-    const Wall::Type type{*std::istream_iterator<int8_t>(file)};
+    int type{};
+    file >> type;
 
-    return {{x, y}, {x_size, y_size}, type};
+    return {{x, y}, {x_size, y_size}, static_cast<Wall::Type>(type)};
 }
 
 Board::Board(const std::string& path)
@@ -66,9 +67,6 @@ Board::Board(const std::string& path)
         std::cerr << "COULDN'T FIND A FILE TO LOAD MAP under path:\"" << path << "\"\n";
         return;
     }
-
-    file >> m_width;
-    file >> m_height;
 
     char obj{};
     while (file >> obj)
