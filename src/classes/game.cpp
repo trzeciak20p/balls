@@ -19,20 +19,15 @@ Game::Game(sf::RenderWindow* window)
 {
 }
 
-Game::State Game::getState()
-{
-    return m_state;
-}
-
 void Game::drawTrail()
 {
-    if (!m_dragging)
+    if (!m_dragging || m_active_ball == nullptr)
     {
         return;
     }
     sf::VertexArray trail{sf::Triangles, 3};
-    const float     distance = bnw::getDistacne(m_mouse, getMouse());
-    const float     angle    = bnw::getAngle(getMouse() - m_mouse);
+    const float     distance = bnw::getDistacne(m_last_click, getMouse());
+    const float     angle    = bnw::getAngle(getMouse() - m_last_click);
     const float     x        = std::cos(angle + pi / 2) * m_active_ball->getRadius() / 2;
     const float     y        = std::sin(angle + pi / 2) * m_active_ball->getRadius() / 2;
 
@@ -68,9 +63,9 @@ void Game::drawTrail()
     m_window->draw(trail);
 }
 
-void Game::updateMouse()
+void Game::setLastClick()
 {
-    m_mouse = getMouse();
+    m_last_click = getMouse();
 }
 
 sf::Vector2f Game::getMouse()
@@ -84,20 +79,20 @@ sf::Vector2f Game::getMouse()
 
 void Game::mousePress()
 {
-    updateMouse();
+    setLastClick();
 
-    gui.mousePress(m_mouse);
+    gui.mousePress(m_last_click);
 
     // for (auto& ball : board.m_balls)
     // {
-    //     if (!ball.checkHover(m_mouse))
+    //     if (!ball.checkHover(m_last_click))
     //     {
     //         continue;
     //     }
     //     m_active_ball = &ball;
-    //     m_dragging    = true;
     //     break;
     // }
+    m_dragging = true;
 }
 
 void Game::mouseRelease()
@@ -108,7 +103,12 @@ void Game::mouseRelease()
     {
         return;
     }
-    m_active_ball->setSpeed((m_mouse - getMouse()) / 6.0F);
-    m_active_ball->setFillColor(m_active_ball->m_color);
     m_dragging = false;
+    if (m_active_ball == nullptr)
+    {
+        return;
+    }
+
+    m_active_ball->setSpeed((m_last_click - getMouse()) / 6.0F);
+    m_active_ball->setFillColor(m_active_ball->m_color);
 }

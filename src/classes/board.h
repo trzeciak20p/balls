@@ -13,8 +13,6 @@ public:
     void update();
     void draw(sf::RenderWindow* window);
 
-    // // private:
-
     std::vector<Ball> m_balls;
     std::vector<Wall> m_walls;
 };

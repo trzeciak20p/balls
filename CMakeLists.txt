@@ -27,7 +27,6 @@ add_executable(main
     src/classes/fontLoader.cpp
     src/classes/gui.cpp
     src/classes/simulation.cpp
-    src/classes/input.cpp
 )
 set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 

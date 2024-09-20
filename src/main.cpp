@@ -18,8 +18,7 @@ int main()
     Game gra(&window);
     bnw::loadFont("fonts/comic.ttf");
 
-    GUI gui = GUI();
-    gra.gui = gui;
+    gra.gui = GUI();
 
     sf::View view;
     view.reset(sf::FloatRect(0, 0, 800, 700));
@@ -61,10 +60,10 @@ int main()
         // Rendering
         window.clear({102, 102, 102});
 
-        gui.update(gra.getMouse());
+        gra.gui.update(gra.getMouse());
         // board.update();
 
-        gui.draw(&window);
+        gra.gui.draw(&window);
         // board.draw(&window);
         gra.drawTrail();
 
