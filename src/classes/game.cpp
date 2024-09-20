@@ -17,6 +17,9 @@ constexpr float pi{std::numbers::pi_v<float>};
 Game::Game(sf::RenderWindow* window)
     : m_window{window}
 {
+    m_view.reset(sf::FloatRect(0, 0, 800, 700));
+    m_window->setView(m_view);
+    gui = GUI();
 }
 
 void Game::drawTrail()
@@ -83,15 +86,15 @@ void Game::mousePress()
 
     gui.mousePress(m_last_click);
 
-    // for (auto& ball : board.m_balls)
-    // {
-    //     if (!ball.checkHover(m_last_click))
-    //     {
-    //         continue;
-    //     }
-    //     m_active_ball = &ball;
-    //     break;
-    // }
+    for (auto& ball : board.m_balls)
+    {
+        if (!ball.checkHover(m_last_click))
+        {
+            continue;
+        }
+        m_active_ball = &ball;
+        break;
+    }
     m_dragging = true;
 }
 
@@ -111,4 +114,48 @@ void Game::mouseRelease()
 
     m_active_ball->setSpeed((m_last_click - getMouse()) / 6.0F);
     m_active_ball->setFillColor(m_active_ball->m_color);
+}
+
+void Game::eventHandle(sf::Event event)
+{
+    {
+        switch (event.type)
+        {
+        case sf::Event::Closed:
+            m_window->close();
+            break;
+
+        case sf::Event::MouseButtonPressed:
+            mousePress();
+            break;
+
+        case sf::Event::MouseButtonReleased:
+            mouseRelease();
+            break;
+
+        case sf::Event::KeyPressed:
+            std::cerr << "kpress: " << sf::Keyboard::getDescription(event.key.scancode).toAnsiString() << '\n';
+            m_view.move(0, 10);
+            m_window->setView(m_view);
+            break;
+
+        case sf::Event::KeyReleased:
+
+        default:
+            break;
+        }
+    }
+}
+
+void Game::update()
+{
+    gui.update(getMouse());
+    board.update();
+}
+
+void Game::draw()
+{
+    gui.draw(m_window);
+    board.draw(m_window);
+    drawTrail();
 }
