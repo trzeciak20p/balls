@@ -1,8 +1,13 @@
 #include "gui.h"
 
-GUI::GUI(std::vector<Button> buttons, std::vector<Slider> sliders)
-    : m_buttons{buttons}, m_sliders{sliders}
+GUI::GUI(std::string scenario, std::vector<Button> buttons, std::vector<Slider> sliders)
+    : m_scenario{scenario}, m_buttons{buttons}, m_sliders{sliders}
 {
+}
+
+std::string GUI::getScenario()
+{
+    return m_scenario;
 }
 
 void GUI::mousePress(sf::Vector2f mouse)
