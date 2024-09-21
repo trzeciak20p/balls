@@ -2,8 +2,8 @@
 
 #include "ball.h"
 #include "board.h"
-#include "gui.h"
 #include "simulation.h"
+#include "ui.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
@@ -27,7 +27,6 @@ public:
 
     sf::Vector2f m_last_click{};
     Simulation   simulation{};
-    GUI          gui{};
     Board        board{"maps/map1"};
 
 private:
@@ -35,4 +34,5 @@ private:
     sf::View          m_view{};
     bool              m_dragging{};
     Ball*             m_active_ball{};
+    UI                m_ui{};
 };

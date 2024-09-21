@@ -19,7 +19,8 @@ Game::Game(sf::RenderWindow* window)
 {
     m_view.reset(sf::FloatRect(0, 0, 800, 700));
     m_window->setView(m_view);
-    gui = GUI();
+    m_ui = UI();
+    m_ui.loadGuiScenario();
 }
 
 void Game::drawTrail()
@@ -84,7 +85,7 @@ void Game::mousePress()
 {
     setLastClick();
 
-    gui.mousePress(m_last_click);
+    m_ui.mousePress(m_last_click);
 
     for (auto& ball : board.m_balls)
     {
@@ -114,6 +115,7 @@ void Game::mouseRelease()
 
     m_active_ball->setSpeed((m_last_click - getMouse()) / 6.0F);
     m_active_ball->setFillColor(m_active_ball->m_color);
+    m_active_ball = nullptr;
 }
 
 void Game::eventHandle(sf::Event event)
@@ -149,13 +151,13 @@ void Game::eventHandle(sf::Event event)
 
 void Game::update()
 {
-    gui.update(getMouse());
+    m_ui.update(getMouse());
     board.update();
 }
 
 void Game::draw()
 {
-    gui.draw(m_window);
+    m_ui.draw(m_window);
     board.draw(m_window);
     drawTrail();
 }

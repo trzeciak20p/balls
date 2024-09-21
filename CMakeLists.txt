@@ -25,6 +25,7 @@ add_executable(main
     src/classes/slider.cpp
     src/classes/button.cpp
     src/classes/fontLoader.cpp
+    src/classes/ui.cpp
     src/classes/gui.cpp
     src/classes/simulation.cpp
 )

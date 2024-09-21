@@ -1,21 +1,21 @@
 #pragma once
 
-#include "button.h"
-#include "slider.h"
+#include "gui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <vector>
 
-class GUI
+class UI
 {
+
 public:
-    GUI(std::vector<Button> buttons, std::vector<Slider> sliders);
+    UI();
 
     void mousePress(sf::Vector2f mouse);
     void update(sf::Vector2f mouse);
     void draw(sf::RenderWindow* window);
+    void loadGuiScenario();
 
 private:
-    std::vector<Button> m_buttons;
-    std::vector<Slider> m_sliders;
+    std::vector<GUI> m_guis;
 };
