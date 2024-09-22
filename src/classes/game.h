@@ -17,7 +17,6 @@ public:
 
     void mousePress();
     void setLastClick();
-    void drawTrail();
     void mouseRelease();
     void update();
     void draw();
