@@ -11,7 +11,7 @@ class Board
 public:
     explicit Board(const std::string& path);
 
-    void update(bool dragging, Vec2f last_click, Vec2f mouse, Ball* active_ball);
+    void update(bool dragging, Vec2f last_click, Vec2f mouse);
     void draw(sf::RenderWindow* window);
 
     std::vector<Ball> m_balls;

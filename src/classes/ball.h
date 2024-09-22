@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec2f.h"
+#include "ball.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
@@ -16,7 +17,8 @@ public:
     bool checkHover(Vec2f pos) const;
     void update(const std::vector<Wall>& walls);
 
-    sf::Color m_color;
+    inline static Ball* active_ball{};
+    sf::Color           m_color;
 
 private:
     void checkBounce(const std::vector<Wall>& walls);

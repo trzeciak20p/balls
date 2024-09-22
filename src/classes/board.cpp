@@ -83,13 +83,13 @@ Board::Board(const std::string& path)
     file.close();
 }
 
-void Board::update(bool dragging, Vec2f last_click, Vec2f mouse, Ball* active_ball)
+void Board::update(bool dragging, Vec2f last_click, Vec2f mouse)
 {
     for (auto& ball : m_balls)
     {
         ball.update(m_walls);
     }
-    m_charge_meter.update(dragging, last_click, mouse, active_ball);
+    m_charge_meter.update(dragging, last_click, mouse);
 }
 
 void Board::draw(sf::RenderWindow* window)

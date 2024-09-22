@@ -23,50 +23,6 @@ Game::Game(sf::RenderWindow* window)
     m_ui.loadGuiScenario(GUI::scenario::options);
 }
 
-void Game::drawTrail()
-{
-    // if (!m_dragging || m_active_ball == nullptr)
-    // {
-    //     return;
-    // }
-    // sf::VertexArray trail{sf::Triangles, 3};
-    // const float     distance = bnw::getDistacne(m_last_click, getMouse());
-    // const float     angle    = bnw::getAngle(getMouse() - m_last_click);
-    // const float     x        = std::cos(angle + pi / 2) * m_active_ball->getRadius() / 2;
-    // const float     y        = std::sin(angle + pi / 2) * m_active_ball->getRadius() / 2;
-
-    // if (distance < 200)
-    // {
-    //     const sf::Color trail_color((distance <= 100) ? (distance / 100 * 255) : (255),
-    //                                 (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
-    //     trail[0] = {m_active_ball->getPosition() + Vec2f(x, y), trail_color};
-    //     trail[1] = {m_active_ball->getPosition() - Vec2f(x, y), trail_color};
-    //     trail[2] = {m_active_ball->getPosition() * 2.0F - getMouse(), trail_color};
-
-    //     m_active_ball->setFillColor(trail_color);
-    // }
-    // else
-    // {
-    //     // speed velocity cap
-    //     trail[0] = {m_active_ball->getPosition() + Vec2f(x, y), sf::Color::Red};
-    //     trail[1] = {m_active_ball->getPosition() - Vec2f(x, y), sf::Color::Red};
-
-    //     const float tip_x = std::cos(angle) * 200;
-    //     const float tip_y = std::sin(angle) * 200;
-
-    //     if (getMouse().x < m_active_ball->getPosition().x + 2.5F)
-    //     {
-    //         trail[2] = {m_active_ball->getPosition() + Vec2f(tip_x, tip_y), sf::Color::Red};
-    //     }
-    //     else
-    //     {
-    //         trail[2] = {m_active_ball->getPosition() - Vec2f(tip_x, tip_y), sf::Color::Red};
-    //     }
-    //     m_active_ball->setFillColor(sf::Color::Red);
-    // }
-    // m_window->draw(trail);
-}
-
 void Game::setLastClick()
 {
     m_last_click = getMouse();
@@ -93,7 +49,7 @@ void Game::mousePress()
         {
             continue;
         }
-        m_active_ball = &ball;
+        Ball::active_ball = &ball;
         break;
     }
     m_dragging = true;
@@ -108,14 +64,14 @@ void Game::mouseRelease()
         return;
     }
     m_dragging = false;
-    if (m_active_ball == nullptr)
+    if (Ball::active_ball == nullptr)
     {
         return;
     }
 
-    m_active_ball->setSpeed((m_last_click - getMouse()) / 6.0F);
-    m_active_ball->setFillColor(m_active_ball->m_color);
-    m_active_ball = nullptr;
+    Ball::active_ball->setSpeed((m_last_click - getMouse()) / 6.0F);
+    Ball::active_ball->setFillColor(Ball::active_ball->m_color);
+    Ball::active_ball = nullptr;
 }
 
 void Game::eventHandle(sf::Event event)
@@ -152,12 +108,11 @@ void Game::eventHandle(sf::Event event)
 void Game::update()
 {
     m_ui.update(getMouse());
-    board.update(m_dragging, m_last_click, getMouse(), m_active_ball);
+    board.update(m_dragging, m_last_click, getMouse());
 }
 
 void Game::draw()
 {
     m_ui.draw(m_window);
     board.draw(m_window);
-    drawTrail();
 }
