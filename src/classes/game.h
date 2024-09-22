@@ -7,6 +7,7 @@
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
+#include "Vec2f.h"
 #include <cmath>
 
 class Game
@@ -23,9 +24,9 @@ public:
     void  eventHandle(sf::Event event);
     Ball* getActiveBall();
 
-    sf::Vector2f getMouse();
+    Vec2f getMouse();
 
-    sf::Vector2f m_last_click{};
+    Vec2f m_last_click{};
     Simulation   simulation{};
     Board        board{"maps/map1"};
 

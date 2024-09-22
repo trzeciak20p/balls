@@ -3,7 +3,7 @@
 #include "button.h"
 #include "slider.h"
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
+#include "Vec2f.h"
 #include <vector>
 
 class GUI
@@ -23,8 +23,8 @@ public:
 
     scenario getScenario();
 
-    void mousePress(sf::Vector2f mouse);
-    void update(sf::Vector2f mouse);
+    void mousePress(Vec2f mouse);
+    void update(Vec2f mouse);
     void draw(sf::RenderWindow* window);
 
 private:

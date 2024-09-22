@@ -9,7 +9,7 @@ UI::UI()
 {
 }
 
-void UI::mousePress(sf::Vector2f mouse)
+void UI::mousePress(Vec2f mouse)
 {
     for (auto& gui : m_guis)
     {
@@ -17,7 +17,7 @@ void UI::mousePress(sf::Vector2f mouse)
     }
 }
 
-void UI::update(sf::Vector2f mouse)
+void UI::update(Vec2f mouse)
 {
     Button::clearActive();
 

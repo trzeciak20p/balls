@@ -3,14 +3,14 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <SFML/System/Vector2.hpp>
+#include "Vec2f.h"
 #include <string>
 #include <vector>
 
 class Button : public sf::RectangleShape
 {
 public:
-    Button(sf::Vector2f pos, sf::Vector2f size, const std::string& name);
+    Button(Vec2f pos, Vec2f size, const std::string& name);
 
     void           setActive();
     static void    clearActive();
@@ -20,7 +20,7 @@ public:
     void onUse();
     void colorDefault();
     void colorActive();
-    bool checkHover(sf::Vector2f pos);
+    bool checkHover(Vec2f pos);
 
 private:
     static inline Button* m_active_button{};

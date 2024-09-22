@@ -12,7 +12,7 @@
 
 constexpr float pi{std::numbers::pi_v<float>};
 
-Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
+Ball::Ball(Vec2f pos, float radius, sf::Color color)
     : sf::CircleShape{radius}, m_color{color}
 {
     setFillColor(color);
@@ -23,7 +23,7 @@ Ball::Ball(sf::Vector2f pos, float radius, sf::Color color)
 // Ball::~Ball() = default;
 // make some exsplosion effect
 
-void Ball::cornerCheck(const Wall& wall, sf::Vector2f new_pos)
+void Ball::cornerCheck(const Wall& wall, Vec2f new_pos)
 {
     if (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom() ||
         new_pos.x >= wall.getLeft() && new_pos.x <= wall.getRight())
@@ -47,7 +47,7 @@ void Ball::cornerCheck(const Wall& wall, sf::Vector2f new_pos)
              bnw::getDistacne(nearest_corner, new_pos) * 2.0F;
 }
 
-void Ball::sideCheck(const Wall& wall, sf::Vector2f new_pos)
+void Ball::sideCheck(const Wall& wall, Vec2f new_pos)
 {
     if (new_pos.y >= wall.getTop() && new_pos.y <= wall.getBottom() &&
         ((new_pos.x + getRadius() > wall.getLeft() && new_pos.x < wall.getRight()) ||
@@ -75,19 +75,19 @@ void Ball::checkBounce(const std::vector<Wall>& walls)
 }
 
 // Checks if cursor hovers over ball
-bool Ball::checkHover(sf::Vector2f pos) const
+bool Ball::checkHover(Vec2f pos) const
 {
     return bnw::getDistacne(getPosition(), pos) <= getRadius();
 }
 
-void Ball::setSpeed(sf::Vector2f speed)
+void Ball::setSpeed(Vec2f speed)
 {
     m_vel = speed;
 }
 
 void Ball::update(const std::vector<Wall>& walls)
 {
-    if (m_vel == sf::Vector2f{})
+    if (m_vel == Vec2f{})
     {
         return;
     }

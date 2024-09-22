@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <string>
 
-Button::Button(sf::Vector2f pos, sf::Vector2f size, const std::string& name)
+Button::Button(Vec2f pos, Vec2f size, const std::string& name)
     : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
 {
     setPosition(pos);
@@ -38,7 +38,7 @@ void Button::clearActive()
     m_active_button = nullptr;
 }
 
-bool Button::checkHover(sf::Vector2f pos)
+bool Button::checkHover(Vec2f pos)
 {
     return pos.x >= getPosition().x && pos.x <= getPosition().x + getSize().x && pos.y >= getPosition().y &&
            pos.y <= getPosition().y + getSize().y;

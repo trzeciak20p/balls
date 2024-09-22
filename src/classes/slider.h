@@ -4,12 +4,13 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "Vec2f.h"
 #include <string>
 
 class Slider : public sf::RectangleShape
 {
 public:
-    Slider(sf::Vector2f pos, float size, const std::string& name);
+    Slider(Vec2f pos, float size, const std::string& name);
 
     void           setActive();
     static void    clearActive();
@@ -19,7 +20,7 @@ public:
     void onUse(float height);
     void colorActive();
     void colorDefault();
-    bool checkHover(sf::Vector2f pos);
+    bool checkHover(Vec2f pos);
 
 private:
     inline static Slider* m_active_slider{};

@@ -5,22 +5,22 @@
 namespace bnw // Balls n' Walls
 {
 
-float getAngle(sf::Vector2f a)
+float getAngle(Vec2f a)
 {
     return std::atan(a.y / a.x);
 }
 
-float getDistacne(sf::Vector2f a, sf::Vector2f b)
+float getDistacne(Vec2f a, Vec2f b)
 {
     return getDistacne(a - b);
 }
 
-float getDistacne(sf::Vector2f a)
+float getDistacne(Vec2f a)
 {
     return std::sqrt(a.x * a.x + a.y * a.y);
 }
 
-float dotProduct(sf::Vector2f a, sf::Vector2f b)
+float dotProduct(Vec2f a, Vec2f b)
 {
     return a.x * b.x + a.y * b.y;
 }

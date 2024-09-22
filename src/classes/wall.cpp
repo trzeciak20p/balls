@@ -3,7 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <array>
 
-Wall::Wall(sf::Vector2f left_top, sf::Vector2f width_height, Type type)
+Wall::Wall(Vec2f left_top, Vec2f width_height, Type type)
     : sf::RectangleShape{width_height}, m_type{type}
 {
     setPosition(left_top);
@@ -22,7 +22,7 @@ Wall::Wall(sf::Vector2f left_top, sf::Vector2f width_height, Type type)
     }
 }
 
-std::array<sf::Vector2f, 4> Wall::getCorners() const
+std::array<Vec2f, 4> Wall::getCorners() const
 {
     return {{getPosition(), {getRight(), getTop()}, getPosition() + getSize(), {getLeft(), getBottom()}}};
 }

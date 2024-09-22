@@ -15,7 +15,7 @@ GUI::scenario GUI::getScenario()
     return m_scenario;
 }
 
-void GUI::mousePress(sf::Vector2f mouse)
+void GUI::mousePress(Vec2f mouse)
 {
     for (auto& button : m_buttons)
     {
@@ -33,7 +33,7 @@ void GUI::mousePress(sf::Vector2f mouse)
     }
 }
 
-void GUI::update(sf::Vector2f mouse)
+void GUI::update(Vec2f mouse)
 {
 
     for (auto& button : m_buttons)

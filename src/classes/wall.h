@@ -2,6 +2,7 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "Vec2f.h"
 #include <array>
 #include <vector>
 
@@ -15,14 +16,14 @@ public:
         bouncy = 1 << 1,
     };
 
-    Wall(sf::Vector2f left_top, sf::Vector2f width_height, Type type = normal);
+    Wall(Vec2f left_top, Vec2f width_height, Type type = normal);
 
     float getTop() const;
     float getLeft() const;
     float getRight() const;
     float getBottom() const;
 
-    std::array<sf::Vector2f, 4> getCorners() const;
+    std::array<Vec2f, 4> getCorners() const;
 
 private:
     Type m_type{};

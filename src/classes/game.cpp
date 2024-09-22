@@ -42,8 +42,8 @@ void Game::drawTrail()
     {
         const sf::Color trail_color((distance <= 100) ? (distance / 100 * 255) : (255),
                                     (distance >= 100) ? ((100 - distance) / 100 * 255) : (255), 0);
-        trail[0] = {m_active_ball->getPosition() + sf::Vector2f(x, y), trail_color};
-        trail[1] = {m_active_ball->getPosition() - sf::Vector2f(x, y), trail_color};
+        trail[0] = {m_active_ball->getPosition() + Vec2f(x, y), trail_color};
+        trail[1] = {m_active_ball->getPosition() - Vec2f(x, y), trail_color};
         trail[2] = {m_active_ball->getPosition() * 2.0F - getMouse(), trail_color};
 
         m_active_ball->setFillColor(trail_color);
@@ -51,19 +51,19 @@ void Game::drawTrail()
     else
     {
         // speed velocity cap
-        trail[0] = {m_active_ball->getPosition() + sf::Vector2f(x, y), sf::Color::Red};
-        trail[1] = {m_active_ball->getPosition() - sf::Vector2f(x, y), sf::Color::Red};
+        trail[0] = {m_active_ball->getPosition() + Vec2f(x, y), sf::Color::Red};
+        trail[1] = {m_active_ball->getPosition() - Vec2f(x, y), sf::Color::Red};
 
         const float tip_x = std::cos(angle) * 200;
         const float tip_y = std::sin(angle) * 200;
 
         if (getMouse().x < m_active_ball->getPosition().x + 2.5F)
         {
-            trail[2] = {m_active_ball->getPosition() + sf::Vector2f(tip_x, tip_y), sf::Color::Red};
+            trail[2] = {m_active_ball->getPosition() + Vec2f(tip_x, tip_y), sf::Color::Red};
         }
         else
         {
-            trail[2] = {m_active_ball->getPosition() - sf::Vector2f(tip_x, tip_y), sf::Color::Red};
+            trail[2] = {m_active_ball->getPosition() - Vec2f(tip_x, tip_y), sf::Color::Red};
         }
         m_active_ball->setFillColor(sf::Color::Red);
     }
@@ -75,7 +75,7 @@ void Game::setLastClick()
     m_last_click = getMouse();
 }
 
-sf::Vector2f Game::getMouse()
+Vec2f Game::getMouse()
 {
     // get the current mouse position in the window
     const sf::Vector2i pixel_pos = sf::Mouse::getPosition(*m_window);
