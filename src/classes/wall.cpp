@@ -3,10 +3,10 @@
 #include <SFML/System/Vector2.hpp>
 #include <array>
 
-Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
-    : sf::RectangleShape{size}, m_type{type}
+Wall::Wall(sf::Vector2f left_top, sf::Vector2f width_height, Type type)
+    : sf::RectangleShape{width_height}, m_type{type}
 {
-    setPosition(pos);
+    setPosition(left_top);
 
     switch (type)
     {

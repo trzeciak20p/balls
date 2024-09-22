@@ -2,8 +2,8 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include <array>
+#include <vector>
 
 class Wall : public sf::RectangleShape
 {
@@ -15,7 +15,7 @@ public:
         bouncy = 1 << 1,
     };
 
-    Wall(sf::Vector2f pos, sf::Vector2f size, Type type = normal);
+    Wall(sf::Vector2f left_top, sf::Vector2f width_height, Type type = normal);
 
     float getTop() const;
     float getLeft() const;
