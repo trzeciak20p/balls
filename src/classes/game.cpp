@@ -20,7 +20,8 @@ Game::Game(sf::RenderWindow* window)
     m_view.reset(sf::FloatRect(0, 0, 800, 700));
     m_window->setView(m_view);
     m_ui = UI();
-    m_ui.loadGuiScenario("a");
+    m_ui.loadGuiScenario(GUI::scenario::menu);
+    m_ui.loadGuiScenario(GUI::scenario::options);
 }
 
 void Game::drawTrail()

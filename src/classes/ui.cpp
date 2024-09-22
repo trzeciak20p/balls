@@ -1,4 +1,7 @@
 #include "ui.h"
+#include "fstream"
+#include "guiScenarios.h"
+#include "iostream"
 
 UI::UI()
 {
@@ -14,6 +17,8 @@ void UI::mousePress(sf::Vector2f mouse)
 
 void UI::update(sf::Vector2f mouse)
 {
+    Button::clearActive();
+
     for (auto& gui : m_guis)
     {
         gui.update(mouse);
@@ -28,28 +33,12 @@ void UI::draw(sf::RenderWindow* window)
     }
 }
 
-void UI::loadGuiScenario(std::string scenario)
+void UI::loadGuiScenario(GUI::scenario scenario)
 {
-    std::string path = "./guis/" + scenario;
-
-    std::vector<Button> buttons{};
-    buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
-    buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
-    std::vector<Slider> sliders{};
-    sliders.emplace_back(sf::Vector2f{100.F, 200.F}, 100, "ziuum");
-    sliders.emplace_back(sf::Vector2f{100.F, 400.F}, 100, "ziuum");
-
-    m_guis.emplace_back(GUI(scenario, buttons, sliders));
+    m_guis.emplace_back(getGuiScenario(scenario));
 }
 
-void UI::deleteGuiScenario(std::string scenario)
+void UI::deleteGuiScenario(GUI::scenario scenario)
 {
-    int i = 0;
-    for (std::vector<GUI>::iterator it = m_guis.begin(); it > m_guis.end(); i++)
-    {
-        if (m_guis[i].getScenario() == scenario)
-        {
-            m_guis.erase(it);
-        }
-    }
+    std::erase_if(m_guis, [&](GUI& gui) { return gui.getScenario() == scenario; });
 }

@@ -1,11 +1,11 @@
 #include "gui.h"
 
-GUI::GUI(std::string scenario, std::vector<Button> buttons, std::vector<Slider> sliders)
+GUI::GUI(GUI::scenario scenario, std::vector<Button> buttons, std::vector<Slider> sliders)
     : m_scenario{scenario}, m_buttons{buttons}, m_sliders{sliders}
 {
 }
 
-std::string GUI::getScenario()
+GUI::scenario GUI::getScenario()
 {
     return m_scenario;
 }
@@ -30,7 +30,6 @@ void GUI::mousePress(sf::Vector2f mouse)
 
 void GUI::update(sf::Vector2f mouse)
 {
-    Button::clearActive();
 
     for (auto& button : m_buttons)
     {
