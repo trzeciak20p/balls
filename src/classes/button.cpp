@@ -1,6 +1,7 @@
 #include "button.h"
-#include "fontLoader.h"
+#include "UI.h"
 #include "Vec2f.h"
+#include "fontLoader.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -8,8 +9,8 @@
 #include <cstdio>
 #include <string>
 
-Button::Button(Vec2f pos, Vec2f size, const std::string& name)
-    : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
+Button::Button(Vec2f pos, Vec2f size, const std::string& name, bnw::Event event)
+    : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}, m_event{event}
 {
     setPosition(pos);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
@@ -53,6 +54,7 @@ void Button::draw(sf::RenderWindow* window)
 
 void Button::onUse()
 {
+    UI::addEvent(m_event);
 }
 
 void Button::colorActive()

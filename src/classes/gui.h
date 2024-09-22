@@ -1,7 +1,7 @@
 #pragma once
 
-#include "button.h"
 #include "Vec2f.h"
+#include "button.h"
 #include "slider.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <vector>

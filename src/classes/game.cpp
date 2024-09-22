@@ -20,7 +20,6 @@ Game::Game(sf::RenderWindow* window)
     m_window->setView(m_view);
     m_ui = UI();
     m_ui.loadGuiScenario(GUI::Scenario::menu);
-    m_ui.loadGuiScenario(GUI::Scenario::options);
 }
 
 void Game::setLastClick()

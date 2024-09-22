@@ -30,6 +30,7 @@ add_executable(main
     src/classes/guiScenarios.cpp
     src/classes/simulation.cpp
     src/classes/chargeMeter.cpp
+    src/classes/event.cpp
 )
 set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 

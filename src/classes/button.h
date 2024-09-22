@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec2f.h"
+#include "event.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -10,7 +11,7 @@
 class Button : public sf::RectangleShape
 {
 public:
-    Button(Vec2f pos, Vec2f size, const std::string& name);
+    Button(Vec2f pos, Vec2f size, const std::string& name, bnw::Event event);
 
     void           setActive();
     static void    clearActive();
@@ -25,5 +26,6 @@ public:
 private:
     static inline Button* m_active_button{};
 
-    sf::Text m_text;
+    sf::Text   m_text;
+    bnw::Event m_event;
 };
