@@ -1,4 +1,9 @@
 #include "gui.h"
+#include "SFML/Graphics/RenderWindow.hpp"
+#include "SFML/System/Vector2.hpp"
+#include "button.h"
+#include "slider.h"
+#include <vector>
 
 GUI::GUI(GUI::scenario scenario, std::vector<Button> buttons, std::vector<Slider> sliders)
     : m_scenario{scenario}, m_buttons{buttons}, m_sliders{sliders}

@@ -1,5 +1,7 @@
 #include "game.h"
+#include "SFML/Window/Event.hpp"
 #include "ball.h"
+#include "gui.h"
 #include "slider.h"
 #include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>

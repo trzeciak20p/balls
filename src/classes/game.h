@@ -31,8 +31,8 @@ public:
 
 private:
     sf::RenderWindow* m_window{};
-    sf::View          m_view{};
+    sf::View          m_view;
     bool              m_dragging{};
     Ball*             m_active_ball{};
-    UI                m_ui{};
+    UI                m_ui;
 };

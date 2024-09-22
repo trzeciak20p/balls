@@ -1,7 +1,9 @@
 #include "ui.h"
-#include "fstream"
+#include "SFML/Graphics/RenderWindow.hpp"
+#include "SFML/System/Vector2.hpp"
+#include "button.h"
 #include "guiScenarios.h"
-#include "iostream"
+#include <vector>
 
 UI::UI()
 {

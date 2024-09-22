@@ -1,4 +1,8 @@
 #include "guiScenarios.h"
+#include "button.h"
+#include "gui.h"
+#include "slider.h"
+#include <vector>
 
 GUI getGuiScenario(GUI::scenario scenario)
 {
