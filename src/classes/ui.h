@@ -1,13 +1,12 @@
 #pragma once
 
+#include "Vec2f.h"
 #include "gui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Vec2f.h"
 #include <vector>
 
 class UI
 {
-
 public:
     UI();
 
