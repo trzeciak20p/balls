@@ -40,19 +40,9 @@ Vec2f Game::getMouse()
 void Game::mousePress()
 {
     setLastClick();
-
-    m_ui.mousePress(m_last_click);
-
-    for (auto& ball : board.m_balls)
-    {
-        if (!ball.checkHover(m_last_click))
-        {
-            continue;
-        }
-        Ball::active_ball = &ball;
-        break;
-    }
     m_dragging = true;
+    m_ui.mousePress(m_last_click);
+    board.mousePress(m_last_click);
 }
 
 void Game::mouseRelease()
@@ -76,32 +66,30 @@ void Game::mouseRelease()
 
 void Game::eventHandle(sf::Event event)
 {
+    switch (event.type)
     {
-        switch (event.type)
-        {
-        case sf::Event::Closed:
-            m_window->close();
-            break;
+    case sf::Event::Closed:
+        m_window->close();
+        break;
 
-        case sf::Event::MouseButtonPressed:
-            mousePress();
-            break;
+    case sf::Event::MouseButtonPressed:
+        mousePress();
+        break;
 
-        case sf::Event::MouseButtonReleased:
-            mouseRelease();
-            break;
+    case sf::Event::MouseButtonReleased:
+        mouseRelease();
+        break;
 
-        case sf::Event::KeyPressed:
-            std::cerr << "kpress: " << sf::Keyboard::getDescription(event.key.scancode).toAnsiString() << '\n';
-            m_view.move(0, 10);
-            m_window->setView(m_view);
-            break;
+    case sf::Event::KeyPressed:
+        std::cerr << "kpress: " << sf::Keyboard::getDescription(event.key.scancode).toAnsiString() << '\n';
+        m_view.move(0, 10);
+        m_window->setView(m_view);
+        break;
 
-        case sf::Event::KeyReleased:
+    case sf::Event::KeyReleased:
 
-        default:
-            break;
-        }
+    default:
+        break;
     }
 }
 

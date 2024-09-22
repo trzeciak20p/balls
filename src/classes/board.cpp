@@ -83,6 +83,19 @@ Board::Board(const std::string& path)
     file.close();
 }
 
+void Board::mousePress(Vec2f mouse)
+{
+    for (auto& ball : m_balls)
+    {
+        if (!ball.checkHover(mouse))
+        {
+            continue;
+        }
+        Ball::active_ball = &ball;
+        break;
+    }
+}
+
 void Board::update(bool dragging, Vec2f last_click, Vec2f mouse)
 {
     for (auto& ball : m_balls)

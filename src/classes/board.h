@@ -11,12 +11,13 @@ class Board
 public:
     explicit Board(const std::string& path);
 
+    void mousePress(Vec2f mouse);
     void update(bool dragging, Vec2f last_click, Vec2f mouse);
     void draw(sf::RenderWindow* window);
 
     std::vector<Ball> m_balls;
-    std::vector<Wall> m_walls;
 
 private:
-    ChargeMeter m_charge_meter;
+    ChargeMeter       m_charge_meter;
+    std::vector<Wall> m_walls;
 };
