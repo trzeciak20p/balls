@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Vec2f.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "Vec2f.h"
 #include <array>
 #include <vector>
 

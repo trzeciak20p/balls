@@ -2,14 +2,14 @@
 #include "ball.h"
 #include "gui.h"
 #include "slider.h"
-#include "utils_2d.h"
-#include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <cmath>
 #include <iostream>
+#include <numbers>
 
 constexpr float pi{std::numbers::pi_v<float>};
 
@@ -19,8 +19,8 @@ Game::Game(sf::RenderWindow* window)
     m_view.reset(sf::FloatRect(0, 0, 800, 700));
     m_window->setView(m_view);
     m_ui = UI();
-    m_ui.loadGuiScenario(GUI::scenario::menu);
-    m_ui.loadGuiScenario(GUI::scenario::options);
+    m_ui.loadGuiScenario(GUI::Scenario::menu);
+    m_ui.loadGuiScenario(GUI::Scenario::options);
 }
 
 void Game::setLastClick()

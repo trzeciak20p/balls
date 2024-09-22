@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "Vec2f.h"
+#include <SFML/Graphics.hpp>
 #include <cmath>
 
 namespace bnw

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Vec2f.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include "Vec2f.h"
 #include <string>
 #include <vector>
 

@@ -1,13 +1,11 @@
 #include "ui.h"
 #include "SFML/Graphics/RenderWindow.hpp"
-#include "SFML/System/Vector2.hpp"
 #include "button.h"
+#include "Vec2f.h"
 #include "guiScenarios.h"
 #include <vector>
 
-UI::UI()
-{
-}
+// UI::UI() = default;
 
 void UI::mousePress(Vec2f mouse)
 {
@@ -35,12 +33,12 @@ void UI::draw(sf::RenderWindow* window)
     }
 }
 
-void UI::loadGuiScenario(GUI::scenario scenario)
+void UI::loadGuiScenario(GUI::Scenario scenario)
 {
     m_guis.emplace_back(getGuiScenario(scenario));
 }
 
-void UI::deleteGuiScenario(GUI::scenario scenario)
+void UI::deleteGuiScenario(GUI::Scenario scenario)
 {
     std::erase_if(m_guis, [&](GUI& gui) { return gui.getScenario() == scenario; });
 }

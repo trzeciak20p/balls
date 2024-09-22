@@ -3,4 +3,4 @@
 #include "gui.h"
 #include "string.h"
 
-GUI getGuiScenario(GUI::scenario scenario);
+GUI getGuiScenario(GUI::Scenario scenario);

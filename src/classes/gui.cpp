@@ -1,16 +1,17 @@
 #include "gui.h"
 #include "SFML/Graphics/RenderWindow.hpp"
-#include "SFML/System/Vector2.hpp"
 #include "button.h"
+#include "Vec2f.h"
 #include "slider.h"
+#include <utility>
 #include <vector>
 
-GUI::GUI(GUI::scenario scenario, std::vector<Button> buttons, std::vector<Slider> sliders)
-    : m_scenario{scenario}, m_buttons{buttons}, m_sliders{sliders}
+GUI::GUI(GUI::Scenario scenario, std::vector<Button>&& buttons, std::vector<Slider>&& sliders)
+    : m_scenario{scenario}, m_buttons{std::move(buttons)}, m_sliders{std::move(sliders)}
 {
 }
 
-GUI::scenario GUI::getScenario()
+GUI::Scenario GUI::getScenario()
 {
     return m_scenario;
 }

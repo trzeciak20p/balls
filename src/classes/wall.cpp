@@ -1,4 +1,5 @@
 #include "wall.h"
+#include "Vec2f.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <array>

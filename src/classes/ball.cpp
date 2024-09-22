@@ -1,7 +1,9 @@
 #include "ball.h"
+#include "Vec2f.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <algorithm>
 #include <cmath>

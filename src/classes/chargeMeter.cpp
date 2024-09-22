@@ -1,6 +1,9 @@
-#include "ChargeMeter.h"
+#include "chargeMeter.h"
+#include "ball.h"
+#include "Vec2f.h"
 #include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <cmath>
 #include <numbers>
 
@@ -10,9 +13,7 @@ void ChargeMeter::update(bool dragging, Vec2f last_click, Vec2f mouse)
 {
     if (!dragging || Ball::active_ball == nullptr)
     {
-        m_vertices[0] = {};
-        m_vertices[1] = {};
-        m_vertices[2] = {};
+        m_vertices = sf::VertexArray{sf::Triangles, 3};
         return;
     }
     const float distance = bnw::getDistacne(last_click, mouse);

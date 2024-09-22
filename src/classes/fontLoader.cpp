@@ -14,4 +14,5 @@ void loadFont(const std::string& path)
         std::cerr << "font: " << path << " didn't load!\n";
     }
 }
+
 } // namespace bnw

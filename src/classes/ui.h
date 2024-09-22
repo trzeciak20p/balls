@@ -8,13 +8,13 @@
 class UI
 {
 public:
-    UI();
+    // UI();
 
     void mousePress(Vec2f mouse);
     void update(Vec2f mouse);
     void draw(sf::RenderWindow* window);
-    void loadGuiScenario(GUI::scenario scenario);
-    void deleteGuiScenario(GUI::scenario scenario);
+    void loadGuiScenario(GUI::Scenario scenario);
+    void deleteGuiScenario(GUI::Scenario scenario);
 
 private:
     std::vector<GUI> m_guis;

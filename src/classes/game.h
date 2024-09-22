@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Vec2f.h"
 #include "ball.h"
 #include "board.h"
+#include "Vec2f.h"
 #include "simulation.h"
 #include "ui.h"
 #include "utils_2d.h"
@@ -24,8 +24,8 @@ public:
 
     Vec2f getMouse();
 
-    Vec2f      m_last_click{};
-    Simulation simulation{};
+    Vec2f      m_last_click;
+    Simulation simulation;
     Board      board{"maps/map1"};
 
 private:

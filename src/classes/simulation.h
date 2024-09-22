@@ -2,8 +2,9 @@
 
 class Simulation
 {
-private:
-    /* data */
 public:
     Simulation();
+
+private:
+    /* data */
 };
