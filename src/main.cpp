@@ -1,14 +1,10 @@
-#include "classes/board.h"
 #include "classes/fontLoader.h"
 #include "classes/game.h"
-#include "classes/gui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/View.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <cmath>
-#include <iostream>
 
 int main()
 {

@@ -1,13 +1,18 @@
 #include "gui.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
+#include "SFML/Graphics/RenderWindow.hpp"
+#include "SFML/System/Vector2.hpp"
+#include "button.h"
+#include "slider.h"
+#include <vector>
 
-GUI::GUI()
+GUI::GUI(GUI::scenario scenario, std::vector<Button> buttons, std::vector<Slider> sliders)
+    : m_scenario{scenario}, m_buttons{buttons}, m_sliders{sliders}
 {
-    m_buttons.emplace_back(sf::Vector2f{5.F, 5.F}, sf::Vector2f{200.F, 100.F}, "AAAA");
-    m_buttons.emplace_back(sf::Vector2f{400.F, 400.F}, sf::Vector2f{200.F, 100.F}, "bbbb");
-    m_sliders.emplace_back(sf::Vector2f{100.F, 200.F}, 100, "ziuum");
-    m_sliders.emplace_back(sf::Vector2f{100.F, 400.F}, 100, "ziuum");
+}
+
+GUI::scenario GUI::getScenario()
+{
+    return m_scenario;
 }
 
 void GUI::mousePress(sf::Vector2f mouse)
@@ -30,7 +35,6 @@ void GUI::mousePress(sf::Vector2f mouse)
 
 void GUI::update(sf::Vector2f mouse)
 {
-    Button::clearActive();
 
     for (auto& button : m_buttons)
     {

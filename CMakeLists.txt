@@ -25,7 +25,9 @@ add_executable(main
     src/classes/slider.cpp
     src/classes/button.cpp
     src/classes/fontLoader.cpp
+    src/classes/ui.cpp
     src/classes/gui.cpp
+    src/classes/guiScenarios.cpp
     src/classes/simulation.cpp
 )
 set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
