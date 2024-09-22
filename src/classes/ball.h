@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Vec2f.h"
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
-#include "Vec2f.h"
+#include <SFML/Graphics/Color.hpp>
 #include <cmath>
 
 class Ball : public sf::CircleShape
@@ -23,5 +24,5 @@ private:
     void cornerCheck(const Wall& wall, Vec2f new_pos);
 
     Vec2f m_vel;
-    float        m_friction{0.9F};
+    float m_friction{0.9F};
 };

@@ -1,9 +1,9 @@
 #include "board.h"
-#include "SFML/Graphics/RenderWindow.hpp"
 #include "ball.h"
 #include "wall.h"
 #include <SFML/Config.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -83,12 +83,13 @@ Board::Board(const std::string& path)
     file.close();
 }
 
-void Board::update()
+void Board::update(bool dragging, Vec2f last_click, Vec2f mouse, Ball* active_ball)
 {
     for (auto& ball : m_balls)
     {
         ball.update(m_walls);
     }
+    m_charge_meter.update(dragging, last_click, mouse, active_ball);
 }
 
 void Board::draw(sf::RenderWindow* window)
@@ -101,4 +102,5 @@ void Board::draw(sf::RenderWindow* window)
     {
         window->draw(ball);
     }
+    m_charge_meter.draw(window);
 }

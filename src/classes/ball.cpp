@@ -2,15 +2,11 @@
 #include "utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
-#include <numbers>
 #include <vector>
-
-constexpr float pi{std::numbers::pi_v<float>};
 
 Ball::Ball(Vec2f pos, float radius, sf::Color color)
     : sf::CircleShape{radius}, m_color{color}
@@ -19,9 +15,6 @@ Ball::Ball(Vec2f pos, float radius, sf::Color color)
     setOrigin(radius, radius);
     setPosition(pos.x + radius, pos.y + radius);
 }
-
-// Ball::~Ball() = default;
-// make some exsplosion effect
 
 void Ball::cornerCheck(const Wall& wall, Vec2f new_pos)
 {
