@@ -5,7 +5,7 @@
 #include <cmath>
 
 namespace bnw
-{ // Balls n' Walls
+{
 
 float getAngle(Vec2f a);
 float getDistacne(Vec2f a);

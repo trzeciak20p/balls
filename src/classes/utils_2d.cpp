@@ -3,7 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
 
-namespace bnw // Balls n' Walls
+namespace bnw
 {
 
 float getAngle(Vec2f a)

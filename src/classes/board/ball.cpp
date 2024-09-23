@@ -69,10 +69,9 @@ void Ball::checkBounce(const std::vector<Wall>& walls)
     }
 }
 
-// Checks if cursor hovers over ball
-bool Ball::checkHover(Vec2f pos) const
+bool Ball::checkHover(Vec2f mouse) const
 {
-    return bnw::getDistacne(getPosition(), pos) <= getRadius();
+    return bnw::getDistacne(getPosition(), mouse) <= getRadius();
 }
 
 void Ball::setSpeed(Vec2f speed)
@@ -88,7 +87,6 @@ void Ball::update(const std::vector<Wall>& walls)
     }
 
     checkBounce(walls);
-
     move(m_vel);
 
     m_vel *= m_friction; // lowering speed
