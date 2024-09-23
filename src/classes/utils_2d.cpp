@@ -8,12 +8,12 @@ float getAngle(Vec2f a)
     return std::atan(a.y / a.x);
 }
 
-float getDistacne(Vec2f a, Vec2f b)
+float getDistance(Vec2f a, Vec2f b)
 {
-    return getDistacne(a - b);
+    return getDistance(a - b);
 }
 
-float getDistacne(Vec2f a)
+float getDistance(Vec2f a)
 {
     return std::sqrt(a.x * a.x + a.y * a.y);
 }
