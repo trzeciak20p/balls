@@ -3,8 +3,6 @@
 #include "entity.h"
 #include "gui.h"
 #include "slider.h"
-#include <memory>
-#include <vector>
 
 namespace gui
 {

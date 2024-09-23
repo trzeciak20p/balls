@@ -1,7 +1,7 @@
 #pragma once
 
+#include "../chungus.h"
 #include "gui.h"
-#include "string.h"
 
 namespace gui
 {

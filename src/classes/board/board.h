@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../chungus.h"
+#include "../ui.h"
 #include "ball.h"
 #include "chargeMeter.h"
-#include "chungus.h"
-#include "ui.h"
 #include "wall.h"
 
 class Board
