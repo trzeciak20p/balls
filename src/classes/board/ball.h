@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../chungus.h"
-#include "ball.h"
 #include "wall.h"
 
 class Ball : public sf::CircleShape
