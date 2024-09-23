@@ -1,9 +1,7 @@
 #pragma once
 
-#include "Vec2f.h"
+#include "chungus.h"
 #include "gui/gui.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <vector>
 
 class UI
 {

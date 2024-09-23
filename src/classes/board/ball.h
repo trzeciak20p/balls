@@ -1,11 +1,8 @@
 #pragma once
 
-#include "../Vec2f.h"
-#include "../utils_2d.h"
+#include "../chungus.h"
+#include "ball.h"
 #include "wall.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <cmath>
 
 class Ball : public sf::CircleShape
 {

@@ -1,11 +1,6 @@
 #include "chargeMeter.h"
-#include "../Vec2f.h"
 #include "../utils_2d.h"
 #include "ball.h"
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <cmath>
-#include <numbers>
 
 constexpr float pi{std::numbers::pi_v<float>};
 

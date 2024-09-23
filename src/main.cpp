@@ -1,10 +1,6 @@
+#include "classes/chungus.h"
 #include "classes/fontLoader.h"
 #include "classes/game.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/WindowStyle.hpp>
-#include <cmath>
 
 int main()
 {

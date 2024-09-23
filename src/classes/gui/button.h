@@ -1,11 +1,8 @@
 #pragma once
 
-#include "../Vec2f.h"
+#include "../chungus.h"
+#include "../fontLoader.h"
 #include "entity.h"
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <string>
 
 namespace gui
 {

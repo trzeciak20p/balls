@@ -1,13 +1,9 @@
 #pragma once
 
-#include "Vec2f.h"
 #include "board/board.h"
 #include "board/simulation.h"
-#include "board/wall.h"
+#include "chungus.h"
 #include "ui.h"
-#include "utils_2d.h"
-#include <SFML/Graphics.hpp>
-#include <cmath>
 
 class Game
 {

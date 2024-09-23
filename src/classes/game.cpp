@@ -1,13 +1,4 @@
 #include "game.h"
-#include "gui/gui.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
-#include <cmath>
-#include <iostream>
-#include <numbers>
 
 constexpr float pi{std::numbers::pi_v<float>};
 
@@ -18,7 +9,6 @@ Game::Game(sf::RenderWindow* window)
     m_window->setView(m_view);
     m_ui = UI();
     m_ui.loadGuiScenario(gui::GUI::Scenario::menu);
-    // m_ui.loadGuiScenario(gui::GUI::Scenario::options);
 }
 
 void Game::setLastClick()

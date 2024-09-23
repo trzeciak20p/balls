@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics/Font.hpp>
+#include "chungus.h"
 
 namespace bnw
 {

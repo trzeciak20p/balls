@@ -1,10 +1,7 @@
 #pragma once
 
-#include "../Vec2f.h"
+#include "../chungus.h"
 #include "entity.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <memory>
-#include <vector>
 
 namespace gui
 {

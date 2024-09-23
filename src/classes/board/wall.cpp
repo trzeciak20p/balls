@@ -1,8 +1,4 @@
 #include "wall.h"
-#include "../Vec2f.h"
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <array>
 
 Wall::Wall(Vec2f left_top, Vec2f width_height, Type type)
     : sf::RectangleShape{width_height}, m_type{type}
