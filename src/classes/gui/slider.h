@@ -1,8 +1,12 @@
 #pragma once
 
-#include "chungus.h"
+#include "../chungus.h"
+#include "entity.h"
 
-class Slider : public sf::RectangleShape
+namespace gui
+{
+
+class Slider : public Entity, public sf::RectangleShape
 {
 public:
     Slider(Vec2f pos, float size, const std::string& name);
@@ -11,6 +15,8 @@ public:
     static void    clearActive();
     static Slider* getActive();
 
+    void mousePress();
+    void update(Vec2f pos);
     void draw(sf::RenderWindow* window);
     void onUse(float height);
     void colorActive();
@@ -26,3 +32,5 @@ private:
     sf::Text           m_text;
     sf::RectangleShape m_controler;
 };
+
+} // namespace gui

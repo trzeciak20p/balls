@@ -1,6 +1,6 @@
 #include "utils_2d.h"
 
-namespace bnw // Balls n' Walls
+namespace bnw
 {
 
 float getAngle(Vec2f a)

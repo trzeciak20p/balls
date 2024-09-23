@@ -1,13 +1,15 @@
 #include "button.h"
-#include "ui.h"
 
-Button::Button(Vec2f pos, Vec2f size, const std::string& name, bnw::Event event)
-    : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}, m_event{std::move(std::move(event))}
+namespace gui
+{
+
+Button::Button(Vec2f pos, Vec2f size, const std::string& name)
+    : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
 {
     setPosition(pos);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
     m_text.setPosition(pos.x + size.x / 2, pos.y + size.y / 2);
-    colorDefault(); // sets default colors for text and body
+    colorDefault();
 }
 
 void Button::setActive()
@@ -38,6 +40,19 @@ bool Button::checkHover(Vec2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
+void Button::mousePress()
+{
+    onUse();
+}
+
+void Button::update(Vec2f pos)
+{
+    if (checkHover(pos))
+    {
+        setActive();
+    }
+}
+
 void Button::draw(sf::RenderWindow* window)
 {
     window->draw(*this);
@@ -46,7 +61,6 @@ void Button::draw(sf::RenderWindow* window)
 
 void Button::onUse()
 {
-    UI::addEvent(m_event);
 }
 
 void Button::colorActive()
@@ -60,3 +74,5 @@ void Button::colorDefault()
     setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
 }
+
+} // namespace gui

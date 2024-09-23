@@ -1,12 +1,13 @@
 #include "chargeMeter.h"
+#include "../utils_2d.h"
 #include "ball.h"
-#include "utils_2d.h"
 
 constexpr float pi{std::numbers::pi_v<float>};
 
-void ChargeMeter::update(bool dragging, Vec2f last_click, Vec2f mouse)
+void ChargeMeter::update(Vec2f last_click, Vec2f mouse)
 {
-    if (!dragging || Ball::active_ball == nullptr)
+
+    if (Ball::active_ball == nullptr)
     {
         m_vertices = sf::VertexArray{sf::Triangles, 3};
         return;

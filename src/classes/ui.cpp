@@ -1,7 +1,17 @@
 #include "ui.h"
-#include "guiScenarios.h"
+#include "gui/button.h"
+#include "gui/gui.h"
+#include "gui/guiScenarios.h"
 
 // UI::UI() = default;
+
+void UI::mouseRelease()
+{
+    for (auto& gui : m_guis)
+    {
+        gui.mouseRelease();
+    }
+}
 
 void UI::mousePress(Vec2f mouse)
 {
@@ -13,7 +23,7 @@ void UI::mousePress(Vec2f mouse)
 
 void UI::update(Vec2f mouse)
 {
-    Button::clearActive();
+    gui::Button::clearActive();
 
     for (auto& gui : m_guis)
     {
@@ -29,47 +39,12 @@ void UI::draw(sf::RenderWindow* window)
     }
 }
 
-void UI::addEvent(const bnw::Event& event)
+void UI::loadGuiScenario(gui::GUI::Scenario scenario)
 {
-    m_event_queue.emplace(event);
+    m_guis.emplace_back(gui::getGuiScenario(scenario));
 }
 
-void UI::eventListener()
+void UI::deleteGuiScenario(gui::GUI::Scenario scenario)
 {
-    if (m_event_queue.empty())
-    {
-        return;
-    }
-    eventHandler();
-}
-
-void UI::eventHandler()
-{
-    while (!m_event_queue.empty())
-    {
-        auto event = m_event_queue.front();
-
-        if (event.checkTag(bnw::Event::Tag::gui))
-        {
-            if (event.checkTag(bnw::Event::Tag::gui_load))
-            {
-                loadGuiScenario(event.m_gui_scenario);
-            }
-            else
-            {
-                deleteGuiScenario(event.m_gui_scenario);
-            }
-        }
-        m_event_queue.pop();
-    }
-}
-
-void UI::loadGuiScenario(bnw::Scenario scenario)
-{
-    m_guis.emplace_back(getGuiScenario(scenario));
-}
-
-void UI::deleteGuiScenario(bnw::Scenario scenario)
-{
-    std::erase_if(m_guis, [&](GUI& gui) { return gui.getScenario() == scenario; });
+    std::erase_if(m_guis, [&](gui::GUI& gui) { return gui.getScenario() == scenario; });
 }

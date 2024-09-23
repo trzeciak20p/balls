@@ -1,6 +1,6 @@
 #pragma once
 
-#include "chungus.h"
+#include "../chungus.h"
 
 class Wall : public sf::RectangleShape
 {

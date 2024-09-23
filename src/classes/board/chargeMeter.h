@@ -1,11 +1,11 @@
 #pragma once
 
-#include "chungus.h"
+#include "../chungus.h"
 
 class ChargeMeter
 {
 public:
-    void update(bool dragging, Vec2f last_click, Vec2f mouse);
+    void update(Vec2f last_click, Vec2f mouse);
     void draw(sf::RenderWindow* window);
 
 private:

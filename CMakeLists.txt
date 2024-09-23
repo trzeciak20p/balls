@@ -17,20 +17,19 @@ set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
 
 add_executable(main
     src/main.cpp
-    src/classes/ball.cpp
-    src/classes/board.cpp
-    src/classes/wall.cpp
+    src/classes/board/ball.cpp
+    src/classes/board/board.cpp
+    src/classes/board/wall.cpp
+    src/classes/board/chargeMeter.cpp
+    src/classes/board/simulation.cpp
+    src/classes/gui/slider.cpp
+    src/classes/gui/button.cpp
+    src/classes/gui/gui.cpp
+    src/classes/gui/guiScenarios.cpp
     src/classes/utils_2d.cpp
     src/classes/game.cpp
-    src/classes/slider.cpp
-    src/classes/button.cpp
     src/classes/fontLoader.cpp
     src/classes/ui.cpp
-    src/classes/gui.cpp
-    src/classes/guiScenarios.cpp
-    src/classes/simulation.cpp
-    src/classes/chargeMeter.cpp
-    src/classes/event.cpp
 )
 set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 

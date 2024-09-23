@@ -1,5 +1,8 @@
 #include "slider.h"
-#include "fontLoader.h"
+#include "../fontLoader.h"
+
+namespace gui
+{
 
 Slider::Slider(Vec2f pos, float size, const std::string& name)
     : RectangleShape{{5.F, size}}, m_name{name}, m_text{name + ": ", bnw::font1, bnw::font1_size}
@@ -47,6 +50,19 @@ bool Slider::checkHover(Vec2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
+void Slider::mousePress()
+{
+    setActive();
+}
+
+void Slider::update(Vec2f pos)
+{
+    if (Slider::getActive() != nullptr)
+    {
+        Slider::getActive()->onUse(pos.y);
+    }
+}
+
 void Slider::draw(sf::RenderWindow* window)
 {
     window->draw(*this);
@@ -86,3 +102,5 @@ void Slider::colorDefault()
     setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
 }
+
+} // namespace gui
