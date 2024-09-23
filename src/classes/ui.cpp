@@ -25,7 +25,7 @@ void UI::mousePress(Vec2f mouse)
 
 void UI::update(Vec2f mouse)
 {
-    Button::clearActive();
+    gui::Button::clearActive();
 
     for (auto& gui : m_guis)
     {
@@ -41,12 +41,12 @@ void UI::draw(sf::RenderWindow* window)
     }
 }
 
-void UI::loadGuiScenario(GUI::Scenario scenario)
+void UI::loadGuiScenario(gui::GUI::Scenario scenario)
 {
-    m_guis.emplace_back(getGuiScenario(scenario));
+    m_guis.emplace_back(gui::getGuiScenario(scenario));
 }
 
-void UI::deleteGuiScenario(GUI::Scenario scenario)
+void UI::deleteGuiScenario(gui::GUI::Scenario scenario)
 {
-    std::erase_if(m_guis, [&](GUI& gui) { return gui.getScenario() == scenario; });
+    std::erase_if(m_guis, [&](gui::GUI& gui) { return gui.getScenario() == scenario; });
 }

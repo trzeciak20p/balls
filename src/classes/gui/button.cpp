@@ -8,6 +8,9 @@
 #include <cstdio>
 #include <string>
 
+namespace gui
+{
+
 Button::Button(Vec2f pos, Vec2f size, const std::string& name)
     : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
 {
@@ -45,6 +48,19 @@ bool Button::checkHover(Vec2f pos)
            pos.y <= getPosition().y + getSize().y;
 }
 
+void Button::mousePress()
+{
+    onUse();
+}
+
+void Button::update(Vec2f pos)
+{
+    if (checkHover(pos))
+    {
+        setActive();
+    }
+}
+
 void Button::draw(sf::RenderWindow* window)
 {
     window->draw(*this);
@@ -66,3 +82,5 @@ void Button::colorDefault()
     setFillColor(sf::Color::Black);
     m_text.setFillColor(sf::Color::White);
 }
+
+} // namespace gui

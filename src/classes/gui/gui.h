@@ -1,10 +1,13 @@
 #pragma once
 
 #include "../Vec2f.h"
-#include "button.h"
-#include "slider.h"
+#include "entity.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <memory>
 #include <vector>
+
+namespace gui
+{
 
 class GUI
 {
@@ -19,7 +22,7 @@ public:
         max_gui_scenario
     };
 
-    GUI(GUI::Scenario scenario, std::vector<Button>&& buttons, std::vector<Slider>&& sliders);
+    GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities);
 
     Scenario getScenario();
 
@@ -29,7 +32,8 @@ public:
     void draw(sf::RenderWindow* window);
 
 private:
-    Scenario            m_scenario;
-    std::vector<Button> m_buttons;
-    std::vector<Slider> m_sliders;
+    Scenario                             m_scenario;
+    std::vector<std::unique_ptr<Entity>> m_entities;
 };
+
+} // namespace gui

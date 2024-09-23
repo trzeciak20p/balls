@@ -6,8 +6,11 @@
 #include <utility>
 #include <vector>
 
-GUI::GUI(GUI::Scenario scenario, std::vector<Button>&& buttons, std::vector<Slider>&& sliders)
-    : m_scenario{scenario}, m_buttons{std::move(buttons)}, m_sliders{std::move(sliders)}
+namespace gui
+{
+
+GUI::GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities)
+    : m_scenario{scenario}, m_entities{std::move(entities)}
 {
 }
 
@@ -23,49 +26,29 @@ void GUI::mouseRelease()
 
 void GUI::mousePress(Vec2f mouse)
 {
-    for (auto& button : m_buttons)
+    for (auto& entity : m_entities)
     {
-        if (button.checkHover(mouse))
+        if (entity->checkHover(mouse))
         {
-            button.onUse();
-        }
-    }
-    for (auto& slider : m_sliders)
-    {
-        if (slider.checkHover(mouse))
-        {
-            slider.setActive();
+            entity->mousePress();
         }
     }
 }
 
 void GUI::update(Vec2f mouse)
 {
-
-    for (auto& button : m_buttons)
+    for (auto& entity : m_entities)
     {
-        if (button.checkHover(mouse))
-        {
-            button.setActive();
-        }
-    }
-    for (auto& slider : m_sliders)
-    {
-        if (Slider::getActive() != nullptr)
-        {
-            Slider::getActive()->onUse(mouse.y);
-        }
+        entity->update(mouse);
     }
 }
 
 void GUI::draw(sf::RenderWindow* window)
 {
-    for (auto& button : m_buttons)
+    for (auto& entity : m_entities)
     {
-        button.draw(window);
-    }
-    for (auto& slider : m_sliders)
-    {
-        slider.draw(window);
+        entity->draw(window);
     }
 }
+
+} // namespace gui

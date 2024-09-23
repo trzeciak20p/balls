@@ -14,9 +14,9 @@ public:
     void mousePress(Vec2f mouse);
     void update(Vec2f mouse);
     void draw(sf::RenderWindow* window);
-    void loadGuiScenario(GUI::Scenario scenario);
-    void deleteGuiScenario(GUI::Scenario scenario);
+    void loadGuiScenario(gui::GUI::Scenario scenario);
+    void deleteGuiScenario(gui::GUI::Scenario scenario);
 
 private:
-    std::vector<GUI> m_guis;
+    std::vector<gui::GUI> m_guis;
 };
