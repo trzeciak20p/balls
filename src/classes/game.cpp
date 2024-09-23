@@ -1,7 +1,5 @@
 #include "game.h"
-#include "board/ball.h"
 #include "gui/gui.h"
-#include "gui/slider.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
@@ -40,28 +38,14 @@ Vec2f Game::getMouse()
 void Game::mousePress()
 {
     setLastClick();
-    m_dragging = true;
     m_ui.mousePress(m_last_click);
     board.mousePress(m_last_click);
 }
 
 void Game::mouseRelease()
 {
-    Slider::clearActive();
-
-    if (!m_dragging)
-    {
-        return;
-    }
-    m_dragging = false;
-    if (Ball::active_ball == nullptr)
-    {
-        return;
-    }
-
-    Ball::active_ball->setSpeed((m_last_click - getMouse()) / 6.0F);
-    Ball::active_ball->setFillColor(Ball::active_ball->m_color);
-    Ball::active_ball = nullptr;
+    m_ui.mouseRelease();
+    board.mouseRelease(getMouse(), m_last_click);
 }
 
 void Game::eventHandle(sf::Event event)
@@ -96,7 +80,7 @@ void Game::eventHandle(sf::Event event)
 void Game::update()
 {
     m_ui.update(getMouse());
-    board.update(m_dragging, m_last_click, getMouse());
+    board.update(m_last_click, getMouse());
 }
 
 void Game::draw()

@@ -16,6 +16,11 @@ GUI::Scenario GUI::getScenario()
     return m_scenario;
 }
 
+void GUI::mouseRelease()
+{
+    Slider::clearActive();
+}
+
 void GUI::mousePress(Vec2f mouse)
 {
     for (auto& button : m_buttons)

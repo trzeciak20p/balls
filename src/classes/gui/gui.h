@@ -23,6 +23,7 @@ public:
 
     Scenario getScenario();
 
+    void mouseRelease();
     void mousePress(Vec2f mouse);
     void update(Vec2f mouse);
     void draw(sf::RenderWindow* window);

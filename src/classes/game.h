@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Vec2f.h"
-#include "board/ball.h"
 #include "board/board.h"
 #include "board/simulation.h"
 #include "board/wall.h"
@@ -24,13 +23,12 @@ public:
 
     Vec2f getMouse();
 
-    Vec2f      m_last_click;
     Simulation simulation;
     Board      board{"maps/map1"};
 
 private:
+    Vec2f             m_last_click;
     sf::RenderWindow* m_window{};
     sf::View          m_view;
-    bool              m_dragging{};
     UI                m_ui;
 };

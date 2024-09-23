@@ -12,7 +12,8 @@ public:
     explicit Board(const std::string& path);
 
     void mousePress(Vec2f mouse);
-    void update(bool dragging, Vec2f last_click, Vec2f mouse);
+    void mouseRelease(Vec2f mouse, Vec2f last_click);
+    void update(Vec2f last_click, Vec2f mouse);
     void draw(sf::RenderWindow* window);
 
 private:

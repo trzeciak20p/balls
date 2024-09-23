@@ -7,6 +7,14 @@
 
 // UI::UI() = default;
 
+void UI::mouseRelease()
+{
+    for (auto& gui : m_guis)
+    {
+        gui.mouseRelease();
+    }
+}
+
 void UI::mousePress(Vec2f mouse)
 {
     for (auto& gui : m_guis)
