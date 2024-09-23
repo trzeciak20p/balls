@@ -1,15 +1,4 @@
 #include "game.h"
-#include "ball.h"
-#include "slider.h"
-#include "event.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
-#include <cmath>
-#include <iostream>
-#include <numbers>
 
 constexpr float pi{std::numbers::pi_v<float>};
 

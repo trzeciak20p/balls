@@ -1,11 +1,4 @@
 #include "gui.h"
-#include "SFML/Graphics/RenderWindow.hpp"
-#include "button.h"
-#include "Vec2f.h"
-#include "event.h"
-#include "slider.h"
-#include <utility>
-#include <vector>
 
 GUI::GUI(bnw::Scenario scenario, std::vector<Button>&& buttons, std::vector<Slider>&& sliders)
     : m_scenario{scenario}, m_buttons{std::move(buttons)}, m_sliders{std::move(sliders)}

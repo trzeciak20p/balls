@@ -1,7 +1,4 @@
 #include "fontLoader.h"
-#include <SFML/Graphics/Font.hpp>
-#include <iostream>
-#include <string>
 
 namespace bnw
 {

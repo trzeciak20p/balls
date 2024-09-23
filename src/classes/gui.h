@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Vec2f.h"
 #include "button.h"
+#include "chungus.h"
 #include "event.h"
 #include "slider.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <vector>
 
 class GUI
 {

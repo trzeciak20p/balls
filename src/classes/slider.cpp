@@ -1,11 +1,5 @@
 #include "slider.h"
 #include "fontLoader.h"
-#include "Vec2f.h"
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <string>
 
 Slider::Slider(Vec2f pos, float size, const std::string& name)
     : RectangleShape{{5.F, size}}, m_name{name}, m_text{name + ": ", bnw::font1, bnw::font1_size}

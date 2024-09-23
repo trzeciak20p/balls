@@ -1,10 +1,6 @@
 #pragma once
 
-#include "Vec2f.h"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <array>
-#include <vector>
+#include "chungus.h"
 
 class Wall : public sf::RectangleShape
 {

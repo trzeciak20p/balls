@@ -1,11 +1,8 @@
 #pragma once
 
-#include "Vec2f.h"
+#include "chungus.h"
 #include "event.h"
 #include "gui.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <queue>
-#include <vector>
 
 class UI
 {
@@ -22,6 +19,6 @@ public:
     void deleteGuiScenario(bnw::Scenario scenario);
 
 private:
-    std::vector<GUI>              m_guis;
+    std::vector<GUI>                     m_guis;
     static inline std::queue<bnw::Event> m_event_queue;
 };

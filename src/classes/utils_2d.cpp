@@ -1,7 +1,4 @@
 #include "utils_2d.h"
-#include "Vec2f.h"
-#include <SFML/System/Vector2.hpp>
-#include <cmath>
 
 namespace bnw // Balls n' Walls
 {

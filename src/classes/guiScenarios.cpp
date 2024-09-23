@@ -1,18 +1,12 @@
 #include "guiScenarios.h"
-#include "button.h"
-#include "event.h"
-#include "gui.h"
-#include "slider.h"
-#include <utility>
-#include <vector>
 
 GUI getGuiScenario(bnw::Scenario scenario)
 {
     std::vector<Button> buttons;
     std::vector<Slider> sliders;
 
-    bnw::Event const la_event{static_cast<bnw::Event::Tag>(bnw::Event::Tag::gui | bnw::Event::Tag::gui_load),
-                        bnw::Scenario::options};
+    const bnw::Event la_event{static_cast<bnw::Event::Tag>(bnw::Event::Tag::gui | bnw::Event::Tag::gui_load),
+                              bnw::Scenario::options};
     switch (scenario)
     {
     case bnw::Scenario::menu:

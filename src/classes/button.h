@@ -1,12 +1,8 @@
 #pragma once
 
-#include "Vec2f.h"
+#include "chungus.h"
 #include "event.h"
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <string>
-#include <vector>
+#include "fontLoader.h"
 
 class Button : public sf::RectangleShape
 {

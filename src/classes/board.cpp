@@ -1,12 +1,4 @@
 #include "board.h"
-#include "ball.h"
-#include "wall.h"
-#include <SFML/Config.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <fstream>
-#include <iostream>
-#include <string>
 
 sf::Color makeColor(std::ifstream& file)
 {

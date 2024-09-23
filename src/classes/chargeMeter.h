@@ -1,9 +1,6 @@
 #pragma once
 
-#include "ball.h"
-#include "Vec2f.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/VertexArray.hpp>
+#include "chungus.h"
 
 class ChargeMeter
 {

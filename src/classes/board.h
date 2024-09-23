@@ -2,9 +2,9 @@
 
 #include "ball.h"
 #include "chargeMeter.h"
+#include "chungus.h"
+#include "ui.h"
 #include "wall.h"
-#include <SFML/Graphics/RenderTexture.hpp>
-#include <vector>
 
 class Board
 {
