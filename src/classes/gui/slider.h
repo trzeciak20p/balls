@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vec2f.h"
+#include "../Vec2f.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

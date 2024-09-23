@@ -1,7 +1,7 @@
 #include "chargeMeter.h"
+#include "../Vec2f.h"
+#include "../utils_2d.h"
 #include "ball.h"
-#include "Vec2f.h"
-#include "utils_2d.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <cmath>

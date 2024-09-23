@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vec2f.h"
-#include "gui.h"
+#include "gui/gui.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <vector>
 

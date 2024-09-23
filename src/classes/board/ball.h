@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vec2f.h"
-#include "utils_2d.h"
+#include "../Vec2f.h"
+#include "../utils_2d.h"
 #include "wall.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Color.hpp>

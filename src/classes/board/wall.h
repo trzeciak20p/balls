@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vec2f.h"
+#include "../Vec2f.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <array>

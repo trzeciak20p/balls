@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ball.h"
-#include "board.h"
 #include "Vec2f.h"
-#include "simulation.h"
+#include "board/ball.h"
+#include "board/board.h"
+#include "board/simulation.h"
+#include "board/wall.h"
 #include "ui.h"
 #include "utils_2d.h"
-#include "wall.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 

@@ -1,8 +1,8 @@
 #include "ui.h"
 #include "SFML/Graphics/RenderWindow.hpp"
-#include "button.h"
 #include "Vec2f.h"
-#include "guiScenarios.h"
+#include "gui/button.h"
+#include "gui/guiScenarios.h"
 #include <vector>
 
 // UI::UI() = default;

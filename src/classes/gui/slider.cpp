@@ -1,6 +1,6 @@
 #include "slider.h"
-#include "fontLoader.h"
-#include "Vec2f.h"
+#include "../Vec2f.h"
+#include "../fontLoader.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

@@ -1,7 +1,7 @@
 #include "game.h"
-#include "ball.h"
-#include "gui.h"
-#include "slider.h"
+#include "board/ball.h"
+#include "gui/gui.h"
+#include "gui/slider.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
