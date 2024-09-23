@@ -1,8 +1,10 @@
 #include "ui.h"
-#include "SFML/Graphics/RenderWindow.hpp"
 #include "Vec2f.h"
 #include "button.h"
+#include "event.h"
 #include "guiScenarios.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <queue>
 #include <vector>
 
 // UI::UI() = default;
@@ -33,9 +35,9 @@ void UI::draw(sf::RenderWindow* window)
     }
 }
 
-void UI::addEvent(bnw::Event event)
+void UI::addEvent(const bnw::Event& event)
 {
-    m_event_queue.emplace();
+    m_event_queue.emplace(event);
 }
 
 void UI::eventListener()
@@ -68,12 +70,12 @@ void UI::eventHandler()
     }
 }
 
-void UI::loadGuiScenario(GUI::Scenario scenario)
+void UI::loadGuiScenario(bnw::Scenario scenario)
 {
     m_guis.emplace_back(getGuiScenario(scenario));
 }
 
-void UI::deleteGuiScenario(GUI::Scenario scenario)
+void UI::deleteGuiScenario(bnw::Scenario scenario)
 {
     std::erase_if(m_guis, [&](GUI& gui) { return gui.getScenario() == scenario; });
 }

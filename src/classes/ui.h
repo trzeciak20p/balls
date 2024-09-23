@@ -10,7 +10,7 @@
 class UI
 {
 public:
-    static void addEvent(bnw::Event event);
+    static void addEvent(const bnw::Event& event);
 
     // UI();
     void mousePress(Vec2f mouse);
@@ -18,10 +18,10 @@ public:
     void draw(sf::RenderWindow* window);
     void eventListener();
     void eventHandler();
-    void loadGuiScenario(GUI::Scenario scenario);
-    void deleteGuiScenario(GUI::Scenario scenario);
+    void loadGuiScenario(bnw::Scenario scenario);
+    void deleteGuiScenario(bnw::Scenario scenario);
 
 private:
     std::vector<GUI>              m_guis;
-    static std::queue<bnw::Event> m_event_queue;
+    static inline std::queue<bnw::Event> m_event_queue;
 };
