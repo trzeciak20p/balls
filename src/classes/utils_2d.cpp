@@ -8,7 +8,7 @@ float getAngle(Vec2f a)
     return std::atan(a.y / a.x);
 }
 
-float getDistance(Vec2f a, Vec2f b)
+float getLength(Vec2f a, Vec2f b)
 {
     return getDistance(a - b);
 }
