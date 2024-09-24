@@ -29,16 +29,16 @@ void Ball::cornerCheck(const Wall& wall, Vec2f new_pos)
     auto corners = wall.getCorners();
 
     auto nearest_corner = *std::ranges::min_element(
-        corners, [&](auto cor1, auto cor2) { return bnw::getLength(cor1, new_pos) < bnw::getLength(cor2, new_pos); });
+        corners, [&](auto cor1, auto cor2) { return bnw::distance(cor1, new_pos) < bnw::distance(cor2, new_pos); });
 
-    if (bnw::getLength(nearest_corner, new_pos) > getRadius())
+    if (bnw::distance(nearest_corner, new_pos) > getRadius())
     {
         return;
     }
 
     const float dot = bnw::dotProduct(m_vel, nearest_corner - new_pos);
-    m_vel -= (nearest_corner - new_pos) / bnw::getLength(nearest_corner, new_pos) * dot /
-             bnw::getLength(nearest_corner, new_pos) * 2.0F;
+    m_vel -= (nearest_corner - new_pos) / bnw::distance(nearest_corner, new_pos) * dot /
+             bnw::distance(nearest_corner, new_pos) * 2.0F;
 }
 
 void Ball::sideCheck(const Wall& wall, Vec2f new_pos)
@@ -70,7 +70,7 @@ void Ball::checkBounce(const std::vector<Wall>& walls)
 
 bool Ball::checkHover(Vec2f mouse) const
 {
-    return bnw::getLength(getPosition(), mouse) <= getRadius();
+    return bnw::distance(getPosition(), mouse) <= getRadius();
 }
 
 void Ball::setSpeed(Vec2f speed)
@@ -90,7 +90,7 @@ void Ball::update(const std::vector<Wall>& walls)
 
     m_vel *= m_friction; // lowering speed
 
-    if (bnw::getDistance(m_vel) < 0.2F)
+    if (bnw::length(m_vel) < 0.2F)
     {
         m_vel = {};
     }

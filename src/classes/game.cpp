@@ -24,7 +24,7 @@ Game::Game()
     m_view.reset(sf::FloatRect(0, 0, 800, 700));
     m_window.setView(m_view);
 
-    m_ui.loadGuiScenario(std::move(std::make_unique<gui::GuiMenu>()));
+    m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>());
 }
 
 void Game::gaming()
