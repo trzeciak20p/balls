@@ -16,7 +16,6 @@ public:
     bool checkHover(Vec2f mouse) const;
     void update(const std::vector<Wall>& walls);
 
-    inline static Ball* active_ball{};
     sf::Color           m_color;
 
 private:

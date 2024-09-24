@@ -85,14 +85,14 @@ Board::Board(const std::string& path)
 
 void Board::mouseRelease(Vec2f mouse, Vec2f last_click)
 {
-    if (Ball::active_ball == nullptr)
+    if (m_active_ball == nullptr)
     {
         return;
     }
 
-    Ball::active_ball->setSpeed((last_click - mouse) / 6.0F);
-    Ball::active_ball->setFillColor(Ball::active_ball->m_color);
-    Ball::active_ball = nullptr;
+    m_active_ball->setSpeed((last_click - mouse) / 6.0F);
+    m_active_ball->setFillColor(m_active_ball->m_color);
+    m_active_ball = nullptr;
 }
 
 void Board::mousePress(Vec2f mouse)
@@ -103,7 +103,7 @@ void Board::mousePress(Vec2f mouse)
         {
             continue;
         }
-        Ball::active_ball = &ball;
+        m_active_ball = &ball;
         break;
     }
 }
@@ -114,7 +114,7 @@ void Board::update(Vec2f last_click, Vec2f mouse)
     {
         ball.update(m_walls);
     }
-    m_charge_meter.update(last_click, mouse);
+    m_charge_meter.update(m_active_ball, last_click, mouse);
 }
 
 void Board::draw(sf::RenderWindow& window)
