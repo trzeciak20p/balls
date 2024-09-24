@@ -12,7 +12,7 @@ void ChargeMeter::update(Vec2f last_click, Vec2f mouse)
         m_vertices = sf::VertexArray{sf::Triangles, 3};
         return;
     }
-    const float distance = bnw::getLength(last_click, mouse);
+    const float distance = bnw::getDistance(last_click, mouse);
     const float angle    = bnw::getAngle(mouse - last_click);
     const float x        = std::cos(angle + pi / 2) * Ball::active_ball->getRadius() / 2;
     const float y        = std::sin(angle + pi / 2) * Ball::active_ball->getRadius() / 2;
