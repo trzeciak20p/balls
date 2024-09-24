@@ -18,7 +18,7 @@ public:
     void mousePress();
     void update(Vec2f pos);
     void draw(sf::RenderWindow* window);
-    void onUse(float height);
+    void slide(float height);
     void colorActive();
     void colorDefault();
     bool checkHover(Vec2f pos);
