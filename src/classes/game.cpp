@@ -25,6 +25,7 @@ Game::Game()
     m_window.setView(m_view);
 
     m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>());
+    m_ui.loadGuiScenario(std::make_unique<gui::GuiOptions>(&m_board));
 }
 
 void Game::gaming()

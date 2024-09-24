@@ -17,7 +17,7 @@ public:
     void update(Vec2f last_click, Vec2f mouse);
     void draw(sf::RenderWindow& window);
 
-private:
+// private:
     Ball*             m_active_ball{};
     ChargeMeter       m_charge_meter;
     std::vector<Wall> m_walls;

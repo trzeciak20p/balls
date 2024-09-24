@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../event.h"
 #include "../vec2f.h"
 #include "entity.h"
 #include <SFML/Graphics/RectangleShape.hpp>
