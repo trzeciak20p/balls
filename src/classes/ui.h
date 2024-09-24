@@ -22,5 +22,4 @@ public:
 
 private:
     std::vector<std::unique_ptr<gui::GUI>> m_guis;
-    static inline std::queue<bnw::Event>   m_event_queue;
 };
