@@ -4,7 +4,7 @@
 
 constexpr float pi{std::numbers::pi_v<float>};
 
-void ChargeMeter::update(Vec2f last_click, Vec2f mouse)
+void ChargeMeter::update(Vec2f anchor, Vec2f mouse)
 {
 
     if (Ball::active_ball == nullptr)
@@ -12,8 +12,8 @@ void ChargeMeter::update(Vec2f last_click, Vec2f mouse)
         m_vertices = sf::VertexArray{sf::Triangles, 3};
         return;
     }
-    const float distance = bnw::getDistance(last_click, mouse);
-    const float angle    = bnw::getAngle(mouse - last_click);
+    const float distance = bnw::getDistance(anchor, mouse);
+    const float angle    = bnw::getAngle(mouse - anchor);
     const float x        = std::cos(angle + pi / 2) * Ball::active_ball->getRadius() / 2;
     const float y        = std::sin(angle + pi / 2) * Ball::active_ball->getRadius() / 2;
 

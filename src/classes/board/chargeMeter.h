@@ -5,7 +5,7 @@
 class ChargeMeter
 {
 public:
-    void update(Vec2f last_click, Vec2f mouse);
+    void update(Vec2f anchor, Vec2f mouse);
     void draw(sf::RenderWindow* window);
 
 private:
