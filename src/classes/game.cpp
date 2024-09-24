@@ -1,6 +1,16 @@
 #include "game.h"
 #include "fontLoader.h"
 #include "gui/gui_menu.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/WindowStyle.hpp>
+#include <cmath>
+#include <memory>
+#include <numbers>
+#include <utility>
 
 constexpr float pi{std::numbers::pi_v<float>};
 
@@ -21,7 +31,7 @@ void Game::gaming()
 {
     while (m_window.isOpen())
     {
-        sf::Event event;
+        sf::Event event{};
         while (m_window.pollEvent(event))
         {
             eventHandle(event);

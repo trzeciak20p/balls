@@ -1,4 +1,5 @@
 #include "classes/game.h"
+#include <cmath>
 
 int main()
 {

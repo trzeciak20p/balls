@@ -1,4 +1,12 @@
 #include "button.h"
+#include "../fontLoader.h"
+#include "../vec2f.h"
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <cstdio>
+#include <string>
 
 namespace gui
 {

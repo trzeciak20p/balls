@@ -5,6 +5,8 @@
 #include "ball.h"
 #include "chargeMeter.h"
 #include "wall.h"
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <vector>
 
 class Board
 {

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "chungus.h"
+#include "Vec2f.h"
+#include <SFML/Graphics.hpp>
+#include <cmath>
 
 namespace bnw
 {

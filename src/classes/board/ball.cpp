@@ -1,5 +1,14 @@
 #include "ball.h"
+#include "../vec2f.h"
 #include "../utils_2d.h"
+#include "wall.h"
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <vector>
 
 Ball::Ball(Vec2f pos, float radius, sf::Color color)
     : sf::CircleShape{radius}, m_color{color}

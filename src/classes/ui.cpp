@@ -1,6 +1,10 @@
 #include "ui.h"
 #include "gui/button.h"
-#include "gui/gui.h"
+#include "vec2f.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <memory>
+#include <utility>
+#include <vector>
 
 // UI::UI() = default;
 

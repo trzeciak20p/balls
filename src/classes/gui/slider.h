@@ -1,7 +1,12 @@
 #pragma once
 
-#include "../chungus.h"
+#include "../vec2f.h"
 #include "entity.h"
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <string>
 
 namespace gui
 {
@@ -15,13 +20,13 @@ public:
     static void    clearActive();
     static Slider* getActive();
 
-    void mousePress();
-    void update(Vec2f pos);
-    void draw(sf::RenderWindow& window);
+    void mousePress() override;
+    void update(Vec2f pos) override;
+    void draw(sf::RenderWindow& window) override;
     void onUse(float height);
-    void colorActive();
-    void colorDefault();
-    bool checkHover(Vec2f pos);
+    void colorActive() override;
+    void colorDefault() override;
+    bool checkHover(Vec2f pos) override;
 
 private:
     inline static Slider* m_active_slider{};
