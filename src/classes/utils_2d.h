@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vec2f.h"
+#include "vec2f.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 

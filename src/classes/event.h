@@ -28,14 +28,14 @@ public:
         music_change = 1 << 5
     };
 
-    Event(Tag tag, bnw::Scenario gui_scenario, std::string  map = "", int sfx_vol = 0, int music_vol = 0);
+    Event(Tag tag, bnw::Scenario gui_scenario, std::string map = "", int sfx_vol = 0, int music_vol = 0);
 
-    Tag           getTag();
-    [[nodiscard]] bool          checkTag(Tag tag) const;
-    bnw::Scenario m_gui_scenario;
-    std::string   m_map;
-    int           m_sfx_vol   = 0;
-    int           m_music_vol = 0;
+    Tag                getTag();
+    [[nodiscard]] bool checkTag(Tag tag) const;
+    bnw::Scenario      m_gui_scenario;
+    std::string        m_map;
+    int                m_sfx_vol   = 0;
+    int                m_music_vol = 0;
 
 private:
     Tag m_tag;

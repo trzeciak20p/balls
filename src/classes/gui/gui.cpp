@@ -1,5 +1,6 @@
 #include "gui.h"
-#include "entity.h"
+#include "../vec2f.h"
+#include "SFML/Graphics/RenderWindow.hpp"
 #include "slider.h"
 
 namespace gui

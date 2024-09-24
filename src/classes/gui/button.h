@@ -1,8 +1,13 @@
 #pragma once
 
-#include "../chungus.h"
-#include "../fontLoader.h"
+#include "../event.h"
+#include "../vec2f.h"
 #include "entity.h"
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <string>
+#include <vector>
 
 namespace gui
 {
@@ -16,13 +21,13 @@ public:
     static void    clearActive();
     static Button* getActive();
 
-    void mousePress();
-    void update(Vec2f pos);
-    void draw(sf::RenderWindow& window);
+    void mousePress() override;
+    void update(Vec2f pos) override;
+    void draw(sf::RenderWindow& window) override;
     void onUse();
-    void colorDefault();
-    void colorActive();
-    bool checkHover(Vec2f pos);
+    void colorDefault() override;
+    void colorActive() override;
+    bool checkHover(Vec2f pos) override;
 
 private:
     static inline Button* m_active_button{};

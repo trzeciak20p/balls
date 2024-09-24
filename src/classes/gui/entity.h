@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../chungus.h"
+#include "../vec2f.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 
 namespace gui
