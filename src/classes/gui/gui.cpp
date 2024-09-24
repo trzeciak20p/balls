@@ -5,15 +5,15 @@
 namespace gui
 {
 
-GUI::GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities)
-    : m_scenario{scenario}, m_entities{std::move(entities)}
-{
-}
+// GUI::GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities)
+//     : m_scenario{scenario}, m_entities{std::move(entities)}
+// {
+// }
 
-GUI::Scenario GUI::getScenario()
-{
-    return m_scenario;
-}
+// GUI::Scenario GUI::getScenario()
+// {
+//     return m_scenario;
+// }
 
 void GUI::mouseRelease()
 {

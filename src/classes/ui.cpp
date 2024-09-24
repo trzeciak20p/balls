@@ -1,7 +1,6 @@
 #include "ui.h"
 #include "gui/button.h"
 #include "gui/gui.h"
-#include "gui/guiScenarios.h"
 
 // UI::UI() = default;
 
@@ -9,7 +8,7 @@ void UI::mouseRelease()
 {
     for (auto& gui : m_guis)
     {
-        gui.mouseRelease();
+        gui->mouseRelease();
     }
 }
 
@@ -17,7 +16,7 @@ void UI::mousePress(Vec2f mouse)
 {
     for (auto& gui : m_guis)
     {
-        gui.mousePress(mouse);
+        gui->mousePress(mouse);
     }
 }
 
@@ -27,7 +26,7 @@ void UI::update(Vec2f mouse)
 
     for (auto& gui : m_guis)
     {
-        gui.update(mouse);
+        gui->update(mouse);
     }
 }
 
@@ -35,16 +34,16 @@ void UI::draw(sf::RenderWindow& window)
 {
     for (auto& gui : m_guis)
     {
-        gui.draw(window);
+        gui->draw(window);
     }
 }
 
-void UI::loadGuiScenario(gui::GUI::Scenario scenario)
+void UI::loadGuiScenario(std::unique_ptr<gui::GUI> gui)
 {
-    m_guis.emplace_back(gui::getGuiScenario(scenario));
+    m_guis.emplace_back(std::move(gui));
 }
 
-void UI::deleteGuiScenario(gui::GUI::Scenario scenario)
-{
-    std::erase_if(m_guis, [&](gui::GUI& gui) { return gui.getScenario() == scenario; });
-}
+// void UI::deleteGuiScenario(gui::GUI::Scenario scenario)
+// {
+//     std::erase_if(m_guis, [&](gui::GUI& gui) { return gui.getScenario() == scenario; });
+// }

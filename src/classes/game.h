@@ -18,6 +18,7 @@ private:
     void mouseRelease();
     void update();
     void draw();
+    void keyPress();
     void eventHandle(sf::Event event);
 
     Vec2f getMouse();

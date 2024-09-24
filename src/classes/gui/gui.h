@@ -19,17 +19,19 @@ public:
         max_gui_scenario
     };
 
-    GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities);
+    // GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities);
 
-    Scenario getScenario();
+    virtual ~GUI() = default;
+
+    // Scenario getScenario();
 
     void mouseRelease();
     void mousePress(Vec2f mouse);
     void update(Vec2f mouse);
     void draw(sf::RenderWindow& window);
 
-private:
-    Scenario                             m_scenario;
+protected:
+    // Scenario                             m_scenario;
     std::vector<std::unique_ptr<Entity>> m_entities;
 };
 

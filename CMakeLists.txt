@@ -25,7 +25,6 @@ add_executable(main
     src/classes/gui/slider.cpp
     src/classes/gui/button.cpp
     src/classes/gui/gui.cpp
-    src/classes/gui/guiScenarios.cpp
     src/classes/utils_2d.cpp
     src/classes/game.cpp
     src/classes/fontLoader.cpp

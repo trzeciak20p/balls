@@ -9,6 +9,8 @@ namespace gui
 class Entity
 {
 public:
+    virtual ~Entity() = default;
+
     virtual void mousePress()                   = 0;
     virtual void update(Vec2f pos)              = 0;
     virtual void draw(sf::RenderWindow& window) = 0;
