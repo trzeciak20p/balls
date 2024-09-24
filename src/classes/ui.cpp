@@ -31,7 +31,7 @@ void UI::update(Vec2f mouse)
     }
 }
 
-void UI::draw(sf::RenderWindow* window)
+void UI::draw(sf::RenderWindow& window)
 {
     for (auto& gui : m_guis)
     {

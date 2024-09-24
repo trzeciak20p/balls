@@ -63,11 +63,11 @@ void Slider::update(Vec2f pos)
     }
 }
 
-void Slider::draw(sf::RenderWindow* window)
+void Slider::draw(sf::RenderWindow& window)
 {
-    window->draw(*this);
-    window->draw(m_text);
-    window->draw(m_controler);
+    window.draw(*this);
+    window.draw(m_text);
+    window.draw(m_controler);
 }
 
 void Slider::onUse(float height)

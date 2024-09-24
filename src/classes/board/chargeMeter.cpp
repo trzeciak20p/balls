@@ -48,7 +48,7 @@ void ChargeMeter::update(Vec2f last_click, Vec2f mouse)
     }
 }
 
-void ChargeMeter::draw(sf::RenderWindow* window)
+void ChargeMeter::draw(sf::RenderWindow& window)
 {
-    window->draw(m_vertices);
+    window.draw(m_vertices);
 }

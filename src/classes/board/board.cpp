@@ -109,15 +109,15 @@ void Board::update(Vec2f last_click, Vec2f mouse)
     m_charge_meter.update(last_click, mouse);
 }
 
-void Board::draw(sf::RenderWindow* window)
+void Board::draw(sf::RenderWindow& window)
 {
     for (const auto& wall : m_walls)
     {
-        window->draw(wall);
+        window.draw(wall);
     }
     for (auto& ball : m_balls)
     {
-        window->draw(ball);
+        window.draw(ball);
     }
     m_charge_meter.draw(window);
 }

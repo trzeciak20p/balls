@@ -39,7 +39,7 @@ void GUI::update(Vec2f mouse)
     }
 }
 
-void GUI::draw(sf::RenderWindow* window)
+void GUI::draw(sf::RenderWindow& window)
 {
     for (auto& entity : m_entities)
     {

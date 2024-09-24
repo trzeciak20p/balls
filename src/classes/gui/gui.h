@@ -26,7 +26,7 @@ public:
     void mouseRelease();
     void mousePress(Vec2f mouse);
     void update(Vec2f mouse);
-    void draw(sf::RenderWindow* window);
+    void draw(sf::RenderWindow& window);
 
 private:
     Scenario                             m_scenario;

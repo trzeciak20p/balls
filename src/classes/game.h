@@ -8,8 +8,11 @@
 class Game
 {
 public:
-    explicit Game(sf::RenderWindow* window);
+    Game();
 
+    void gaming();
+
+private:
     void mousePress();
     void setLastClick();
     void mouseRelease();
@@ -19,12 +22,10 @@ public:
 
     Vec2f getMouse();
 
-    Simulation simulation;
-    Board      board{"maps/map1"};
-
-private:
-    Vec2f             m_last_click;
-    sf::RenderWindow* m_window{};
-    sf::View          m_view;
-    UI                m_ui;
+    Simulation       m_simulation;
+    Board            m_board{"maps/map1"};
+    Vec2f            m_last_click;
+    sf::RenderWindow m_window;
+    sf::View         m_view;
+    UI               m_ui;
 };

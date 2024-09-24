@@ -53,10 +53,10 @@ void Button::update(Vec2f pos)
     }
 }
 
-void Button::draw(sf::RenderWindow* window)
+void Button::draw(sf::RenderWindow& window)
 {
-    window->draw(*this);
-    window->draw(m_text);
+    window.draw(*this);
+    window.draw(m_text);
 }
 
 void Button::onUse()

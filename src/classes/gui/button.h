@@ -18,7 +18,7 @@ public:
 
     void mousePress();
     void update(Vec2f pos);
-    void draw(sf::RenderWindow* window);
+    void draw(sf::RenderWindow& window);
     void onUse();
     void colorDefault();
     void colorActive();

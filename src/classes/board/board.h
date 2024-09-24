@@ -14,7 +14,7 @@ public:
     void mousePress(Vec2f mouse);
     void mouseRelease(Vec2f mouse, Vec2f last_click);
     void update(Vec2f last_click, Vec2f mouse);
-    void draw(sf::RenderWindow* window);
+    void draw(sf::RenderWindow& window);
 
 private:
     ChargeMeter       m_charge_meter;
