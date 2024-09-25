@@ -23,7 +23,7 @@ public:
     void mousePress() override;
     void update(Vec2f pos) override;
     void draw(sf::RenderWindow& window) override;
-    void onUse(float height);
+    void slide(float height);
     void colorActive() override;
     void colorDefault() override;
     bool checkHover(Vec2f pos) override;

@@ -22,7 +22,7 @@ Slider::Slider(Vec2f pos, float size, const std::string& name)
     m_controler.setSize({15.F, 5.F});
     m_controler.setOrigin(m_controler.getSize().x / 2, m_controler.getSize().y / 2);
 
-    onUse(pos.y);
+    slide(pos.y);
     colorDefault();
 }
 
@@ -65,7 +65,7 @@ void Slider::update(Vec2f pos)
 {
     if (Slider::getActive() != nullptr)
     {
-        Slider::getActive()->onUse(pos.y);
+        Slider::getActive()->slide(pos.y);
     }
 }
 
@@ -76,7 +76,7 @@ void Slider::draw(sf::RenderWindow& window)
     window.draw(m_controler);
 }
 
-void Slider::onUse(float height)
+void Slider::slide(float height)
 {
     m_value = (height - getPosition().y) / getSize().y * 100;
     if (m_value <= 0)
