@@ -1,24 +1,26 @@
 #include "utils_2d.h"
-#include <SFML/System/Vector2.hpp>
-#include <cmath>
 
-namespace bnw // Balls n' Walls
+namespace bnw
 {
 
-float getAngle(sf::Vector2f A)
+float getAngle(Vec2f a)
 {
-    return std::atan(A.y / A.x);
+    return std::atan(a.y / a.x);
 }
 
-float getDistacne(sf::Vector2f A, sf::Vector2f B)
+float getDistance(Vec2f a, Vec2f b)
 {
-    auto diff = A - B;
-    return std::sqrt(diff.x * diff.x + diff.y * diff.y);
+    return getLength(a - b);
 }
 
-float getDistacne(sf::Vector2f A)
+float getLength(Vec2f a)
 {
-    return std::sqrt(A.x * A.x + A.y * A.y);
+    return std::sqrt(a.x * a.x + a.y * a.y);
+}
+
+float dotProduct(Vec2f a, Vec2f b)
+{
+    return a.x * b.x + a.y * b.y;
 }
 
 } // namespace bnw

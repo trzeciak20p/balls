@@ -1,11 +1,12 @@
 #pragma once
 
-#include <SFML/Graphics/Font.hpp>
+#include "chungus.h"
 
 namespace bnw
 {
-extern sf::Font font1;
-extern int      font1_size;
-void            loadFont(std::string path);
+
+inline sf::Font font1;
+inline unsigned font1_size{20};
+void            loadFont(const std::string& path);
 
 } // namespace bnw

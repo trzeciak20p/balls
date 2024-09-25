@@ -1,24 +1,27 @@
 #include "wall.h"
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/System/Vector2.hpp>
 
-Wall::Wall(sf::Vector2f pos, sf::Vector2f size, Type type)
-    : sf::RectangleShape{size}, m_type{type}
+Wall::Wall(Vec2f left_top, Vec2f width_height, Type type)
+    : sf::RectangleShape{width_height}, m_type{type}
 {
+    setPosition(left_top);
+
     switch (type)
     {
     case dmg:
-        setFillColor(sf::Color(255, 20, 20));
+        setFillColor({255, 20, 20});
         break;
     case bouncy:
-        setFillColor(sf::Color(235, 40, 255));
+        setFillColor({235, 40, 255});
         break;
     default:
-        setFillColor(sf::Color(125, 125, 125));
+        setFillColor({125, 125, 125});
         break;
     }
+}
 
-    setPosition(pos);
+std::array<Vec2f, 4> Wall::getCorners() const
+{
+    return {{getPosition(), {getRight(), getTop()}, getPosition() + getSize(), {getLeft(), getBottom()}}};
 }
 
 float Wall::getTop() const

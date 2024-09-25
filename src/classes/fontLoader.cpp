@@ -2,15 +2,14 @@
 
 namespace bnw
 {
-// klasa z tego miałaby sens
-sf::Font font1{};
-int      font1_size = 20;
+// klasa z tego miałaby sans
 
-void loadFont(std::string path)
+void loadFont(const std::string& path)
 {
     if (!font1.loadFromFile(path))
     {
-        std::fprintf(stderr, "font: \"%s\" didn't load!\r\n", path.c_str());
+        std::cerr << "font: " << path << " didn't load!\n";
     }
 }
+
 } // namespace bnw

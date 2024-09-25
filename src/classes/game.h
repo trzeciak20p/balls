@@ -1,41 +1,30 @@
 #pragma once
 
-#include "ball.h"
-#include "board.h"
-#include "utils_2d.h"
-#include "wall.h"
-#include <SFML/Graphics.hpp>
-#include <cmath>
+#include "board/board.h"
+#include "board/simulation.h"
+#include "chungus.h"
+#include "ui.h"
 
 class Game
 {
 public:
-    enum State : int8_t
-    {
-        paused,
-        playing,
-        menu,
-        settings,
-        map_selection
-    };
+    explicit Game(sf::RenderWindow* window);
 
-    explicit Game(sf::Window *window);
+    void mousePress();
+    void setLastClick();
+    void mouseRelease();
+    void update();
+    void draw();
+    void eventHandle(sf::Event event);
 
-    State getState();
-    void  mousePress();
-    void  updateMouse();
-    void  mouseRelease();
-    bool  calculateTrail(); // Calculates trail for drawing
+    Vec2f getMouse();
 
-    const sf::VertexArray &getTrial();
-
-    sf::Vector2i m_mouse;
-    Board       *to_board{};
+    Simulation simulation;
+    Board      board{"maps/map1"};
 
 private:
-    sf::Window     *m_window{};
-    bool            m_dragging{};
-    Ball           *m_active_ball{};
-    State           m_state{menu};
-    sf::VertexArray m_trail{sf::Triangles, 3};
+    Vec2f             m_last_click;
+    sf::RenderWindow* m_window{};
+    sf::View          m_view;
+    UI                m_ui;
 };

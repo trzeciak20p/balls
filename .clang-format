@@ -9,8 +9,19 @@ IntegerLiteralSeparator:
   Binary: 8
   Decimal: 3
   Hex: 4
+InsertBraces: true
 PackConstructorInitializers: NextLineOnly
 QualifierAlignment: Left
+PointerAlignment: Left
 RemoveParentheses: ReturnStatement
 RemoveSemicolon: true
 SeparateDefinitionBlocks: Always
+
+# CppCoreGuidelines NL.16: Use a conventional class member declaration order
+
+# types: classes, enums, and aliases (using)
+# constructors, assignments, destructor
+# functions
+# data
+
+# Use the public before protected before private order.

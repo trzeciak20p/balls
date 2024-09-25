@@ -1,8 +1,6 @@
 #pragma once
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <vector>
+#include "../chungus.h"
 
 class Wall : public sf::RectangleShape
 {
@@ -14,12 +12,14 @@ public:
         bouncy = 1 << 1,
     };
 
-    Wall(sf::Vector2f pos, sf::Vector2f size, Type type = normal);
+    Wall(Vec2f left_top, Vec2f width_height, Type type = normal);
 
     float getTop() const;
     float getLeft() const;
     float getRight() const;
     float getBottom() const;
+
+    std::array<Vec2f, 4> getCorners() const;
 
 private:
     Type m_type{};
