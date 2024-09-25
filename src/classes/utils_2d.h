@@ -7,9 +7,9 @@
 namespace bnw
 {
 
-float getAngle(Vec2f a);
-float getLength(Vec2f a);
-float getDistance(Vec2f a, Vec2f b);
+float angle(Vec2f a);
+float length(Vec2f a);
+float distance(Vec2f a, Vec2f b);
 float dotProduct(Vec2f a, Vec2f b);
 
 } // namespace bnw

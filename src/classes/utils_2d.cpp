@@ -11,12 +11,12 @@ float angle(Vec2f a)
     return std::atan(a.y / a.x);
 }
 
-float getDistance(Vec2f a, Vec2f b)
+float distance(Vec2f a, Vec2f b)
 {
-    return getLength(a - b);
+    return length(a - b);
 }
 
-float getLength(Vec2f a)
+float length(Vec2f a)
 {
     return std::sqrt(a.x * a.x + a.y * a.y);
 }
