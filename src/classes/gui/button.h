@@ -11,7 +11,7 @@
 namespace gui
 {
 
-class Button : public Entity, public sf::RectangleShape
+class Button : public Widget, public sf::RectangleShape
 {
 public:
     Button(Vec2f pos, Vec2f size, const std::string& name);

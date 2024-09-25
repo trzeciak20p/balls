@@ -6,10 +6,10 @@
 namespace gui
 {
 
-class Entity
+class Widget
 {
 public:
-    virtual ~Entity() = default;
+    virtual ~Widget() = default;
 
     virtual void mousePress()                   = 0;
     virtual void update(Vec2f pos)              = 0;

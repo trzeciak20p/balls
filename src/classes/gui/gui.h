@@ -25,7 +25,7 @@ public:
         max_gui_scenario
     };
 
-    // GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities);
+    // GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Widget>>&& entities);
 
     virtual ~GUI() = default;
 
@@ -38,7 +38,7 @@ public:
 
 protected:
     // Scenario                             m_scenario;
-    std::vector<std::unique_ptr<Entity>> m_entities;
+    std::vector<std::unique_ptr<Widget>> m_entities;
 };
 
 } // namespace gui

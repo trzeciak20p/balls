@@ -6,7 +6,7 @@
 namespace gui
 {
 
-// GUI::GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Entity>>&& entities)
+// GUI::GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Widget>>&& entities)
 //     : m_scenario{scenario}, m_entities{std::move(entities)}
 // {
 // }

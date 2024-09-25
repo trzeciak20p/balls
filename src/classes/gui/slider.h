@@ -11,7 +11,7 @@
 namespace gui
 {
 
-class Slider : public Entity, public sf::RectangleShape
+class Slider : public Widget, public sf::RectangleShape
 {
 public:
     Slider(Vec2f pos, float size, const std::string& name);
