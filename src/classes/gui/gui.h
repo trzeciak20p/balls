@@ -15,7 +15,7 @@ namespace gui
 class GUI
 {
 public:
-    enum Scenario
+    enum Scenario : int8_t
     {
         menu,
         map_select,

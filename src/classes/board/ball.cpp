@@ -11,11 +11,16 @@
 #include <vector>
 
 Ball::Ball(Vec2f pos, float radius, sf::Color color)
-    : sf::CircleShape{radius}, m_color{color}
+    : sf::CircleShape{radius}, m_base_color{color}
 {
     setFillColor(color);
     setOrigin(radius, radius);
     setPosition(pos.x + radius, pos.y + radius);
+}
+
+sf::Color Ball::getBaseColor()
+{
+    return m_base_color;
 }
 
 void Ball::cornerCheck(const Wall& wall, Vec2f new_pos)

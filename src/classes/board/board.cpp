@@ -91,7 +91,7 @@ void Board::mouseRelease(Vec2f mouse, Vec2f last_click)
     }
 
     m_active_ball->setSpeed((last_click - mouse) / 6.0F);
-    m_active_ball->setFillColor(m_active_ball->m_color);
+    m_active_ball->setFillColor(m_active_ball->getBaseColor());
     m_active_ball = nullptr;
 }
 

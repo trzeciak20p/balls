@@ -12,7 +12,7 @@ namespace gui
 {
 
 Button::Button(Vec2f pos, Vec2f size, const std::string& name)
-    : sf::RectangleShape{size}, m_text{name, bnw::font1, bnw::font1_size}
+    : sf::RectangleShape{size}, m_text{name, bnw::font_default, bnw::font1_size}
 {
     setPosition(pos);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});

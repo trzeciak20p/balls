@@ -10,19 +10,19 @@
 class Ball : public sf::CircleShape
 {
 public:
-    Ball(Vec2f pos, float radius, sf::Color color = sf::Color::White);
+    Ball(Vec2f pos, float radius, sf::Color base_color = sf::Color::White);
 
-    void setSpeed(Vec2f speed);
-    bool checkHover(Vec2f mouse) const;
-    void update(const std::vector<Wall>& walls);
-
-    sf::Color           m_color;
+    void      setSpeed(Vec2f speed);
+    bool      checkHover(Vec2f mouse) const;
+    void      update(const std::vector<Wall>& walls);
+    sf::Color getBaseColor();
 
 private:
     void checkBounce(const std::vector<Wall>& walls);
     void sideCheck(const Wall& wall, Vec2f new_pos);
     void cornerCheck(const Wall& wall, Vec2f new_pos);
 
-    Vec2f m_vel;
-    float m_friction{0.9F};
+    sf::Color m_base_color;
+    Vec2f     m_vel;
+    float     m_friction{0.9F};
 };

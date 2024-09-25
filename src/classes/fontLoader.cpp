@@ -9,7 +9,7 @@ namespace bnw
 
 void loadFont(const std::string& path)
 {
-    if (!font1.loadFromFile(path))
+    if (!font_default.loadFromFile(path))
     {
         std::cerr << "font: " << path << " didn't load!\n";
     }

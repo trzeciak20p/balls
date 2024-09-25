@@ -1,4 +1,5 @@
 #include "game.h"
+#include "board/board.h"
 #include "fontLoader.h"
 #include "gui/gui_menu.h"
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -10,7 +11,6 @@
 #include <cmath>
 #include <memory>
 #include <numbers>
-#include <utility>
 
 constexpr float pi{std::numbers::pi_v<float>};
 
@@ -24,7 +24,7 @@ Game::Game()
     m_view.reset(sf::FloatRect(0, 0, 800, 700));
     m_window.setView(m_view);
 
-    m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>(*this));
+    m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>(this));
     m_ui.loadGuiScenario(std::make_unique<gui::GuiOptions>(m_board.get()));
 }
 

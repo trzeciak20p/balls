@@ -19,16 +19,16 @@ public:
         m_board = board;
     }
 
-    void mousePress()
+    void mousePress() override
     {
-        if (!m_board)
+        if (m_board == nullptr)
         {
             return;
         }
 
-        auto color_ball = m_board->m_balls[0].getFillColor();
-        color_ball.r -= 5;
-        m_board->m_balls[0].setFillColor(color_ball);
+        // auto color_ball = m_board->m_balls[0].getFillColor();
+        // color_ball.r -= 5;
+        // m_board->m_balls[0].setFillColor(color_ball);
     }
 
 private:
@@ -38,18 +38,18 @@ private:
 class ButThatNeedsGame : public Button
 {
 public:
-    ButThatNeedsGame(Vec2f pos, Vec2f size, const std::string& name, Game& game)
+    ButThatNeedsGame(Vec2f pos, Vec2f size, const std::string& name, Game* game)
         : Button(pos, size, name), m_game{game}
     {
     }
 
-    void mousePress()
+    void mousePress() override
     {
-        m_game.loadBoard();
+        m_game->loadBoard();
     }
 
 private:
-    Game& m_game;
+    Game* m_game;
 };
 
 } // namespace gui

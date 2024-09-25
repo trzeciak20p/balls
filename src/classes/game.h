@@ -30,7 +30,7 @@ private:
     Vec2f getMouse();
 
     Simulation             m_simulation;
-    std::unique_ptr<Board> m_board{};
+    std::unique_ptr<Board> m_board;
     Vec2f                  m_last_click;
     sf::RenderWindow       m_window;
     sf::View               m_view;
