@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../vec2f.h"
-#include "entity.h"
+#include "widget.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

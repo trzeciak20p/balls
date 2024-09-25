@@ -16,6 +16,7 @@ public:
     Game();
 
     void gaming();
+    void loadBoard();
 
 private:
     void mousePress();
@@ -28,10 +29,10 @@ private:
 
     Vec2f getMouse();
 
-    Simulation       m_simulation;
-    Board            m_board{"maps/map1"};
-    Vec2f            m_last_click;
-    sf::RenderWindow m_window;
-    sf::View         m_view;
-    UI               m_ui;
+    Simulation             m_simulation;
+    std::unique_ptr<Board> m_board{};
+    Vec2f                  m_last_click;
+    sf::RenderWindow       m_window;
+    sf::View               m_view;
+    UI                     m_ui;
 };

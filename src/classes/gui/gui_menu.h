@@ -1,9 +1,10 @@
 #pragma once
 
 #include "../board/board.h"
+#include "../game.h"
 #include "button.h"
 #include "custom_but.h"
-#include "entity.h"
+#include "widget.h"
 #include "gui.h"
 #include "slider.h"
 
@@ -13,9 +14,9 @@ namespace gui
 class GuiMenu : public GUI
 {
 public:
-    GuiMenu()
+    GuiMenu(Game& game)
     {
-        m_entities.emplace_back(std::make_unique<Button>(Vec2f{300.F, 150.F}, Vec2f{200.F, 100.F}, "GEJM"));
+        m_entities.emplace_back(std::make_unique<ButThatNeedsGame>(Vec2f{300.F, 150.F}, Vec2f{200.F, 100.F}, "GEJM", game));
         m_entities.emplace_back(std::make_unique<Button>(Vec2f{300.F, 330.F}, Vec2f{200.F, 100.F}, "OPTIONS"));
     }
 };

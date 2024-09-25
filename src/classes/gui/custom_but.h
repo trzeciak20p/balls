@@ -35,4 +35,21 @@ private:
     Board* m_board{};
 };
 
+class ButThatNeedsGame : public Button
+{
+public:
+    ButThatNeedsGame(Vec2f pos, Vec2f size, const std::string& name, Game& game)
+        : Button(pos, size, name), m_game{game}
+    {
+    }
+
+    void mousePress()
+    {
+        m_game.loadBoard();
+    }
+
+private:
+    Game& m_game;
+};
+
 } // namespace gui

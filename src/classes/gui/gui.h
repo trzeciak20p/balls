@@ -2,7 +2,7 @@
 
 #include "../vec2f.h"
 #include "button.h"
-#include "entity.h"
+#include "widget.h"
 #include "event.h"
 #include "slider.h"
 #include <SFML/Graphics/RenderWindow.hpp>

@@ -24,8 +24,8 @@ Game::Game()
     m_view.reset(sf::FloatRect(0, 0, 800, 700));
     m_window.setView(m_view);
 
-    m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>());
-    m_ui.loadGuiScenario(std::make_unique<gui::GuiOptions>(&m_board));
+    m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>(*this));
+    m_ui.loadGuiScenario(std::make_unique<gui::GuiOptions>(m_board.get()));
 }
 
 void Game::gaming()
@@ -41,6 +41,11 @@ void Game::gaming()
         update();
         draw();
     }
+}
+
+void Game::loadBoard()
+{
+    m_board = std::make_unique<Board>("maps/map1");
 }
 
 void Game::setLastClick()
@@ -59,13 +64,21 @@ void Game::mousePress()
 {
     setLastClick();
     m_ui.mousePress(m_last_click);
-    m_board.mousePress(m_last_click);
+
+    if (m_board)
+    {
+        m_board->mousePress(m_last_click);
+    }
 }
 
 void Game::mouseRelease()
 {
     m_ui.mouseRelease();
-    m_board.mouseRelease(getMouse(), m_last_click);
+
+    if (m_board)
+    {
+        m_board->mouseRelease(getMouse(), m_last_click);
+    }
 }
 
 void Game::keyPress()
@@ -103,10 +116,19 @@ void Game::eventHandle(sf::Event event)
     }
 }
 
+void loadBoard()
+{
+}
+
 void Game::update()
 {
     m_ui.update(getMouse());
-    m_board.update(m_last_click, getMouse());
+
+    if (!m_board)
+    {
+        return;
+    }
+    m_board->update(m_last_click, getMouse());
 }
 
 void Game::draw()
@@ -114,7 +136,11 @@ void Game::draw()
     m_window.clear({102, 102, 102});
 
     m_ui.draw(m_window);
-    m_board.draw(m_window);
+
+    if (m_board)
+    {
+        m_board->draw(m_window);
+    }
 
     m_window.display();
 }
