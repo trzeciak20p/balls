@@ -7,6 +7,9 @@
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <vector>
 
+namespace sim
+{
+
 class Board
 {
 public:
@@ -23,3 +26,5 @@ private:
     std::vector<Wall> m_walls;
     std::vector<Ball> m_balls;
 };
+
+} // namespace sim

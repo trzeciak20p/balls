@@ -1,9 +1,9 @@
 #pragma once
 
-#include "board/ball.h"
-#include "board/board.h"
-#include "board/simulation.h"
-#include "board/wall.h"
+#include "simulation/ball.h"
+#include "simulation/board.h"
+#include "simulation/simulation.h"
+#include "simulation/wall.h"
 #include "ui.h"
 #include "utils_2d.h"
 #include "vec2f.h"
@@ -17,10 +17,7 @@ public:
 
     void gaming();
 
-    Simulation& getSimulation()
-    {
-        return m_simulation;
-    }
+    sim::Simulation& getSimulation();
 
 private:
     void eventHandle(sf::Event event);
@@ -33,7 +30,7 @@ private:
 
     Vec2f getMouse();
 
-    Simulation       m_simulation;
+    sim::Simulation       m_simulation;
     sf::RenderWindow m_window;
     UI               m_ui;
 };

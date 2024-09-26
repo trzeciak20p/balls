@@ -1,9 +1,7 @@
 #include "game.h"
-#include "board/board.h"
-#include "fontLoader.h"
 #include "gui/gui_menu.h"
+#include "vec2f.h"
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
@@ -16,8 +14,6 @@ constexpr float pi{std::numbers::pi_v<float>};
 
 Game::Game()
 {
-    bnw::loadFont("fonts/comic.ttf");
-
     m_window.create(sf::VideoMode(800, 700), "Balls and Walls", sf::Style::Close);
     m_window.setFramerateLimit(60);
 
@@ -94,8 +90,9 @@ void Game::eventHandle(sf::Event event)
     }
 }
 
-void loadBoard()
+sim::Simulation& Game::getSimulation()
 {
+    return m_simulation;
 }
 
 void Game::update()

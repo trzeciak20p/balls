@@ -7,6 +7,9 @@
 #include <SFML/Graphics/Color.hpp>
 #include <cmath>
 
+namespace sim
+{
+
 class Ball : public sf::CircleShape
 {
 public:
@@ -26,3 +29,5 @@ private:
     Vec2f     m_vel;
     float     m_friction{0.9F};
 };
+
+} // namespace sim

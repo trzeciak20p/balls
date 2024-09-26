@@ -5,6 +5,9 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
+namespace sim
+{
+
 class ChargeMeter
 {
 public:
@@ -14,3 +17,5 @@ public:
 private:
     sf::VertexArray m_vertices{sf::Triangles, 3};
 };
+
+} // namespace sim

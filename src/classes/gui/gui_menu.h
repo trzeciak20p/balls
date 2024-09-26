@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../board/board.h"
+#include "../simulation/board.h"
 #include "../game.h"
 #include "button.h"
 #include "custom_but.h"
@@ -24,7 +24,7 @@ public:
 class GuiOptions : public GUI
 {
 public:
-    explicit GuiOptions(Board* board)
+    explicit GuiOptions(sim::Board* board)
     {
         m_entities.emplace_back(std::make_unique<ButThatNeedsBoard>(Vec2f{5.F, 5.F}, Vec2f{70.F, 50.F}, "BACK", board));
         m_entities.emplace_back(std::make_unique<Slider>(Vec2f{350.F, 400.F}, 100, "ziuum"));

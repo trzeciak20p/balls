@@ -17,11 +17,11 @@ set(CMAKE_CXX_FLAGS_SPEED "-Ofast" CACHE STRING "Flags used when fast")
 
 add_executable(main
     src/main.cpp
-    src/classes/board/ball.cpp
-    src/classes/board/board.cpp
-    src/classes/board/wall.cpp
-    src/classes/board/chargeMeter.cpp
-    src/classes/board/simulation.cpp
+    src/classes/simulation/ball.cpp
+    src/classes/simulation/board.cpp
+    src/classes/simulation/wall.cpp
+    src/classes/simulation/chargeMeter.cpp
+    src/classes/simulation/simulation.cpp
     src/classes/gui/slider.cpp
     src/classes/gui/button.cpp
     src/classes/gui/gui.cpp

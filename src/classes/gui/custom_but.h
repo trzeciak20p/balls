@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../board/board.h"
+#include "../simulation/board.h"
 #include "button.h"
 
 namespace gui
@@ -9,12 +9,12 @@ namespace gui
 class ButThatNeedsBoard : public Button
 {
 public:
-    ButThatNeedsBoard(Vec2f pos, Vec2f size, const std::string& name, Board* board)
+    ButThatNeedsBoard(Vec2f pos, Vec2f size, const std::string& name, sim::Board* board)
         : Button(pos, size, name), m_board{board}
     {
     }
 
-    void setBoard(Board* board)
+    void setBoard(sim::Board* board)
     {
         m_board = board;
     }
@@ -32,7 +32,7 @@ public:
     }
 
 private:
-    Board* m_board{};
+    sim::Board* m_board{};
 };
 
 class ButThatNeedsGame : public Button

@@ -6,6 +6,9 @@
 #include <array>
 #include <vector>
 
+namespace sim
+{
+
 class Wall : public sf::RectangleShape
 {
 public:
@@ -28,3 +31,5 @@ public:
 private:
     Type m_type{};
 };
+
+} // namespace sim

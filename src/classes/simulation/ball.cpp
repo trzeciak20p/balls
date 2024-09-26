@@ -1,6 +1,6 @@
 #include "ball.h"
-#include "../vec2f.h"
 #include "../utils_2d.h"
+#include "../vec2f.h"
 #include "wall.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/Color.hpp>
@@ -9,6 +9,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <vector>
+
+namespace sim
+{
 
 Ball::Ball(Vec2f pos, float radius, sf::Color color)
     : sf::CircleShape{radius}, m_base_color{color}
@@ -33,9 +36,8 @@ void Ball::cornerCheck(const Wall& wall, Vec2f new_pos)
 
     auto corners = wall.getCorners();
 
-    auto nearest_corner = *std::ranges::min_element(corners, [&](auto cor1, auto cor2) {
-        return bnw::distance(cor1, new_pos) < bnw::distance(cor2, new_pos);
-    });
+    auto nearest_corner = *std::ranges::min_element(
+        corners, [&](auto cor1, auto cor2) { return bnw::distance(cor1, new_pos) < bnw::distance(cor2, new_pos); });
 
     if (bnw::distance(nearest_corner, new_pos) > getRadius())
     {
@@ -101,3 +103,5 @@ void Ball::update(const std::vector<Wall>& walls)
         m_vel = {};
     }
 }
+
+} // namespace sim

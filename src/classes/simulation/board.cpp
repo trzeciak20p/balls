@@ -8,6 +8,9 @@
 #include <iostream>
 #include <string>
 
+namespace sim
+{
+
 sf::Color makeColor(std::ifstream& file)
 {
     std::string str{};
@@ -129,3 +132,5 @@ void Board::draw(sf::RenderWindow& window)
     }
     m_charge_meter.draw(window);
 }
+
+} // namespace sim

@@ -10,6 +10,9 @@
 
 constexpr float pi{std::numbers::pi_v<float>};
 
+namespace sim
+{
+
 void ChargeMeter::update(Ball* active_ball, Vec2f anchor, Vec2f mouse)
 {
 
@@ -58,3 +61,5 @@ void ChargeMeter::draw(sf::RenderWindow& window)
 {
     window.draw(m_vertices);
 }
+
+} // namespace sim
