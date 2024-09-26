@@ -1,6 +1,5 @@
 #pragma once
 
-#include "event.h"
 #include "gui/gui.h"
 #include "vec2f.h"
 #include <SFML/Graphics/RenderWindow.hpp>
