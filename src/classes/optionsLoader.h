@@ -11,12 +11,12 @@ public:
 
     static void load();
     static void restoreDefault();
-    static void validate();
-    static void save();           // nwm na ile ma sens
-    static void displayOptions(); // debug
+    static void save();
 
 private:
     static void generateDefaultFile();
+    static void validate();
+    static void displayOptions(); // debug
 
     inline static std::string                  default_path = "./options.txt";
     inline static std::map<std::string, float> default_options{

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <ostream>
 
-// OptionsLoader::OptionsLoader() {};
+// OptionsLoader::OptionsLoader() = default;
 
 void OptionsLoader::displayOptions() // debug
 {
@@ -54,7 +54,7 @@ void OptionsLoader::save()
     std::ofstream file(default_path);
     for (const auto& [key, value] : options)
     {
-        file << key << "\t\t" << value << std::endl;
+        file << key << " " << value << std::endl;
     }
     file.close();
 }
