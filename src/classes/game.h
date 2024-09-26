@@ -16,23 +16,24 @@ public:
     Game();
 
     void gaming();
-    void loadBoard();
+
+    Simulation& getSimulation()
+    {
+        return m_simulation;
+    }
 
 private:
+    void eventHandle(sf::Event event);
     void mousePress();
-    void setLastClick();
     void mouseRelease();
+    void keyPress();
+
     void update();
     void draw();
-    void keyPress();
-    void eventHandle(sf::Event event);
 
     Vec2f getMouse();
 
-    Simulation             m_simulation;
-    std::unique_ptr<Board> m_board;
-    Vec2f                  m_last_click;
-    sf::RenderWindow       m_window;
-    sf::View               m_view;
-    UI                     m_ui;
+    Simulation       m_simulation;
+    sf::RenderWindow m_window;
+    UI               m_ui;
 };

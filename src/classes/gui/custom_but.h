@@ -45,7 +45,7 @@ public:
 
     void mousePress() override
     {
-        m_game->loadBoard();
+        m_game->getSimulation().loadBoard();
     }
 
 private:
