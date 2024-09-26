@@ -30,7 +30,7 @@ private:
 
     Vec2f getMouse();
 
-    sim::Simulation       m_simulation;
+    sim::Simulation  m_simulation;
     sf::RenderWindow m_window;
     UI               m_ui;
 };

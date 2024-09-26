@@ -14,7 +14,7 @@ constexpr float pi{std::numbers::pi_v<float>};
 
 Game::Game()
 {
-    m_window.create(sf::VideoMode(800, 700), "Balls and Walls", sf::Style::Close);
+    m_window.create(sf::VideoMode(800, 700), "Balls and Walls", sf::Style::Close | sf::Style::Resize);
     m_window.setFramerateLimit(60);
 
     m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>(this));
@@ -84,6 +84,11 @@ void Game::eventHandle(sf::Event event)
         break;
 
     case sf::Event::KeyReleased:
+
+    break;
+
+    case sf::Event::Resized:
+
 
     default:
         break;
