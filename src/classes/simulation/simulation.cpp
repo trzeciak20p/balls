@@ -54,6 +54,11 @@ void Simulation::mousePress(sf::RenderWindow& window, Vec2f mouse)
     m_board->mousePress(wetWouse(window, mouse));
 }
 
+void Simulation::onResize(sf::Event::SizeEvent size)
+{
+    m_view.setSize(size.width, size.height);
+}
+
 void Simulation::mouseRelease(sf::RenderWindow& window, Vec2f mouse)
 {
     if (!m_board)

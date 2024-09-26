@@ -88,7 +88,12 @@ void Game::eventHandle(sf::Event event)
     break;
 
     case sf::Event::Resized:
+    {
+        sf::FloatRect visibleArea(0.f, 0.f, event.size.width, event.size.height);
+        m_window.setView(sf::View(visibleArea));
 
+        m_simulation.onResize(event.size);
+    }
 
     default:
         break;
