@@ -21,7 +21,7 @@ public:
 
     void mousePress() override
     {
-        if (m_board == nullptr)
+        if (!m_board)
         {
             return;
         }

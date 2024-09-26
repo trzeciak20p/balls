@@ -39,7 +39,7 @@ Slider* Slider::getActive()
 
 void Slider::clearActive()
 {
-    if (m_active_slider == nullptr)
+    if (!m_active_slider)
     {
         return;
     }

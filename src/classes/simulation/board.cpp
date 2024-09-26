@@ -88,7 +88,7 @@ Board::Board(const std::string& path)
 
 void Board::mouseRelease(Vec2f mouse, Vec2f last_click)
 {
-    if (m_active_ball == nullptr)
+    if (!m_active_ball)
     {
         return;
     }

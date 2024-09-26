@@ -15,8 +15,7 @@ namespace sim
 
 void ChargeMeter::update(Ball* active_ball, Vec2f anchor, Vec2f mouse)
 {
-
-    if (active_ball == nullptr)
+    if (!active_ball)
     {
         m_vertices = sf::VertexArray{sf::Triangles, 3};
         return;

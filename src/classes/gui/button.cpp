@@ -33,7 +33,7 @@ Button* Button::getActive()
 
 void Button::clearActive()
 {
-    if (m_active_button == nullptr)
+    if (!m_active_button)
     {
         return;
     }
