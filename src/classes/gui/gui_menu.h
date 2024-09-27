@@ -1,12 +1,13 @@
 #pragma once
 
-#include "../game.h"
 #include "../simulation/board.h"
 #include "button.h"
 #include "custom_but.h"
 #include "gui.h"
 #include "slider.h"
 #include "widget.h"
+
+class Game;
 
 namespace gui
 {

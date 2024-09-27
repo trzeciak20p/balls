@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../simulation/board.h"
+#include "../game.h"
 #include "button.h"
 
 namespace gui
