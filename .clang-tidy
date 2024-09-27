@@ -18,17 +18,17 @@ HeaderFilterRegex: 'src/*'
 FormatStyle: 'file'
 
 CheckOptions:
-- { readability-identifier-naming.VariableCase,          lower_case }
-- { readability-identifier-naming.ParameterCase,         lower_case }
-- { readability-identifier-naming.FunctionCase,          camelBack }
-- { readability-identifier-naming.MethodCase,            camelBack }
-- { readability-identifier-naming.ClassCase,             CamelCase }
-- { readability-identifier-naming.StructCase,            CamelCase }
-- { readability-identifier-naming.EnumCase,              CamelCase }
-- { readability-identifier-naming.UnionCase,             CamelCase }
-- { readability-identifier-naming.TypeAliasCase,         CamelCase }
-- { readability-identifier-naming.TemplateParameterCase, CamelCase }
-- { readability-identifier-naming.NamespaceCase,         lower_case }
-- { readability-identifier-naming.PrivateMemberPrefix,   m_ }
+- { key: readability-identifier-naming.VariableCase,          value: lower_case }
+- { key: readability-identifier-naming.ParameterCase,         value: lower_case }
+- { key: readability-identifier-naming.FunctionCase,          value: camelBack }
+- { key: readability-identifier-naming.MethodCase,            value: camelBack }
+- { key: readability-identifier-naming.ClassCase,             value: CamelCase }
+- { key: readability-identifier-naming.StructCase,            value: CamelCase }
+- { key: readability-identifier-naming.EnumCase,              value: CamelCase }
+- { key: readability-identifier-naming.UnionCase,             value: CamelCase }
+- { key: readability-identifier-naming.TypeAliasCase,         value: CamelCase }
+- { key: readability-identifier-naming.TemplateParameterCase, value: CamelCase }
+- { key: readability-identifier-naming.NamespaceCase,         value: lower_case }
+- { key: readability-identifier-naming.PrivateMemberPrefix,   value: m_ }
 
-- {AllowPointerConditions, true}
+- { key: readability-implicit-bool-conversion.AllowPointerConditions, value: true}
