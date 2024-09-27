@@ -2,6 +2,7 @@
 #include "../vec2f.h"
 #include "button.h"
 #include "gui_menu.h"
+#include "layer.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <utility>
 #include <vector>
@@ -11,14 +12,14 @@ namespace gui
 
 GUI::GUI(Game* game)
 {
-    loadLayer(gui::createMenuLayer(game));
+    loadLayer(createMenuLayer(game));
 }
 
 void GUI::mouseRelease()
 {
     for (auto& e : m_layers)
     {
-        gui::Layer::mouseRelease();
+        Layer::mouseRelease();
     }
 }
 
@@ -32,7 +33,7 @@ void GUI::mousePress(Vec2f mouse)
 
 void GUI::update(Vec2f mouse)
 {
-    gui::Button::clearActive();
+    Button::clearActive();
 
     for (auto& e : m_layers)
     {
