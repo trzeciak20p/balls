@@ -1,10 +1,10 @@
 #pragma once
 
+#include "gui/gui.h"
 #include "simulation/ball.h"
 #include "simulation/board.h"
 #include "simulation/simulation.h"
 #include "simulation/wall.h"
-#include "ui.h"
 #include "utils_2d.h"
 #include "vec2f.h"
 #include <SFML/Graphics.hpp>
@@ -24,13 +24,14 @@ private:
     void mousePress();
     void mouseRelease();
     void keyPress();
+    void onResize(sf::Event::SizeEvent size);
 
     void update();
     void draw();
 
     Vec2f getMouse();
 
-    sim::Simulation  m_simulation;
     sf::RenderWindow m_window;
-    UI               m_ui;
+    sim::Simulation  m_simulation;
+    gui::GUI         m_gui{this};
 };

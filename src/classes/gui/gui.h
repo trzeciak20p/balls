@@ -1,12 +1,13 @@
 #pragma once
 
 #include "../vec2f.h"
-#include "button.h"
-#include "widget.h"
-#include "slider.h"
+#include "layer.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
+#include <queue>
 #include <vector>
+
+class Game;
 
 namespace gui
 {
@@ -14,30 +15,16 @@ namespace gui
 class GUI
 {
 public:
-    enum Scenario : int8_t
-    {
-        menu,
-        map_select,
-        options,
-        hud,
-        pause,
-        max_gui_scenario
-    };
+    explicit GUI(Game* game);
 
-    // GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Widget>>&& entities);
+    void mouseRelease();
+    void mousePress(Vec2f mouse);
+    void update(Vec2f mouse);
+    void draw(sf::RenderWindow& window);
+    void loadLayer(Layer&& layer);
 
-    virtual ~GUI() = default;
-
-    // Scenario getScenario();
-
-    static void mouseRelease();
-    void        mousePress(Vec2f mouse);
-    void        update(Vec2f mouse);
-    void        draw(sf::RenderWindow& window);
-
-protected:
-    // Scenario                             m_scenario;
-    std::vector<std::unique_ptr<Widget>> m_entities;
+private:
+    std::vector<Layer> m_layers;
 };
 
 } // namespace gui

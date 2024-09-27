@@ -63,7 +63,7 @@ void Slider::mousePress()
 
 void Slider::update(Vec2f pos)
 {
-    if (Slider::getActive() != nullptr)
+    if (Slider::getActive())
     {
         Slider::getActive()->slide(pos.y);
     }

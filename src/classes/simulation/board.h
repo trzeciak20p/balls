@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../ui.h"
 #include "ball.h"
 #include "chargeMeter.h"
 #include "wall.h"

@@ -1,51 +1,56 @@
 #include "gui.h"
 #include "../vec2f.h"
-#include "SFML/Graphics/RenderWindow.hpp"
-#include "slider.h"
+#include "button.h"
+#include "gui_menu.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <utility>
+#include <vector>
 
 namespace gui
 {
 
-// GUI::GUI(GUI::Scenario scenario, std::vector<std::unique_ptr<Widget>>&& entities)
-//     : m_scenario{scenario}, m_entities{std::move(entities)}
-// {
-// }
-
-// GUI::Scenario GUI::getScenario()
-// {
-//     return m_scenario;
-// }
+GUI::GUI(Game* game)
+{
+    loadLayer(gui::createMenuLayer(game));
+}
 
 void GUI::mouseRelease()
 {
-    Slider::clearActive();
+    for (auto& e : m_layers)
+    {
+        gui::Layer::mouseRelease();
+    }
 }
 
 void GUI::mousePress(Vec2f mouse)
 {
-    for (auto& entity : m_entities)
+    for (auto& e : m_layers)
     {
-        if (entity->checkHover(mouse))
-        {
-            entity->mousePress();
-        }
+        e.mousePress(mouse);
     }
 }
 
 void GUI::update(Vec2f mouse)
 {
-    for (auto& entity : m_entities)
+    gui::Button::clearActive();
+
+    for (auto& e : m_layers)
     {
-        entity->update(mouse);
+        e.update(mouse);
     }
 }
 
 void GUI::draw(sf::RenderWindow& window)
 {
-    for (auto& entity : m_entities)
+    for (auto& e : m_layers)
     {
-        entity->draw(window);
+        e.draw(window);
     }
+}
+
+void GUI::loadLayer(Layer&& layer)
+{
+    m_layers.emplace_back(std::move(layer));
 }
 
 } // namespace gui

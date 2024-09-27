@@ -30,5 +30,4 @@ CheckOptions:
 - { key: readability-identifier-naming.TemplateParameterCase, value: CamelCase }
 - { key: readability-identifier-naming.NamespaceCase,         value: lower_case }
 - { key: readability-identifier-naming.PrivateMemberPrefix,   value: m_ }
-
 - { key: readability-implicit-bool-conversion.AllowPointerConditions, value: true}
