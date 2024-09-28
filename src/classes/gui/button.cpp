@@ -17,7 +17,7 @@ Button::Button(Vec2f pos, Vec2f size, const std::string& name)
     setPosition(pos);
     m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
     m_text.setPosition(pos.x + size.x / 2, pos.y + size.y / 2);
-    colorDefault();
+    Button::colorDefault();
 }
 
 void Button::setActive()

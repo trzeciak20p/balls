@@ -23,7 +23,7 @@ Slider::Slider(Vec2f pos, float size, const std::string& name)
     m_controler.setOrigin(m_controler.getSize().x / 2, m_controler.getSize().y / 2);
 
     slide(pos.y);
-    colorDefault();
+    Slider::colorDefault();
 }
 
 void Slider::setActive()

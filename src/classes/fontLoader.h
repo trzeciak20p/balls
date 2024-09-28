@@ -14,6 +14,6 @@ inline sf::Font font_default{[]() {
     return font;
 }()};
 
-inline unsigned font1_size{20};
+constexpr int font1_size{20};
 
 } // namespace bnw
