@@ -16,6 +16,7 @@ public:
     void mousePress(sf::RenderWindow& window, Vec2f mouse);
     void mouseRelease(sf::RenderWindow& window, Vec2f mouse);
     void onResize(sf::Event::SizeEvent size);
+    void moveView(Vec2f diff);
 
 private:
     Vec2f wetWouse(sf::RenderWindow& window, Vec2f mouse);

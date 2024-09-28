@@ -23,7 +23,7 @@ private:
     void eventHandle(sf::Event event);
     void mousePress();
     void mouseRelease();
-    void keyPress();
+    void keyPress(sf::Event::KeyEvent key);
     void onResize(sf::Event::SizeEvent size);
 
     void update();

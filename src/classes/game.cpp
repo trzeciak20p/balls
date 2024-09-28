@@ -52,16 +52,32 @@ void Game::mouseRelease()
     m_simulation.mouseRelease(m_window, getMouse());
 }
 
-void Game::keyPress()
+void Game::keyPress(sf::Event::KeyEvent key)
 {
-    // std::cerr << "kpress: " << sf::Keyboard::getDescription(event.key.scancode).toAnsiString() << '\n';
-    // m_view.move(0, 10);
-    // m_window.setView(m_view);
+    // złe narazie (+ nie działa)
+    switch (key.scancode)
+    {
+    case sf::Keyboard::Scan::Scancode::Right:
+        m_simulation.moveView({10.F, 0.F});
+        break;
+    case sf::Keyboard::Scan::Scancode::Left:
+        m_simulation.moveView({-10.F, 0.F});
+        break;
+    case sf::Keyboard::Scan::Scancode::Up:
+        m_simulation.moveView({0.F, -10.F});
+        break;
+    case sf::Keyboard::Scan::Scancode::Down:
+        m_simulation.moveView({0.F, 10.F});
+        break;
+
+    default:
+        break;
+    }
 }
 
 void Game::onResize(sf::Event::SizeEvent size)
 {
-    sf::FloatRect const visible_area(0.F, 0.F, size.width, size.height);
+    const sf::FloatRect visible_area(0.F, 0.F, size.width, size.height);
     m_window.setView(sf::View(visible_area));
 
     m_simulation.onResize(size);
@@ -84,7 +100,7 @@ void Game::eventHandle(sf::Event event)
         break;
 
     case sf::Event::KeyPressed:
-        keyPress();
+        keyPress(event.key);
         break;
 
     case sf::Event::KeyReleased:
