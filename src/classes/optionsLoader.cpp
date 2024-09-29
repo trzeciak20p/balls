@@ -2,20 +2,16 @@
 #include <fstream>
 #include <ostream>
 
-// OptionsLoader::OptionsLoader() = default;
+// Options::Options() = default;
 
-void OptionsLoader::displayOptions() // debug
+float Options::get(const std::string& key)
 {
-    fprintf(stderr, "OPTIONS:\r\n");
-    for (const auto& [key, value] : options)
-    {
-        fprintf(stderr, "%s %f\r\n", key.c_str(), value);
-    }
+    return m_options[key];
 }
 
-void OptionsLoader::load()
+void Options::load()
 {
-    std::ifstream file(default_path);
+    std::ifstream file(m_default_path);
     if (!file.is_open())
     {
         generateDefaultFile();
@@ -24,43 +20,52 @@ void OptionsLoader::load()
     float       value;
     while (file >> key, file >> value)
     {
-        options.emplace(key, value);
+        m_options.emplace(key, value);
     }
     validate();
-    displayOptions();
+    display();
     file.close();
     save();
 }
 
-void OptionsLoader::restoreDefault()
+void Options::restoreDefault()
 {
-    options = default_options;
+    m_options = m_default_options;
 }
 
-void OptionsLoader::validate()
+void Options::validate()
 {
-    for (const auto& [key, value] : default_options)
+    for (const auto& [key, value] : m_default_options)
     {
-        if (!options.contains(key))
+        if (!m_options.contains(key))
         {
-            fprintf(stderr, "BRAK: %s\r\n", key.c_str());
-            options.emplace(key, value);
+            fprintf(stderr, "BRAK: %s\r\n", key.c_str()); // debug
+            m_options.emplace(key, value);
         }
     }
 }
 
-void OptionsLoader::save()
+void Options::save()
 {
-    std::ofstream file(default_path);
-    for (const auto& [key, value] : options)
+    std::ofstream file(m_default_path);
+    for (const auto& [key, value] : m_options)
     {
         file << key << " " << value << std::endl;
     }
     file.close();
 }
 
-void OptionsLoader::generateDefaultFile()
+void Options::generateDefaultFile()
 {
     restoreDefault();
     save();
+}
+
+void Options::display() // debug
+{
+    fprintf(stderr, "OPTIONS:\r\n");
+    for (const auto& [key, value] : m_options)
+    {
+        fprintf(stderr, "%s %f\r\n", key.c_str(), value);
+    }
 }

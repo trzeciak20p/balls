@@ -1,5 +1,6 @@
 #include "game.h"
 #include "gui/gui_menu.h"
+#include "optionsLoader.h"
 #include "vec2f.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
@@ -14,8 +15,10 @@ constexpr float pi{std::numbers::pi_v<float>};
 
 Game::Game()
 {
-    m_window.create(sf::VideoMode(800, 700), "Balls and Walls", sf::Style::Close | sf::Style::Resize);
-    m_window.setFramerateLimit(60);
+    Options::load();
+    m_window.create(sf::VideoMode(Options::get("window_x"), Options::get("window_y")), "Balls and Walls",
+                    sf::Style::Close | sf::Style::Resize);
+    m_window.setFramerateLimit(Options::get("fps"));
 
     m_ui.loadGuiScenario(std::make_unique<gui::GuiMenu>(this));
     // m_ui.loadGuiScenario(std::make_unique<gui::GuiOptions>(m_board.get()));
@@ -85,10 +88,9 @@ void Game::eventHandle(sf::Event event)
 
     case sf::Event::KeyReleased:
 
-    break;
+        break;
 
     case sf::Event::Resized:
-
 
     default:
         break;

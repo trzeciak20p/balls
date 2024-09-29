@@ -3,27 +3,37 @@
 #include <map>
 #include <string>
 
-class OptionsLoader
+class Options
 {
 
 public:
-    // OptionsLoader();
+    enum Option{
+        window_heigth,
+        widnow_width,
+        fps,
+        vol_music,
+        vol_sfx,
+    };
 
-    static void load();
-    static void restoreDefault();
-    static void save();
+    // Options();
+    static float get(const std::string& key);
+    static void  load();
+    static void  restoreDefault();
+    static void  save();
 
 private:
     static void generateDefaultFile();
     static void validate();
-    static void displayOptions(); // debug
-
-    inline static std::string                  default_path = "./options.txt";
-    inline static std::map<std::string, float> default_options{
-        std::pair<std::string, float>("window_x", 700.F),
-        std::pair<std::string, float>("window_y", 800.F),
+    static void display(); // debug
+    
+    // TODO: zamienić string na enum?
+    inline static std::string                  m_default_path = "./options.txt";
+    inline static std::map<std::string, float> m_default_options{
+        std::pair<std::string, float>("window_w", 800.F),
+        std::pair<std::string, float>("window_h", 700.F),
+        std::pair<std::string, float>("fps", 60.F),
         std::pair<std::string, float>("vol_music", 60.F),
         std::pair<std::string, float>("vol_sfx", 60.F),
     };
-    inline static std::map<std::string, float> options{};
+    inline static std::map<std::string, float> m_options{};
 };
