@@ -1,5 +1,5 @@
 #include "slider.h"
-#include "../fontLoader.h"
+#include "../font_loader.h"
 #include "../vec2f.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>

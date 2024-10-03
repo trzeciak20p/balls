@@ -20,7 +20,7 @@ add_executable(main
     src/classes/simulation/ball.cpp
     src/classes/simulation/board.cpp
     src/classes/simulation/wall.cpp
-    src/classes/simulation/chargeMeter.cpp
+    src/classes/simulation/charge_meter.cpp
     src/classes/simulation/simulation.cpp
     src/classes/gui/slider.cpp
     src/classes/gui/button.cpp
@@ -28,7 +28,7 @@ add_executable(main
     src/classes/gui/gui.cpp
     src/classes/utils_2d.cpp
     src/classes/game.cpp
-    src/classes/fontLoader.cpp
+    src/classes/font_loader.cpp
 )
 set_target_properties(main PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ball.h"
-#include "chargeMeter.h"
+#include "charge_meter.h"
 #include "wall.h"
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <vector>
